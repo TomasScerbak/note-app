@@ -6,7 +6,7 @@ body {
   line-height: 1.5;
   font-size: 1.8rem;
   font-family: var(--app-font-family);
-  background-color: var(--app-background);
+  background-color: var(--app-login-signup-bg);
   transition: background-color 0.3s ease;
   color: var(--app-main-text);
 }
@@ -18,7 +18,7 @@ body {
 :root {
   /* --neutral-950: hsl(222, 32%, 8%);
   --neutral-900: hsl(230, 19%, 12%); */
-  --app-background: hsl(231, 16%, 16%);
+  --app-login-signup-bg: hsl(231, 16%, 16%);
   --app-font-family: sans-serif;
   --app-main-text: hsl(0, 0%, 100%);
   /* --neutral-700: hsl(221, 16%, 20%);
@@ -43,10 +43,14 @@ body {
 }
 
 [color-theme="light"] {
-  --app-background: hsl(216, 19%, 90%);
+  --app-login-signup-bg: hsl(216, 19%, 90%);
   --app-main-text: hsl(222, 32%, 8%);
 }
 
 [font-family="monospace"] {
   --app-font-family: monospace, sans-serif;
+}
+
+[font-family="serif"] {
+  app-font-family: serif, sans-serif;
 }
