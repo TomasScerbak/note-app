@@ -26,6 +26,8 @@ body {
   --app-main-text: hsl(0, 0%, 100%);
   --app-secondary-text: hsl(219, 15%, 82%);
   --app--logo-test: "#ffff";
+  --app-input-border: hsl(222, 11%, 36%);
+  --app-input-text: hsl(221, 8%, 48%);
   /* --neutral-700: hsl(221, 16%, 20%);
   --neutral-600: hsl(222, 11%, 36%);
   --neutral-500: hsl(221, 8%, 48%);
@@ -36,7 +38,7 @@ body {
   --neutral-50: hsl(216, 33%, 97%);
   --neutral-0: hsl(0, 0%, 100%); */
 
-  /* --blue-700: hsl(228, 70%, 48%);
+  --blue-700: hsl(228, 70%, 48%);
   --blue-500: hsl(228, 100%, 60%);
   --blue-50: hsl(222, 100%, 96%);
 
@@ -44,7 +46,7 @@ body {
   --green-100: hsl(154, 84%, 90%);
 
   --red-500: hsl(355, 96%, 60%);
-  --red-100: hsl(356, 100%, 92%); */
+  --red-100: hsl(356, 100%, 92%);
 
   --spacing-025: 0.2rem;
   --spacing-050: 0.4rem;
@@ -115,11 +117,41 @@ p {
   color: var(--app-main-text);
 }
 
+label {
+  font-size: 1.4rem;
+}
+
+input {
+  border: 1px solid var(--app-input-border);
+  outline: none;
+  background: transparent;
+  height: 4.2rem;
+  width: 100%;
+  border-radius: var(--radius-8);
+  color: var(--app-main-text);
+  padding: var(--spacing-150) var(--spacing-200);
+  margin: var(--spacing-075) 0 var(--spacing-200) 0;
+  cursor: pointer;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+input[data-autocompleted] {
+  background-color: transparent !important;
+}
+
+a:hover {
+  color: var(--blue-500);
+}
+
 [color-theme="light"] {
   --app-login-signup-bg: hsl(216, 19%, 90%);
   --app-main-text: hsl(222, 32%, 8%);
   --app-secondary-text: hsl(222, 11%, 36%);
   --app-main-color: hsl(0, 0%, 100%);
+  --app-input-border: hsl(219, 15%, 82%);
 }
 
 [font-family="monospace"] {
