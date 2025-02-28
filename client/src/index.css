@@ -9,6 +9,8 @@ body {
   background-color: var(--app-login-signup-bg);
   transition: background-color 0.3s ease;
   color: var(--app-main-text);
+  height: 100vh;
+  line-height: 120%;
 }
 *,
 *::before,
@@ -19,8 +21,11 @@ body {
   /* --neutral-950: hsl(222, 32%, 8%);
   --neutral-900: hsl(230, 19%, 12%); */
   --app-login-signup-bg: hsl(231, 16%, 16%);
+  --app-main-color: hsl(222, 32%, 8%);
   --app-font-family: sans-serif;
   --app-main-text: hsl(0, 0%, 100%);
+  --app-secondary-text: hsl(219, 15%, 82%);
+  --app--logo-test: "#ffff";
   /* --neutral-700: hsl(221, 16%, 20%);
   --neutral-600: hsl(222, 11%, 36%);
   --neutral-500: hsl(221, 8%, 48%);
@@ -40,11 +45,81 @@ body {
 
   --red-500: hsl(355, 96%, 60%);
   --red-100: hsl(356, 100%, 92%); */
+
+  --spacing-025: 0.2rem;
+  --spacing-050: 0.4rem;
+  --spacing-075: 0.6rem;
+  --spacing-100: 0.8rem;
+  --spacing-150: 1.2rem;
+  --spacing-200: 1.6rem;
+  --spacing-250: 2rem;
+  --spacing-300: 2.4rem;
+  --spacing-400: 3.2rem;
+  --spacing-500: 4rem;
+  --spacing-600: 4.8rem;
+  --spacing-800: 6.4rem;
+  --spacing-1000: 8rem;
+
+  --radius-4: 0.4rem;
+  --radius-6: 0.6rem;
+  --radius-8: 0.8rem;
+  --radius-10: 1rem;
+  --radius-12: 1.2rem;
+  --radius-16: 1.6rem;
+  --radius-20: 2rem;
+  --radius-24: 2.4rem;
+  --radius-full: 99.9rem;
+}
+
+main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 2.4rem;
+  letter-spacing: -0.5px;
+  color: var(--app-main-text);
+}
+
+h2 {
+  font-size: 2rem;
+  letter-spacing: -0.5px;
+  color: var(--app-main-text);
+}
+
+h3 {
+  font-size: 1.6rem;
+  letter-spacing: -0.3px;
+  color: var(--app-main-text);
+}
+
+h4 h5 {
+  font-size: 1.4rem;
+  letter-spacing: -0.2px;
+  color: var(--app-main-text);
+}
+
+h6 {
+  font-size: 1.2rem;
+  letter-spacing: -0.2px;
+  color: var(--app-main-text);
+}
+
+p {
+  font-size: 1.4rem;
+  letter-spacing: -0.2px;
+  color: var(--app-main-text);
 }
 
 [color-theme="light"] {
   --app-login-signup-bg: hsl(216, 19%, 90%);
   --app-main-text: hsl(222, 32%, 8%);
+  --app-secondary-text: hsl(222, 11%, 36%);
+  --app-main-color: hsl(0, 0%, 100%);
 }
 
 [font-family="monospace"] {
