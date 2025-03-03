@@ -13,16 +13,6 @@
   position: relative;
 }
 
-.password_btn {
-  position: absolute;
-  right: 0.1rem;
-  top: 1.3rem;
-  border: none;
-  outline: none;
-  background: transparent;
-  cursor: pointer;
-}
-
 .forgot {
   color: var(--app-input-text);
   font-size: 1.2rem;

@@ -3,8 +3,7 @@ import { useState } from "react";
 
 import classes from "./Form.module.css";
 
-import ShowPasswordIcon from "../assets/icon-show-password.svg";
-import HidePasswordIcon from "../assets/icon-hide-password.svg";
+import HidePasswordButton from "./UI/HidePasswordButton";
 
 const Form = () => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -36,7 +35,11 @@ const Form = () => {
             type={hidePassword ? "password" : "text"}
             required
           />
-          <button
+          <HidePasswordButton
+            handleHidePassword={handleHidePassword}
+            isHidden={hidePassword}
+          />
+          {/* <button
             onClick={handleHidePassword}
             type="button"
             className={classes.password_btn}
@@ -45,7 +48,7 @@ const Form = () => {
               src={hidePassword ? HidePasswordIcon : ShowPasswordIcon}
               alt=""
             />
-          </button>
+          </button> */}
         </div>
       </div>
     </form>
