@@ -12,7 +12,7 @@ const HidePasswordButton = ({ isHidden, handleHidePassword }) => {
       onClick={handleHidePassword}
       type="button"
     >
-      {isHidden ? (
+      {!isHidden ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

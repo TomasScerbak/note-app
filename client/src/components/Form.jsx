@@ -4,6 +4,8 @@ import { useState } from "react";
 import classes from "./Form.module.css";
 
 import HidePasswordButton from "./UI/HidePasswordButton";
+import AuthMediaBox from "./UI/AuthMediaBox";
+import Button from "./UI/Button";
 
 const Form = () => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -11,8 +13,9 @@ const Form = () => {
   const handleHidePassword = () => {
     setHidePassword((prev) => !prev);
   };
+
   return (
-    <form>
+    <form className={classes.form}>
       <div className={classes.form_control}>
         <div className={classes.email_label_container}>
           <label htmlFor="email">Email Address</label>
@@ -39,18 +42,10 @@ const Form = () => {
             handleHidePassword={handleHidePassword}
             isHidden={hidePassword}
           />
-          {/* <button
-            onClick={handleHidePassword}
-            type="button"
-            className={classes.password_btn}
-          >
-            <img
-              src={hidePassword ? HidePasswordIcon : ShowPasswordIcon}
-              alt=""
-            />
-          </button> */}
         </div>
       </div>
+      <Button variant="primary" hasImage={false} title="Login" type="button" />
+      <AuthMediaBox text="Or log in with:" />
     </form>
   );
 };

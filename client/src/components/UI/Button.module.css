@@ -1,0 +1,31 @@
+.btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  width: 100%;
+  outline: none;
+  text-align: center;
+  font-size: 1.6rem;
+  line-height: 120%;
+  letter-spacing: -0.5px;
+  height: 4.4rem;
+  border-radius: var(--radius-8);
+}
+
+.btn--primary {
+  background-color: var(--blue-500);
+  color: var(--app-main-text);
+  border: none;
+}
+
+.btn--secondary {
+  background-color: transparent;
+  border: 1px solid var(--app-input-border);
+  margin-bottom: var(--spacing-200);
+}
+
+.btn_image {
+  margin-right: var(--spacing-150);
+}
