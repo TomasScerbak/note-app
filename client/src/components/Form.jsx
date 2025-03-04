@@ -16,8 +16,8 @@ const Form = () => {
 
   return (
     <form className={classes.form}>
-      <div className={classes.form_control}>
-        <div className={classes.email_label_container}>
+      <div className={classes.form__control}>
+        <div className={classes.email__label__container}>
           <label htmlFor="email">Email Address</label>
           <Link to="/reset_password" className={classes.forgot}>
             Forgot
@@ -30,9 +30,9 @@ const Form = () => {
           required
         />
       </div>
-      <div className={classes.form_control}>
+      <div className={classes.form__control}>
         <label htmlFor="password">Password</label>
-        <div className={classes.password_input_container}>
+        <div className={classes.password__input__container}>
           <input
             name="password"
             type={hidePassword ? "password" : "text"}

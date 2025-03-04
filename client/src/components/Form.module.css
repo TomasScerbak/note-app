@@ -2,18 +2,18 @@
   width: 100%;
 }
 
-.form_control {
+.form__control {
   text-align: left;
 }
 
-.email_label_container {
+.email__label__container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.password_input_container {
+.password__input__container {
   position: relative;
 }
 

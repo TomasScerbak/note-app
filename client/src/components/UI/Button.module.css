@@ -12,6 +12,7 @@
   letter-spacing: -0.5px;
   height: 4.4rem;
   border-radius: var(--radius-8);
+  cursor: pointer;
 }
 
 .btn--primary {
@@ -24,8 +25,11 @@
   background-color: transparent;
   border: 1px solid var(--app-input-border);
   margin-bottom: var(--spacing-200);
+  color: var(--app-main-text);
+  letter-spacing: 0.5px;
 }
 
-.btn_image {
+.btn__image {
   margin-right: var(--spacing-150);
+  filter: var(--image-filter);
 }

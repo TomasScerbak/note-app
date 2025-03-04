@@ -1,12 +1,7 @@
-import { Link } from "react-router";
+import AuthCard from "../components/UI/AuthCard";
 
 const Login = () => {
-  return (
-    <div>
-      <h1>Login</h1>
-      <Link to="/">Already have account?</Link>
-    </div>
-  );
+  return <AuthCard type="login" />;
 };
 
 export default Login;

@@ -1,4 +1,4 @@
-.auth_card {
+.auth__card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,7 +13,7 @@
 }
 
 @media (min-width: 769px) {
-  .auth_card {
+  .auth__card {
     width: 54rem;
   }
 }

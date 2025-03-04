@@ -11,6 +11,9 @@ body {
   color: var(--app-main-text);
   height: 100vh;
   line-height: 120%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 *,
 *::before,
@@ -47,6 +50,8 @@ body {
 
   --red-500: hsl(355, 96%, 60%);
   --red-100: hsl(356, 100%, 92%);
+
+  --image-filter: invert(100%) brightness(1000%);
 
   --spacing-025: 0.2rem;
   --spacing-050: 0.4rem;
@@ -146,6 +151,7 @@ a:hover {
   --app-secondary-text: hsl(222, 11%, 36%);
   --app-main-color: hsl(0, 0%, 100%);
   --app-input-border: hsl(219, 15%, 82%);
+  --image-filter: hsl(222, 32%, 8%);
 }
 
 [font-family="monospace"] {

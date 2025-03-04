@@ -6,7 +6,7 @@ const Button = ({ type, title, hasImage, src, variant }) => {
       className={`${classes.btn} ${classes[`btn--${variant}`]}`}
       type={type}
     >
-      {hasImage ? <img className={classes.btn_image} src={src} /> : null}
+      {hasImage ? <img className={classes.btn__image} src={src} /> : null}
       {title}
     </button>
   );

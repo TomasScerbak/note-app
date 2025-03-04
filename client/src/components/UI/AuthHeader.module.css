@@ -1,7 +1,7 @@
-.auth_header {
+.auth__header {
   width: 100%;
 }
 
-.logo_text {
+.logo__text {
   color: var(--app-secondary-text);
 }

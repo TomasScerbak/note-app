@@ -1,5 +1,7 @@
+import AuthCard from "../components/UI/AuthCard";
+
 const Reset = () => {
-  return <div>Reset</div>;
+  return <AuthCard type="reset" />;
 };
 
 export default Reset;

@@ -1,13 +1,36 @@
 import Logo from "./Logo";
 
-import classes from "./Logo.module.css";
+import classes from "./AuthHeader.module.css";
 
-const AuthHeader = () => {
+const AuthHeader = ({ type }) => {
+  let headerText;
+  let headerSubText;
+
+  switch (type) {
+    case "signup":
+      headerText = "Create Your Account";
+      headerSubText =
+        "Sign up to start organizing your notes and boost your productivity.";
+      break;
+    case "login":
+      headerText = "Welcome to Note";
+      headerSubText = "Please log in to continue";
+      break;
+    case "reset":
+      headerText = "Forgotten your password?";
+      headerSubText =
+        "Enter your email below, and we’ll send you a link to reset it.";
+      break;
+    default:
+      headerText = "Welcome to Note";
+      headerSubText = "Please log in to continue";
+  }
+
   return (
-    <header className={classes.auth_header}>
+    <header className={classes.auth__header}>
       <Logo />
-      <h1>Welcome to Note</h1>
-      <p className={classes.logo_text}>Please log in to continue </p>
+      <h1>{headerText}</h1>
+      <p className={classes.logo__text}>{headerSubText} </p>
     </header>
   );
 };
