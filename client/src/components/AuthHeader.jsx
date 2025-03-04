@@ -1,4 +1,4 @@
-import Logo from "./Logo";
+import Logo from "./UI/Logo";
 
 import classes from "./AuthHeader.module.css";
 
@@ -17,6 +17,10 @@ const AuthHeader = ({ type }) => {
       headerSubText = "Please log in to continue";
       break;
     case "reset":
+      headerText = "Reset Your Password";
+      headerSubText = "Choose a new password to secure your account.";
+      break;
+    case "forgotten":
       headerText = "Forgotten your password?";
       headerSubText =
         "Enter your email below, and we’ll send you a link to reset it.";

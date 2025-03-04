@@ -8,7 +8,7 @@ const HidePasswordButton = ({ isHidden, handleHidePassword }) => {
 
   return (
     <button
-      className={classes.password_btn}
+      className={classes.password__btn}
       onClick={handleHidePassword}
       type="button"
     >

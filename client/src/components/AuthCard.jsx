@@ -1,8 +1,8 @@
+import Form from "./Form";
 import AuthHeader from "./AuthHeader";
-import Form from "../Form";
+import FormFooter from "./FormFooter";
 
 import classes from "./AuthCard.module.css";
-import FormFooter from "./FormFooter";
 
 const AuthCard = ({ type }) => {
   return (

@@ -2,10 +2,6 @@
   width: 100%;
 }
 
-.form__control {
-  text-align: left;
-}
-
 .email__label__container {
   display: flex;
   flex-direction: row;

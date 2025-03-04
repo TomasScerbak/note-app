@@ -1,4 +1,4 @@
-import AuthCard from "../components/UI/AuthCard";
+import AuthCard from "../components/AuthCard";
 
 const Login = () => {
   return <AuthCard type="login" />;

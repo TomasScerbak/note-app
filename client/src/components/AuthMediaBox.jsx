@@ -1,8 +1,8 @@
 import classes from "./AuthMediaBox.module.css";
 
-import Button from "./Button";
+import Button from "./UI/Button";
 
-import GoogleImage from "../../assets/icon-google.svg";
+import GoogleImage from "../assets/icon-google.svg";
 
 const AuthMediaBox = ({ text }) => {
   return (

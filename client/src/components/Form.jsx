@@ -1,49 +1,43 @@
-import { Link } from "react-router";
-import { useState } from "react";
-
 import classes from "./Form.module.css";
 
-import HidePasswordButton from "./UI/HidePasswordButton";
-import AuthMediaBox from "./UI/AuthMediaBox";
+import AuthMediaBox from "./AuthMediaBox";
 import Button from "./UI/Button";
+import FormControl from "./FormControl";
+import EmailInputContainer from "./UI/EmailInputContainer";
+import PasswordInputContainer from "./UI/PasswordInputContainer";
 
-const Form = () => {
-  const [hidePassword, setHidePassword] = useState(true);
-
-  const handleHidePassword = () => {
-    setHidePassword((prev) => !prev);
-  };
-
+const Form = ({ type }) => {
   return (
     <form className={classes.form}>
-      <div className={classes.form__control}>
-        <div className={classes.email__label__container}>
-          <label htmlFor="email">Email Address</label>
-          <Link to="/reset_password" className={classes.forgot}>
-            Forgot
-          </Link>
-        </div>
-        <input
-          placeholder="email@example.com"
-          name="email"
-          type="text"
-          required
-        />
-      </div>
-      <div className={classes.form__control}>
-        <label htmlFor="password">Password</label>
-        <div className={classes.password__input__container}>
-          <input
-            name="password"
-            type={hidePassword ? "password" : "text"}
-            required
+      <FormControl className={classes.form__control}>
+        {type === "signup" || type === "login" || type === "forgotten" ? (
+          <EmailInputContainer
+            htmlFor="email"
+            text="Email Address"
+            placeholder="email@example.com"
+            type="email"
+            name="email"
           />
-          <HidePasswordButton
-            handleHidePassword={handleHidePassword}
-            isHidden={hidePassword}
+        ) : (
+          <PasswordInputContainer
+            htmlFor="new_password"
+            text="New Password"
+            placeholder=""
+            type="password"
+            name="new_password"
           />
-        </div>
-      </div>
+        )}
+      </FormControl>
+      <FormControl className={classes.form__control}>
+        {type === "forgotten" ? null : (
+          <PasswordInputContainer
+            htmlFor={type === "reset" ? "new_password" : "password"}
+            text={type === "reset" ? "Confirm New Password" : "Password"}
+            placeholder=""
+            name={type === "reset" ? "new_password" : "password"}
+          />
+        )}
+      </FormControl>
       <Button variant="primary" hasImage={false} title="Login" type="button" />
       <AuthMediaBox text="Or log in with:" />
     </form>
