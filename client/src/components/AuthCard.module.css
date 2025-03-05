@@ -14,6 +14,14 @@
 
 @media (min-width: 769px) {
   .auth__card {
+    width: 50.4rem;
+    padding: var(--spacing-600) var(--spacing-400);
+  }
+}
+
+@media (min-width: 922px) {
+  .auth__card {
     width: 54rem;
+    padding: var(--spacing-600);
   }
 }
