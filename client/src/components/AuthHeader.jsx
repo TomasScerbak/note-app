@@ -9,8 +9,7 @@ const AuthHeader = ({ type }) => {
   switch (type) {
     case "signup":
       headerText = "Create Your Account";
-      headerSubText =
-        "Sign up to start organizing your notes and boost your productivity.";
+      headerSubText = "Sign up to start organizing your notes and boost your productivity.";
       break;
     case "login":
       headerText = "Welcome to Note";
@@ -22,8 +21,7 @@ const AuthHeader = ({ type }) => {
       break;
     case "forgotten":
       headerText = "Forgotten your password?";
-      headerSubText =
-        "Enter your email below, and we’ll send you a link to reset it.";
+      headerSubText = "Enter your email below, and we’ll send you a link to reset it.";
       break;
     default:
       headerText = "Welcome to Note";

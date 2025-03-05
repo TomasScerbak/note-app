@@ -1,25 +1,13 @@
 import classes from "./HidePasswordButton.module.css";
 
 const HidePasswordButton = ({ isHidden, handleHidePassword }) => {
-  const currentAttr = document
-    .getElementById("root")
-    .getAttribute("color-theme");
+  const currentAttr = document.getElementById("root").getAttribute("color-theme");
   const theme = currentAttr === "dark" ? "#0E121B" : "#ffff";
 
   return (
-    <button
-      className={classes.password__btn}
-      onClick={handleHidePassword}
-      type="button"
-    >
+    <button className={classes.password__btn} onClick={handleHidePassword} type="button">
       {!isHidden ? (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path
             fill={theme}
             fillRule="evenodd"
@@ -34,13 +22,7 @@ const HidePasswordButton = ({ isHidden, handleHidePassword }) => {
           />
         </svg>
       ) : (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path
             stroke={theme}
             strokeLinecap="round"

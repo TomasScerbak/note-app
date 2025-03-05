@@ -11,9 +11,7 @@ const AuthCard = ({ type }) => {
       <Form type={type} />
       {type === "login" || type === "signup" ? (
         <FormFooter
-          text={
-            type === "login" ? "No account yet?" : "Already have an account?"
-          }
+          text={type === "login" ? "No account yet?" : "Already have an account?"}
           link={type === "login" ? "signup" : "/"}
           linkText={type === "login" ? "Signup" : "Login"}
         />

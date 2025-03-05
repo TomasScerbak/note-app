@@ -8,13 +8,7 @@ const AuthMediaBox = ({ text }) => {
   return (
     <div className={classes.auth_media}>
       <p>{text}</p>
-      <Button
-        variant="secondary"
-        src={GoogleImage}
-        hasImage={true}
-        title="Google"
-        type="button"
-      />
+      <Button variant="secondary" src={GoogleImage} hasImage={true} title="Google" type="button" />
     </div>
   );
 };

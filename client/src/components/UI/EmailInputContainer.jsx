@@ -5,14 +5,7 @@ import Input from "./Input";
 
 import classes from "./EmailInputContainer.module.css";
 
-const EmailInputContainer = ({
-  htmlFor,
-  text,
-  placeholder,
-  name,
-  type,
-  formType,
-}) => {
+const EmailInputContainer = ({ htmlFor, text, placeholder, name, type, formType }) => {
   return (
     <>
       <div className={classes.email__container}>

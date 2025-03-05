@@ -52,6 +52,7 @@ body {
   --red-100: hsl(356, 100%, 92%);
 
   --image-filter: invert(100%) brightness(1000%);
+  --image-filter-2: invert(100%) brightness(80%);
 
   --spacing-025: 0.2rem;
   --spacing-050: 0.4rem;

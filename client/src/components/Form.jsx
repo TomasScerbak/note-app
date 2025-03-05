@@ -33,8 +33,16 @@ const Form = ({ type }) => {
       mediaBoxText = "Or log in with:";
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const formDataObj = Object.fromEntries(formData.entries());
+    console.log(formDataObj);
+  };
+
   return (
-    <form className={classes.form}>
+    <form onSubmit={handleSubmit} className={classes.form}>
       <FormControl className={classes.form__control}>
         {type === "signup" || type === "login" || type === "forgotten" ? (
           <EmailInputContainer
@@ -52,28 +60,23 @@ const Form = ({ type }) => {
             placeholder=""
             type="password"
             name="new_password"
+            formType={type}
           />
         )}
       </FormControl>
       <FormControl className={classes.form__control}>
         {type === "forgotten" ? null : (
           <PasswordInputContainer
-            htmlFor={type === "reset" ? "new_password" : "password"}
+            htmlFor={type === "reset" ? "confirm_password" : "password"}
             text={type === "reset" ? "Confirm New Password" : "Password"}
             placeholder=""
-            name={type === "reset" ? "new_password" : "password"}
+            name={type === "reset" ? "confirm_password" : "password"}
+            formType={type}
           />
         )}
       </FormControl>
-      <Button
-        variant="primary"
-        hasImage={false}
-        title={btnTitle}
-        type="button"
-      />
-      {type === "login" || type === "signup" ? (
-        <AuthMediaBox text={mediaBoxText} />
-      ) : null}
+      <Button variant="primary" hasImage={false} title={btnTitle} type="submit" />
+      {type === "login" || type === "signup" ? <AuthMediaBox text={mediaBoxText} /> : null}
     </form>
   );
 };

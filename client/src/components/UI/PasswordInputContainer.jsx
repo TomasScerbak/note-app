@@ -3,27 +3,35 @@ import { useState } from "react";
 import Label from "./Label";
 import Input from "./Input";
 import HidePasswordButton from "./HidePasswordButton";
+import PasswordInfoMessage from "./PasswordInfoMessage";
 
 import classes from "./PasswordInputContainer.module.css";
 
-const PasswordInputContainer = ({ htmlFor, text, placeholder, name }) => {
+const PasswordInputContainer = ({ htmlFor, text, placeholder, name, formType }) => {
   const [hidePassword, setHidePassword] = useState(true);
+  const [hideInfoMessage, setHideInfoMessage] = useState(false);
 
   const handleHidePassword = () => {
     setHidePassword((prev) => !prev);
   };
+
+  const handleHideInfoMessage = (event) => {
+    const value = event.target.value;
+    setHideInfoMessage(value.length > 8);
+  };
+
   return (
     <div className={classes.password__container}>
       <Label htmlFor={htmlFor} text={text} />
       <Input
+        handleHideInfoMessage={handleHideInfoMessage}
         placeholder={placeholder}
         name={name}
         type={hidePassword ? "password" : "text"}
       />
-      <HidePasswordButton
-        handleHidePassword={handleHidePassword}
-        isHidden={hidePassword}
-      />
+      {!hideInfoMessage && name === "new_password" && <PasswordInfoMessage />}
+      {!hideInfoMessage && formType === "signup" && <PasswordInfoMessage />}
+      <HidePasswordButton handleHidePassword={handleHidePassword} isHidden={hidePassword} />
     </div>
   );
 };
