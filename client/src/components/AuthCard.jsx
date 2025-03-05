@@ -10,7 +10,13 @@ const AuthCard = ({ type }) => {
       <AuthHeader type={type} />
       <Form type={type} />
       {type === "login" || type === "signup" ? (
-        <FormFooter type={type} />
+        <FormFooter
+          text={
+            type === "login" ? "No account yet?" : "Already have an account?"
+          }
+          link={type === "login" ? "signup" : "/"}
+          linkText={type === "login" ? "Signup" : "Login"}
+        />
       ) : null}
     </section>
   );

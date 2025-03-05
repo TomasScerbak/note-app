@@ -5,7 +5,14 @@
   align-items: center;
 }
 
-.signup {
+.footer__text {
+  font-size: 1.4rem;
+  letter-spacing: -0.2px;
   color: var(--app-input-text);
+  margin: 0 0.3rem 0 0;
+}
+
+.footer__link {
+  color: var(--app-main-text);
   font-size: 1.2rem;
 }

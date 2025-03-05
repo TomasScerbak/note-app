@@ -7,6 +7,32 @@ import EmailInputContainer from "./UI/EmailInputContainer";
 import PasswordInputContainer from "./UI/PasswordInputContainer";
 
 const Form = ({ type }) => {
+  let btnTitle;
+  let mediaBoxText;
+
+  switch (type) {
+    case "signup":
+      btnTitle = "Sign Up";
+      mediaBoxText = "Or log in with:";
+      break;
+    case "login":
+      btnTitle = "Login";
+      mediaBoxText = "Or log in with:";
+      break;
+    case "reset":
+      btnTitle = "Reset Password";
+      mediaBoxText = "";
+      break;
+    case "forgotten":
+      btnTitle = "Send Reset Link";
+      mediaBoxText = "";
+      break;
+    default:
+      "login";
+      btnTitle = "Login";
+      mediaBoxText = "Or log in with:";
+  }
+
   return (
     <form className={classes.form}>
       <FormControl className={classes.form__control}>
@@ -17,6 +43,7 @@ const Form = ({ type }) => {
             placeholder="email@example.com"
             type="email"
             name="email"
+            formType={type}
           />
         ) : (
           <PasswordInputContainer
@@ -38,8 +65,15 @@ const Form = ({ type }) => {
           />
         )}
       </FormControl>
-      <Button variant="primary" hasImage={false} title="Login" type="button" />
-      <AuthMediaBox text="Or log in with:" />
+      <Button
+        variant="primary"
+        hasImage={false}
+        title={btnTitle}
+        type="button"
+      />
+      {type === "login" || type === "signup" ? (
+        <AuthMediaBox text={mediaBoxText} />
+      ) : null}
     </form>
   );
 };
