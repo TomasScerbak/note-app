@@ -1,4 +1,4 @@
-.info__container {
+.message__container {
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -6,14 +6,20 @@
   margin: -1.4rem 0 1.6rem;
 }
 
-.info__image {
-  margin: 0 0.2rem 0 0;
+.message__image {
   width: 1.6rem;
-  filter: var(--image-filter-2);
+  margin-right: 0.2rem;
 }
 
-.info__text {
-  margin: 0;
+.message__text {
+  margin: 0.1rem 0;
   font-size: 1.2rem;
+}
+
+.message--info {
   color: var(--neutral-400);
+}
+
+.message--critical {
+  color: var(--red-500);
 }

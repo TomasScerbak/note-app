@@ -3,7 +3,7 @@ import { useState } from "react";
 import Label from "./Label";
 import Input from "./Input";
 import HidePasswordButton from "./HidePasswordButton";
-import PasswordInfoMessage from "./PasswordInfoMessage";
+import InputMessage from "./InputMessage";
 
 import classes from "./PasswordInputContainer.module.css";
 
@@ -29,8 +29,12 @@ const PasswordInputContainer = ({ htmlFor, text, placeholder, name, formType }) 
         name={name}
         type={hidePassword ? "password" : "text"}
       />
-      {!hideInfoMessage && name === "new_password" && <PasswordInfoMessage />}
-      {!hideInfoMessage && formType === "signup" && <PasswordInfoMessage />}
+      {!hideInfoMessage && name === "new_password" && (
+        <InputMessage text="At least 8 characters" level="critical" />
+      )}
+      {!hideInfoMessage && formType === "signup" && <InputMessage text="At least 8 characters" />}
+      {/* {!hideInfoMessage && name === "new_password" && <PasswordInfoMessage />} */}
+      {/* {!hideInfoMessage && formType === "signup" && <PasswordInfoMessage />} */}
       <HidePasswordButton handleHidePassword={handleHidePassword} isHidden={hidePassword} />
     </div>
   );
