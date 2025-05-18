@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { useAuth } from "../contexts/authContext";
+
 import classes from "./Form.module.css";
 
 import AuthMediaBox from "./AuthMediaBox";
@@ -7,6 +10,14 @@ import EmailInputContainer from "./UI/EmailInputContainer";
 import PasswordInputContainer from "./UI/PasswordInputContainer";
 
 const Form = ({ type }) => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    new_password: "",
+    confirm_password: "",
+  });
+  const { signUp, signIn } = useAuth();
+
   let btnTitle;
   let mediaBoxText;
 
@@ -28,17 +39,38 @@ const Form = ({ type }) => {
       mediaBoxText = "";
       break;
     default:
-      "login";
       btnTitle = "Login";
       mediaBoxText = "Or log in with:";
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
+    console.log("Form submitted");
     const formData = new FormData(event.target);
     const formDataObj = Object.fromEntries(formData.entries());
-    console.log(formDataObj);
+
+    setFormData((prevState) => ({
+      ...prevState,
+      email: formDataObj.email.trim(),
+      password: formDataObj.password.trim(),
+    }));
+
+    switch (type) {
+      case "signup":
+        await signUp(formDataObj.email, formDataObj.password);
+        break;
+      case "login":
+        await signIn(formDataObj.email, formDataObj.password);
+        break;
+      case "reset":
+        // handleResetPassword(formDataObj);
+        break;
+      case "forgotten":
+        // handleForgottenPassword(formDataObj);
+        break;
+      default:
+        console.log("Invalid form type");
+    }
   };
 
   return (
@@ -75,7 +107,14 @@ const Form = ({ type }) => {
           />
         )}
       </FormControl>
-      <Button variant="primary" hasImage={false} title={btnTitle} type="submit" />
+      <Button
+        variant="primary"
+        hasImage={false}
+        title={btnTitle}
+        type="submit"
+        formDataObj={formData}
+        formType={type}
+      />
       {type === "login" || type === "signup" ? <AuthMediaBox text={mediaBoxText} /> : null}
     </form>
   );
