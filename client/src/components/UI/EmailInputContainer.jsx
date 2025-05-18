@@ -1,11 +1,12 @@
 import { Link } from "react-router";
+import InputMessage from "./InputMessage";
 
 import Label from "./Label";
 import Input from "./Input";
 
 import classes from "./EmailInputContainer.module.css";
 
-const EmailInputContainer = ({ htmlFor, text, placeholder, name, type, formType }) => {
+const EmailInputContainer = ({ htmlFor, text, placeholder, name, type, formType, onChange, ref, error }) => {
   return (
     <>
       <div className={classes.email__container}>
@@ -16,7 +17,8 @@ const EmailInputContainer = ({ htmlFor, text, placeholder, name, type, formType 
           </Link>
         ) : null}
       </div>
-      <Input placeholder={placeholder} name={name} type={type} />
+      <Input ref={ref} onChange={onChange} placeholder={placeholder} name={name} type={type} />
+      {error ? <InputMessage text={error} level="critical" /> : null}
     </>
   );
 };

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useAuth } from "../contexts/authContext";
+import { isValidEmail, isValidPassword } from "../validations/emailValidation";
 
 import classes from "./Form.module.css";
 
@@ -10,12 +11,18 @@ import EmailInputContainer from "./UI/EmailInputContainer";
 import PasswordInputContainer from "./UI/PasswordInputContainer";
 
 const Form = ({ type }) => {
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const [error, setError] = useState({});
+  const [typingTimeout, setTypingTimeout] = useState(null);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     new_password: "",
     confirm_password: "",
   });
+
   const { signUp, signIn } = useAuth();
 
   let btnTitle;
@@ -43,9 +50,40 @@ const Form = ({ type }) => {
       mediaBoxText = "Or log in with:";
   }
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    // Clear the previous timeout to prevent premature validation
+    if (typingTimeout) {
+      setError((prev) => ({ ...prev, [name]: "" })); // Clear the error message
+      clearTimeout(typingTimeout);
+    }
+
+    // Set a new timeout to validate the input after the user stops typing
+    setTypingTimeout(
+      setTimeout(() => {
+        if (name === "email" && !isValidEmail(value) && value) {
+          setError((prev) => ({ ...prev, [name]: "Please enter a valid email address." }));
+        }
+
+        if (name === "password" && !isValidPassword(value) && value) {
+          setError((prev) => ({
+            ...prev,
+            [name]:
+              "Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, and one number.",
+          }));
+        }
+      }, 500) // Adjust timeout duration as needed (500ms delay)
+    );
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Form submitted");
+
     const formData = new FormData(event.target);
     const formDataObj = Object.fromEntries(formData.entries());
 
@@ -84,6 +122,9 @@ const Form = ({ type }) => {
             type="email"
             name="email"
             formType={type}
+            onChange={handleInputChange}
+            ref={emailRef}
+            error={error.email}
           />
         ) : (
           <PasswordInputContainer
@@ -93,6 +134,9 @@ const Form = ({ type }) => {
             type="password"
             name="new_password"
             formType={type}
+            onChange={handleInputChange}
+            ref={passwordRef}
+            error={error.new_password}
           />
         )}
       </FormControl>
@@ -104,6 +148,9 @@ const Form = ({ type }) => {
             placeholder=""
             name={type === "reset" ? "confirm_password" : "password"}
             formType={type}
+            onChange={handleInputChange}
+            ref={passwordRef}
+            error={type === "reset" ? error.confirm_password : error.password}
           />
         )}
       </FormControl>
