@@ -14,6 +14,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
 }
 *,
 *::before,
@@ -77,6 +79,15 @@ body {
   --radius-20: 2rem;
   --radius-24: 2.4rem;
   --radius-full: 99.9rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 main {

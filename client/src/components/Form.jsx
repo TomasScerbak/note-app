@@ -9,6 +9,7 @@ import Button from "./UI/Button";
 import FormControl from "./FormControl";
 import EmailInputContainer from "./UI/EmailInputContainer";
 import PasswordInputContainer from "./UI/PasswordInputContainer";
+import AuthModal from "./modals/AuthModal";
 
 const Form = ({ type }) => {
   const emailRef = useRef(null);
@@ -91,6 +92,23 @@ const Form = ({ type }) => {
     const formData = new FormData(event.target);
     const formDataObj = Object.fromEntries(formData.entries());
 
+    // Validate email and password before submission
+    if (!formDataObj.email) {
+      setError((prev) => ({
+        ...prev,
+        email: "Please enter a valid email address.",
+      }));
+    }
+    if (!formDataObj.password) {
+      setError((prev) => ({
+        ...prev,
+        password: "Please enter a valid password.",
+      }));
+    }
+
+    // If either field is missing, prevent form submission
+    if (!formDataObj.email || !formDataObj.password) return;
+
     setFormData((prevState) => ({
       ...prevState,
       email: formDataObj.email ? formDataObj.email.trim() : formDataObj.email,
@@ -167,6 +185,7 @@ const Form = ({ type }) => {
         formType={type}
       />
       {type === "login" || type === "signup" ? <AuthMediaBox text={mediaBoxText} /> : null}
+      {authError ? <AuthModal /> : null}
     </form>
   );
 };

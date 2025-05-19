@@ -41,3 +41,8 @@
   margin-right: var(--spacing-150);
   filter: var(--image-filter);
 }
+
+.btn--small {
+  width: 7.8rem;
+  height: 4.1rem;
+}

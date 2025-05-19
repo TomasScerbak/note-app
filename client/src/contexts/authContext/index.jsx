@@ -1,11 +1,14 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { auth } from "../../firebase/firebase.js";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { signInWithPopup } from "firebase/auth";
-import { GoogleAuthProvider } from "firebase/auth";
-import { sendPasswordResetEmail } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -44,6 +47,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error("Signup Error:", error.code, error.message);
       setAuthError(error.message); // Store the error message
+      return error.message;
     }
   };
 
@@ -58,6 +62,7 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       setAuthError(error.message);
+      return error.message;
     }
   };
 
@@ -74,6 +79,7 @@ export const AuthProvider = ({ children }) => {
       });
     } catch (error) {
       setAuthError(error.message);
+      return error.message;
     }
   };
 
@@ -87,6 +93,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error("Error signing out:", error);
       setAuthError(error.message); // Store the error message
+      return error.message;
     }
   };
 
@@ -97,6 +104,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error("Error sending password reset email:", error);
       setAuthError(error.message); // Store the error message
+      return error.message;
     }
   };
 
@@ -105,6 +113,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         authError,
+        setAuthError,
         isLoading,
         isLoggedIn,
         signUp,
