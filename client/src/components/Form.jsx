@@ -23,7 +23,7 @@ const Form = ({ type }) => {
     confirm_password: "",
   });
 
-  const { signUp, signIn } = useAuth();
+  const { signUp, signIn, passwordResetEmail, authError } = useAuth();
 
   let btnTitle;
   let mediaBoxText;
@@ -66,11 +66,16 @@ const Form = ({ type }) => {
     // Set a new timeout to validate the input after the user stops typing
     setTypingTimeout(
       setTimeout(() => {
-        if (name === "email" && !isValidEmail(value) && value) {
+        if (
+          name === "email" &&
+          value &&
+          !isValidEmail(value) &&
+          (type === "signup" || type === "forgotten")
+        ) {
           setError((prev) => ({ ...prev, [name]: "Please enter a valid email address." }));
         }
 
-        if (name === "password" && !isValidPassword(value) && value) {
+        if (name === "password" && !isValidPassword(value) && value && type !== "login") {
           setError((prev) => ({
             ...prev,
             [name]:
@@ -83,14 +88,13 @@ const Form = ({ type }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const formData = new FormData(event.target);
     const formDataObj = Object.fromEntries(formData.entries());
 
     setFormData((prevState) => ({
       ...prevState,
-      email: formDataObj.email.trim(),
-      password: formDataObj.password.trim(),
+      email: formDataObj.email ? formDataObj.email.trim() : formDataObj.email,
+      password: formDataObj.password ? formDataObj.password.trim() : formDataObj.password,
     }));
 
     switch (type) {
@@ -101,10 +105,10 @@ const Form = ({ type }) => {
         await signIn(formDataObj.email, formDataObj.password);
         break;
       case "reset":
-        // handleResetPassword(formDataObj);
+        //
         break;
       case "forgotten":
-        // handleForgottenPassword(formDataObj);
+        passwordResetEmail(formDataObj.email);
         break;
       default:
         console.log("Invalid form type");

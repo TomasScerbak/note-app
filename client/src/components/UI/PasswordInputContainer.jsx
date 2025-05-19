@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 
 import Label from "./Label";
 import Input from "./Input";
@@ -16,7 +17,14 @@ const PasswordInputContainer = ({ htmlFor, text, placeholder, name, formType, on
 
   return (
     <div className={classes.password__container}>
-      <Label htmlFor={htmlFor} text={text} />
+      <div className={classes.password__label}>
+        <Label htmlFor={htmlFor} text={text} />
+        {formType === "login" ? (
+          <Link to="/forgot_password" className={classes.forgot}>
+            Forgot
+          </Link>
+        ) : null}
+      </div>
       <Input
         placeholder={placeholder}
         name={name}

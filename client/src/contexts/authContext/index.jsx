@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -32,7 +33,6 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signUp = async (email, password) => {
-    console.log("signUp called with email:", email, "and password:", password);
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       setUser(userCredential.user);
@@ -48,10 +48,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signIn = async (email, password) => {
-    console.log("signIn called with email:", email, "and password:", password);
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log("User signed in:", userCredential.user);
       setUser(userCredential.user);
       setAuthError(null); // Clear previous error
 
@@ -92,9 +90,29 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const passwordResetEmail = async (email) => {
+    try {
+      console.log("Sending password reset email to:", email);
+      await sendPasswordResetEmail(auth, email);
+    } catch (error) {
+      console.error("Error sending password reset email:", error);
+      setAuthError(error.message); // Store the error message
+    }
+  };
+
   return (
     <AuthContext.Provider
-      value={{ user, authError, isLoading, isLoggedIn, signUp, signIn, signInWiGoogle, signOut }}
+      value={{
+        user,
+        authError,
+        isLoading,
+        isLoggedIn,
+        signUp,
+        signIn,
+        signInWiGoogle,
+        signOut,
+        passwordResetEmail,
+      }}
     >
       {children}
     </AuthContext.Provider>

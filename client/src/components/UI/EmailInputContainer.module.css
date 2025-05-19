@@ -4,8 +4,3 @@
   justify-content: space-between;
   align-items: center;
 }
-
-.forgot {
-  color: var(--app-input-text);
-  font-size: 1.2rem;
-}
