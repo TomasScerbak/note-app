@@ -1,6 +1,9 @@
 // import { useAuth } from "../contexts/authContext";
 
 import Main from "./Main";
+import HeaderSmall from "../components/HeaderSmall";
+import Body from "../components/Body";
+import Footer from "../components/Footer";
 
 import classes from "./Home.module.css";
 
@@ -14,9 +17,15 @@ const Home = () => {
   return (
     <Main>
       <div className={classes.parent}>
-        <div className={classes.header}>0</div>
-        <div className={classes.body}>1</div>
-        <div className={classes.footer}>2</div>
+        <div className={classes.header}>
+          <HeaderSmall />
+        </div>
+        <div className={classes.body}>
+          <Body />
+        </div>
+        <div className={classes.footer}>
+          <Footer />
+        </div>
         <div className={classes.top__left}>1</div>
         <div className={classes.top__header}>0</div>
         <div className={classes.left__sidebar}>2</div>

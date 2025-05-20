@@ -16,6 +16,8 @@ body {
   text-rendering: optimizeLegibility;
   opacity: 0;
   animation: fadeIn 0.5s ease-in forwards;
+  margin: 0;
+  padding: 0;
 }
 *,
 *::before,

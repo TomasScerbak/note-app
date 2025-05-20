@@ -1,0 +1,8 @@
+.header_small {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 1.3rem 1.6rem;
+  background-color: var(--neutral-800);
+  height: 100%;
+}

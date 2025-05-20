@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 5.4rem 1fr 5.6rem;
-  border: 1px solid white;
   width: 100%;
   height: 100vh;
   grid-template-areas:
@@ -13,52 +12,49 @@
 
 .header {
   grid-area: header;
-  border: 1px solid white;
 }
 
 .body {
   grid-area: body;
-  border: 1px solid white;
 }
 
 .footer {
   grid-area: footer;
-  border: 1px solid white;
 }
 
 .top__left {
   grid-area: top__left;
-  border: 1px solid white;
+
   display: none;
 }
 
 .left__sidebar {
   grid-area: left__sidebar;
-  border: 1px solid white;
+
   display: none;
 }
 
 .top__header {
   grid-area: top__header;
-  border: 1px solid white;
+
   display: none;
 }
 
 .left_inner_panel {
   grid-area: left_inner_panel;
-  border: 1px solid white;
+
   display: none;
 }
 
 .right_inner_panel {
   grid-area: right_inner_panel;
-  border: 1px solid white;
+
   display: none;
 }
 
 .right__sidebar {
   grid-area: right__sidebar;
-  border: 1px solid white;
+
   display: none;
 }
 
@@ -74,8 +70,6 @@
     grid-template-rows: 5.2rem 1fr;
     grid-template-areas:
       "top__left top__header top__header top__header top__header"
-      "left__sidebar left_inner_panel right_inner_panel right_inner_panel right__sidebar"
-      "left__sidebar left_inner_panel right_inner_panel right_inner_panel right__sidebar"
       "left__sidebar left_inner_panel right_inner_panel right_inner_panel right__sidebar";
   }
 
