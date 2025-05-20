@@ -10,6 +10,7 @@ import FormControl from "./FormControl";
 import EmailInputContainer from "./UI/EmailInputContainer";
 import PasswordInputContainer from "./UI/PasswordInputContainer";
 import AuthModal from "./modals/AuthModal";
+import ConfirmationModal from "./modals/ConfirmationModal";
 
 const Form = ({ type }) => {
   const emailRef = useRef(null);
@@ -24,7 +25,7 @@ const Form = ({ type }) => {
     confirm_password: "",
   });
 
-  const { signUp, signIn, passwordResetEmail, authError } = useAuth();
+  const { signUp, signIn, passwordResetEmail, authError, passwordResetSent } = useAuth();
 
   let btnTitle;
   let mediaBoxText;
@@ -88,10 +89,11 @@ const Form = ({ type }) => {
   };
 
   const handleSubmit = async (event) => {
+    console.log("Form submitted");
     event.preventDefault();
     const formData = new FormData(event.target);
     const formDataObj = Object.fromEntries(formData.entries());
-
+    console.log("Form data:", formDataObj);
     // Validate email and password before submission
     if (!formDataObj.email) {
       setError((prev) => ({
@@ -107,7 +109,7 @@ const Form = ({ type }) => {
     }
 
     // If either field is missing, prevent form submission
-    if (!formDataObj.email || !formDataObj.password) return;
+    if (type !== "forgotten" && (!formDataObj.email || !formDataObj.password)) return;
 
     setFormData((prevState) => ({
       ...prevState,
@@ -186,6 +188,7 @@ const Form = ({ type }) => {
       />
       {type === "login" || type === "signup" ? <AuthMediaBox text={mediaBoxText} /> : null}
       {authError ? <AuthModal /> : null}
+      {passwordResetSent ? <ConfirmationModal /> : null}
     </form>
   );
 };

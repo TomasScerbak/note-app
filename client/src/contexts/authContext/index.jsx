@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [authError, setAuthError] = useState(null);
+  const [passwordResetSent, setPasswordResetSent] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -99,8 +100,8 @@ export const AuthProvider = ({ children }) => {
 
   const passwordResetEmail = async (email) => {
     try {
-      console.log("Sending password reset email to:", email);
-      await sendPasswordResetEmail(auth, email);
+      sendPasswordResetEmail(auth, email);
+      setPasswordResetSent(true);
     } catch (error) {
       console.error("Error sending password reset email:", error);
       setAuthError(error.message); // Store the error message
@@ -121,6 +122,8 @@ export const AuthProvider = ({ children }) => {
         signInWiGoogle,
         signOut,
         passwordResetEmail,
+        passwordResetSent,
+        setPasswordResetSent,
       }}
     >
       {children}

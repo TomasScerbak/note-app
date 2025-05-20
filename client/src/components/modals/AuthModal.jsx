@@ -54,8 +54,6 @@ const AuthModal = () => {
       errorMessage = "An unexpected authentication error occurred.";
   }
 
-  console.log("Error Message:", errorMessage);
-
   const handleClose = () => {
     setIsOpen(false);
     setAuthError(null);
