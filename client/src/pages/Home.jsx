@@ -1,20 +1,31 @@
-import { useAuth } from "../contexts/authContext";
+// import { useAuth } from "../contexts/authContext";
+
+import Main from "./Main";
+
+import classes from "./Home.module.css";
 
 const Home = () => {
-  const { user, isLoading, isLoggedIn, signOut } = useAuth();
+  // const { user, isLoading, isLoggedIn, signOut } = useAuth();
 
-  const handleSignOut = async () => {
-    await signOut();
-  };
+  // const handleSignOut = async () => {
+  //   await signOut();
+  // };
 
   return (
-    <div>
-      <div>
-        <h1>Home</h1>
-        <button onClick={handleSignOut}>Sign Out</button>
+    <Main>
+      <div className={classes.parent}>
+        <div className={classes.header}>0</div>
+        <div className={classes.body}>1</div>
+        <div className={classes.footer}>2</div>
+        <div className={classes.top__left}>1</div>
+        <div className={classes.top__header}>0</div>
+        <div className={classes.left__sidebar}>2</div>
+        <div className={classes.top__header}>3</div>
+        <div className={classes.left_inner_panel}>4</div>
+        <div className={classes.right_inner_panel}>5</div>
+        <div className={classes.right__sidebar}>6</div>
       </div>
-      <p>{isLoading ? "Loading..." : isLoggedIn ? `Welcome, ${user.email}` : "Please log in."}</p>
-    </div>
+    </Main>
   );
 };
 
