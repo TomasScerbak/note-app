@@ -10,6 +10,8 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 
+import axios from "axios";
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -43,6 +45,17 @@ export const AuthProvider = ({ children }) => {
       setAuthError(null); // Clear any previous error
 
       if (userCredential.user && userCredential.user.uid) {
+        // Send user data to the backend
+        const userData = {
+          email: userCredential.user.email,
+          uid: userCredential.user.uid,
+        };
+        await axios.post("http://localhost:5000/", userData, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        setIsLoggedIn(true);
         navigate("/home");
       }
     } catch (error) {

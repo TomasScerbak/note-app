@@ -89,11 +89,10 @@ const Form = ({ type }) => {
   };
 
   const handleSubmit = async (event) => {
-    console.log("Form submitted");
     event.preventDefault();
     const formData = new FormData(event.target);
     const formDataObj = Object.fromEntries(formData.entries());
-    console.log("Form data:", formDataObj);
+
     // Validate email and password before submission
     if (!formDataObj.email) {
       setError((prev) => ({
