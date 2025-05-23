@@ -50,13 +50,15 @@ export const AuthProvider = ({ children }) => {
           email: userCredential.user.email,
           uid: userCredential.user.uid,
         };
-        await axios.post("http://localhost:5000/", userData, {
+        const response = await axios.post("http://localhost:5000/", userData, {
           headers: {
             "Content-Type": "application/json",
           },
         });
-        setIsLoggedIn(true);
-        navigate("/home");
+        if (response.status === 201) {
+          setIsLoggedIn(true);
+          navigate("/home");
+        }
       }
     } catch (error) {
       console.error("Signup Error:", error.code, error.message);

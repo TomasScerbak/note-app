@@ -22,16 +22,6 @@ const pool = mysql.createPool({
 
 const db = pool.promise();
 
-app.get("/test-db", async (req, res) => {
-  try {
-    const [rows] = await db.query("SELECT 1 + 1 AS result");
-    res.json({ message: "Database connection successful!", result: rows[0].result });
-  } catch (error) {
-    console.error("Database connection error:", error);
-    res.status(500).json({ message: "Database connection failed", error: error.message });
-  }
-});
-
 import UserRouter from "./routes/userRoutes.js";
 app.use("/", UserRouter);
 
