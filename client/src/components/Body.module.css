@@ -1,8 +1,0 @@
-.body {
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  align-items: center;
-  height: 100%;
-  background-color: var(--app-main-color);
-}

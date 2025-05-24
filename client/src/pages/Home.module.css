@@ -12,14 +12,18 @@
 
 .header {
   grid-area: header;
+  background-color: var(app-login-signup-bg);
 }
 
 .body {
   grid-area: body;
+  background-color: var(--app-main-color);
+  padding: 0 1.6rem;
 }
 
 .footer {
   grid-area: footer;
+  background-color: var(--app-main-color);
 }
 
 .top__left {

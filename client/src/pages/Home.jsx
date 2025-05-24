@@ -2,8 +2,8 @@
 
 import Main from "./Main";
 import HeaderSmall from "../components/HeaderSmall";
-import Body from "../components/Body";
 import Footer from "../components/Footer";
+import AllNotes from "../components/AllNotes";
 
 import classes from "./Home.module.css";
 
@@ -21,7 +21,7 @@ const Home = () => {
           <HeaderSmall />
         </div>
         <div className={classes.body}>
-          <Body />
+          <AllNotes />
         </div>
         <div className={classes.footer}>
           <Footer />

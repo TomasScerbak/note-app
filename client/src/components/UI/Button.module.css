@@ -37,7 +37,7 @@
   background-color: var(--neutral-600);
 }
 
-.btn__image {
+.btn__image--google {
   margin-right: var(--spacing-150);
   filter: var(--image-filter);
 }
@@ -45,4 +45,14 @@
 .btn--small {
   width: 7.8rem;
   height: 4.1rem;
+}
+
+.btn--rounded {
+  border-radius: 100%;
+  width: 4.8rem;
+  height: 4.8rem;
+  position: absolute;
+  bottom: -69rem;
+  right: 0.5rem;
+  z-index: 1000;
 }
