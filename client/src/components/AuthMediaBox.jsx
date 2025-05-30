@@ -21,6 +21,7 @@ const AuthMediaBox = ({ text }) => {
         title="Google"
         type="button"
         onClick={handleGoogleSignIn}
+        btnImageClass="btn__image__google"
       />
     </div>
   );

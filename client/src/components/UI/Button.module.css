@@ -37,7 +37,7 @@
   background-color: var(--neutral-600);
 }
 
-.btn__image--google {
+.btn__image__google {
   margin-right: var(--spacing-150);
   filter: var(--image-filter);
 }

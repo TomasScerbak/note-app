@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
         });
         if (response.status === 201) {
           setIsLoggedIn(true);
-          navigate("/home");
+          navigate("/home/all-notes"); // Redirect to the all notes page after signup
         }
       }
     } catch (error) {
@@ -74,7 +74,8 @@ export const AuthProvider = ({ children }) => {
       setAuthError(null); // Clear previous error
 
       if (userCredential.user && userCredential.user.uid) {
-        navigate("/home");
+        navigate("/home/all-notes"); // Redirect to the all notes page after sign in
+        setIsLoggedIn(true);
       }
     } catch (error) {
       setAuthError(error.message);
@@ -90,7 +91,8 @@ export const AuthProvider = ({ children }) => {
         setUser(user);
         setAuthError(null); // Clear previous error
         if (user && user.uid) {
-          navigate("/home");
+          navigate("/home/all-notes"); // Redirect to the all notes page after sign in
+          setIsLoggedIn(true);
         }
       });
     } catch (error) {

@@ -28,37 +28,31 @@
 
 .top__left {
   grid-area: top__left;
-
   display: none;
 }
 
 .left__sidebar {
   grid-area: left__sidebar;
-
   display: none;
 }
 
 .top__header {
   grid-area: top__header;
-
   display: none;
 }
 
 .left_inner_panel {
   grid-area: left_inner_panel;
-
   display: none;
 }
 
 .right_inner_panel {
   grid-area: right_inner_panel;
-
   display: none;
 }
 
 .right__sidebar {
   grid-area: right__sidebar;
-
   display: none;
 }
 
