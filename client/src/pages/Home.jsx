@@ -1,7 +1,6 @@
 // import { useAuth } from "../contexts/authContext";
 import { Outlet } from "react-router";
 
-import Main from "./Main";
 import HeaderSmall from "../components/HeaderSmall";
 import Footer from "../components/Footer";
 
@@ -15,7 +14,7 @@ const Home = () => {
   // };
 
   return (
-    <Main>
+    <>
       <div className={classes.parent}>
         <div className={classes.header}>
           <HeaderSmall />
@@ -34,7 +33,7 @@ const Home = () => {
         <div className={classes.right_inner_panel}>5</div>
         <div className={classes.right__sidebar}>6</div>
       </div>
-    </Main>
+    </>
   );
 };
 

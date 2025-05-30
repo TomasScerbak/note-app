@@ -1,0 +1,14 @@
+.btn {
+  outline: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn--blue {
+  color: var(--blue-500);
+}
+
+.btn--white {
+  color: var(--neutral-300);
+}

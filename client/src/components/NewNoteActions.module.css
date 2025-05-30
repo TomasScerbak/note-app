@@ -1,0 +1,34 @@
+.new_note_action_container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.left_col {
+  justify-self: start;
+}
+
+.right_col {
+  justify-self: end;
+}
+
+.go_back_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.left_arrow {
+  width: 1.8rem;
+  height: 1.8rem;
+  color: var(--neutral-300);
+}
+
+.back_to_all_notes {
+  color: var(--neutral-300);
+  font-size: 1.4rem;
+}

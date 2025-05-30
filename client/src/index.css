@@ -164,8 +164,16 @@ input:hover {
   background-color: var(--neutral-600);
 }
 
+a {
+  text-decoration: none;
+}
+
 a:hover {
   color: var(--blue-500);
+}
+
+link {
+  color: white;
 }
 
 [color-theme="light"] {
