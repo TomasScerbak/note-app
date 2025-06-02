@@ -134,7 +134,7 @@ label {
   font-size: 1.4rem;
 }
 
-input {
+/* input {
   border: 1px solid var(--app-input-border);
   outline: none;
   background: transparent;
@@ -162,7 +162,7 @@ input[data-autocompleted] {
 input:hover {
   color: var(--neutral-500);
   background-color: var(--neutral-600);
-}
+} */
 
 a {
   text-decoration: none;

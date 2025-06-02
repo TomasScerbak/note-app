@@ -1,0 +1,30 @@
+.input__container {
+  width: 100%;
+  cursor: text;
+  caret-color: var(--neutral-400);
+}
+
+.placeholder {
+  width: calc(100% - 20px);
+  color: var(--neutral-400);
+  font-size: 1.4rem;
+  line-height: 1.5;
+  pointer-events: none;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.note__tag__input {
+  width: 100%;
+  font-size: 1.4rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: text;
+  caret-color: white;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}

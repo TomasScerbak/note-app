@@ -6,4 +6,7 @@ export default defineConfig({
   plugins: [react()],
 
   "process.env": {},
+  optimizeDeps: {
+    exclude: ["@tinymce/miniature"], // Exclude it from dependency optimization
+  },
 });

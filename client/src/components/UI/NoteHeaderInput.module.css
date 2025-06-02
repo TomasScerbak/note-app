@@ -1,0 +1,19 @@
+.note__header__input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: text;
+  caret-color: white;
+  color: white;
+  font-size: 2.4rem;
+}
+
+.note__header__input::placeholder {
+  color: white;
+  font-size: 2.4rem;
+}
+
+.note__header__input:hover {
+  background-color: none;
+}
