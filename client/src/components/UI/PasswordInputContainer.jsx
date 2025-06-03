@@ -8,7 +8,7 @@ import InputMessage from "./InputMessage";
 
 import classes from "./PasswordInputContainer.module.css";
 
-const PasswordInputContainer = ({ htmlFor, text, placeholder, name, formType, onChange, ref, error }) => {
+const PasswordInputContainer = ({ htmlFor, text, placeholder, name, formType, onChange, error }) => {
   const [hidePassword, setHidePassword] = useState(true);
 
   const handleHidePassword = () => {
@@ -30,7 +30,6 @@ const PasswordInputContainer = ({ htmlFor, text, placeholder, name, formType, on
         name={name}
         type={hidePassword ? "password" : "text"}
         onChange={onChange}
-        ref={ref}
       />
       {formType !== "login" && error ? <InputMessage text={error} level="critical" /> : null}
       <HidePasswordButton handleHidePassword={handleHidePassword} isHidden={hidePassword} />

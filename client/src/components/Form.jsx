@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { isValidEmail, isValidPassword } from "../validations/emailValidation";
 
@@ -13,8 +13,6 @@ import AuthModal from "./modals/AuthModal";
 import ConfirmationModal from "./modals/ConfirmationModal";
 
 const Form = ({ type }) => {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
   const [error, setError] = useState({});
   const [typingTimeout, setTypingTimeout] = useState(null);
 
@@ -146,7 +144,6 @@ const Form = ({ type }) => {
             name="email"
             formType={type}
             onChange={handleInputChange}
-            ref={emailRef}
             error={error.email}
           />
         ) : (
@@ -158,7 +155,6 @@ const Form = ({ type }) => {
             name="new_password"
             formType={type}
             onChange={handleInputChange}
-            ref={passwordRef}
             error={error.new_password}
           />
         )}
@@ -172,7 +168,6 @@ const Form = ({ type }) => {
             name={type === "reset" ? "confirm_password" : "password"}
             formType={type}
             onChange={handleInputChange}
-            ref={passwordRef}
             error={type === "reset" ? error.confirm_password : error.password}
           />
         )}
