@@ -52,7 +52,7 @@
   width: 4.8rem;
   height: 4.8rem;
   position: absolute;
-  bottom: -69rem;
-  right: 0.5rem;
+  bottom: 10%;
+  right: 3%;
   z-index: 1000;
 }

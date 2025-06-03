@@ -1,21 +1,42 @@
 // import { useAuth } from "../contexts/authContext";
 import { Outlet } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 
 import HeaderSmall from "../components/HeaderSmall";
 import Footer from "../components/Footer";
+import Button from "../components/UI/Button";
+
+import PlusImage from "../assets/icon-plus.svg";
 
 import classes from "./Home.module.css";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   // const { user, isLoading, isLoggedIn, signOut } = useAuth();
 
   // const handleSignOut = async () => {
   //   await signOut();
   // };
 
+  const navigateToNewNote = () => {
+    navigate("/home/create-note");
+  };
+
   return (
     <>
       <div className={classes.parent}>
+        {location.pathname === "/home/all-notes" ? (
+          <Button
+            onClick={navigateToNewNote}
+            variant="primary"
+            hasImage={true}
+            type="button"
+            size="rounded"
+            src={PlusImage}
+          />
+        ) : null}
         <div className={classes.header}>
           <HeaderSmall />
         </div>
