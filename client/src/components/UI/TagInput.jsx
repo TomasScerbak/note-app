@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classes from "./TagInput.module.css";
 
-const TagInput = () => {
+const TagInput = ({ clearValues, handleClearValues }) => {
   const [showPlaceholder, setShowPlaceholder] = useState(true);
   const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    if (clearValues) {
+      setTags([]);
+      setShowPlaceholder(true);
+      handleClearValues(false);
+    }
+  }, [clearValues, handleClearValues]);
 
   return (
     <div onClick={() => setShowPlaceholder(false)} className={classes.input__container}>
@@ -11,6 +19,10 @@ const TagInput = () => {
         <div className={classes.placeholder}>Add tags separated by commas (e.g. Work, Planning)</div>
       )}
       <input
+        value={tags}
+        onChange={(event) => {
+          setTags(event.target.value);
+        }}
         type="text"
         onFocus={() => setShowPlaceholder(false)}
         onBlur={(event) => {

@@ -6,9 +6,17 @@
 }
 
 .btn--blue {
+  color: var(--blue-700);
+}
+
+.btn--blue:hover {
   color: var(--blue-500);
 }
 
 .btn--white {
   color: var(--neutral-300);
+}
+
+.btn--white:hover {
+  color: white;
 }
