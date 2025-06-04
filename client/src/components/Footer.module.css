@@ -1,15 +1,40 @@
 .footer {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   background-color: var(--app-main-color);
-  color: var(--app-main-text);
   box-shadow: 0px -5px 6px 0px rgba(0, 0, 0, 0.5);
   height: 100%;
+  width: 100%;
+  padding: 0 3.2rem;
+}
+
+.footer__item {
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6.2rem;
+  height: 3.2rem;
+  cursor: pointer;
+  background: transparent;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .footer__icon {
-  background-color: wheat;
+  background: none;
   width: 2.4rem;
   height: 2.4rem;
+}
+
+.active {
+  width: 6.2rem;
+  height: 3.2rem;
+  background-color: var(--neutral-700);
+  border-radius: var(--radius-4);
+}
+
+.footer__icon__active {
+  filter: invert(28%) sepia(99%) saturate(5200%) hue-rotate(218deg) brightness(100%) contrast(100%);
 }

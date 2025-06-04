@@ -8,6 +8,10 @@ import Forgotten from "./pages/Forgotten";
 import NewNote from "./components/NewNote";
 import ViewNotePage from "./components/ViewNotePage";
 import AllNotes from "./components/AllNotes";
+import Search from "./pages/Search";
+import Archive from "./pages/Archive";
+import TagList from "./pages/TagList";
+import Settings from "./pages/Settings";
 
 import "./App.css";
 
@@ -21,6 +25,10 @@ function App() {
           <Route path="/home/all-notes" element={<AllNotes />} />
           <Route path="/home/create-note" element={<NewNote />} />
           <Route path="home/note/:id" element={<ViewNotePage />} />
+          <Route path="home/search-notes" element={<Search />} />
+          <Route path="home/archive-notes" element={<Archive />} />
+          <Route path="home/tag-list" element={<TagList />} />
+          <Route path="home/settings" element={<Settings />} />
         </Route>
         <Route path="/forgot_password" element={<Forgotten />} />
         <Route path="/reset_password" element={<Reset />} />
