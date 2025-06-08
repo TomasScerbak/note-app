@@ -30,6 +30,8 @@ mysql-data/
 *.sqlite3
 db.json
 dump.rdb
+.devdbrc
+devdbrc
 
 # Editor & OS-specific files
 .vscode/
