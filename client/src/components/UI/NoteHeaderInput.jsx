@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 
 import classes from "./NoteHeaderInput.module.css";
 
-const NoteHeaderInput = ({ clearValues, handleClearValues }) => {
+const NoteHeaderInput = ({ clearValues, handleClearValues, title, setTitle }) => {
   const [placeholder, setPlaceholder] = useState("Enter a title...");
-  const [title, setTitle] = useState("");
 
   useEffect(() => {
     if (clearValues) {
@@ -12,7 +11,7 @@ const NoteHeaderInput = ({ clearValues, handleClearValues }) => {
       setPlaceholder("Enter a title...");
       handleClearValues(false);
     }
-  }, [clearValues, handleClearValues]);
+  }, [clearValues, handleClearValues, title, setTitle]);
 
   return (
     <input
