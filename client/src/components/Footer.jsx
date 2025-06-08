@@ -14,8 +14,6 @@ const Footer = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log("location", location);
-
   const handleClick = useCallback((label) => {
     setActiveLabel(label);
   }, []);
@@ -26,35 +24,35 @@ const Footer = () => {
       label: "home",
       isActive: true,
       image: HomeImage,
-      navigate: "/home/all-notes",
+      navigate: "all-notes",
     },
     {
       text: "Search",
       label: "search",
       isActive: false,
       image: SearchImage,
-      navigate: "home/search-notes",
+      navigate: "search-notes",
     },
     {
       text: "Archive",
       label: "archive",
       isActive: false,
       image: ArchiveImage,
-      navigate: "home/archive-notes",
+      navigate: "archive-notes",
     },
     {
       text: "Tags",
       label: "tags",
       isActive: false,
       image: TagImage,
-      navigate: "home/tag-list",
+      navigate: "tag-list",
     },
     {
       text: "Settings",
       label: "settings",
       isActive: false,
       image: SettingsImage,
-      navigate: "home/settings",
+      navigate: "settings",
     },
   ];
   return (

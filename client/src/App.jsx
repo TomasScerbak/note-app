@@ -22,13 +22,13 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/home" element={<Home />}>
-          <Route path="/home/all-notes" element={<AllNotes />} />
-          <Route path="/home/create-note" element={<NewNote />} />
-          <Route path="home/note/:id" element={<ViewNotePage />} />
-          <Route path="home/search-notes" element={<Search />} />
-          <Route path="home/archive-notes" element={<Archive />} />
-          <Route path="home/tag-list" element={<TagList />} />
-          <Route path="home/settings" element={<Settings />} />
+          <Route path="all-notes" element={<AllNotes />} />
+          <Route path="create-note" element={<NewNote />} />
+          <Route path="note/:id" element={<ViewNotePage />} />
+          <Route path="search-notes" element={<Search />} />
+          <Route path="archive-notes" element={<Archive />} />
+          <Route path="tag-list" element={<TagList />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="/forgot_password" element={<Forgotten />} />
         <Route path="/reset_password" element={<Reset />} />
