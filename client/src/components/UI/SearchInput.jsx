@@ -14,7 +14,7 @@ const SearchInput = ({ placeholder, name, type, onChange, message }) => {
         ></input>
         <img className={classes.seach__input__image} src={SearchImage} alt="search icon" />
       </div>
-      <p>{message}</p>
+      {message}
     </>
   );
 };

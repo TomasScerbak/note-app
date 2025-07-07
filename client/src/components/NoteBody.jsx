@@ -13,12 +13,14 @@ const NoteBody = ({ clearValues, handleClearValues, noteText, setNoteText }) => 
     }
   }, [clearValues, handleClearValues, noteText, setNoteText]);
   return (
-    <textarea
-      onChange={(event) => setNoteText(event.target.value)}
-      value={noteText}
-      placeholder={placeholder}
-      className={classes.note__body__input}
-    ></textarea>
+    <div className={classes.note__body}>
+      <textarea
+        onChange={(event) => setNoteText(event.target.value)}
+        value={noteText}
+        placeholder={placeholder}
+        className={classes.note__body__input}
+      ></textarea>
+    </div>
   );
 };
 

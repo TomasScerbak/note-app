@@ -5,10 +5,25 @@ import SearchInput from "../components/UI/SearchInput";
 
 const Search = () => {
   const [searchText, setSearchText] = useState("");
-  const [message, setMessage] = useState("test");
+  const [message, setMessage] = useState("");
 
   const handleChange = (event) => {
-    setSearchText(event.target.value);
+    const newValue = event.target.value;
+    setSearchText(newValue);
+
+    if (newValue.length) {
+      setMessage(
+        <p>
+          All notes matching
+          <strong>
+            <q>{newValue}</q>
+          </strong>
+          are displayed below.
+        </p>
+      );
+    } else {
+      setMessage("");
+    }
   };
 
   return (

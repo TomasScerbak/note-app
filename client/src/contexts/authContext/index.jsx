@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
           email: userCredential.user.email,
           uid: userCredential.user.uid,
         };
-        const response = await axios.post("http://localhost:5000/", userData, {
+        const response = await axios.post("http://localhost:5000/api/user/", userData, {
           headers: {
             "Content-Type": "application/json",
           },
