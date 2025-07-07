@@ -23,7 +23,7 @@ const pool = mysql.createPool({
 const db = pool.promise();
 
 import UserRouter from "./routes/userRoutes.js";
-app.use("/", UserRouter);
+app.use("/api/user", UserRouter);
 
 const port = process.env.PORT;
 

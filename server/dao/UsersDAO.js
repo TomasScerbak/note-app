@@ -13,6 +13,20 @@ class UsersDAO {
       throw error;
     }
   }
+
+  static async getUserIdByUID(user) {
+    console.log("user", user);
+    const { uid } = user;
+    const sql = "SELECT id FROM users WHERE uid = ?";
+    const value = [uid];
+    try {
+      const [result] = await db.query(sql, value);
+      return result;
+    } catch (error) {
+      console.error("Error getting user by UID:", error);
+      throw error;
+    }
+  }
 }
 
 export default UsersDAO;
