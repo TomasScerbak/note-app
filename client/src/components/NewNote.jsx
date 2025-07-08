@@ -34,7 +34,8 @@ const NewNote = () => {
     setClearValues((prev) => !prev);
   };
 
-  const handleNoteErrors = () => {
+  const handleSaveNote = () => {
+    // Check if title and noteText are not empty
     setNoteErrors({
       no_title_error: title.trim() === "",
       no_text_error: noteText.trim() === "",
@@ -43,7 +44,7 @@ const NewNote = () => {
 
   return (
     <div className={classes.note__container}>
-      <NewNoteActions handleNoteErrors={handleNoteErrors} handleClearValues={handleClearValues} />
+      <NewNoteActions handleSaveNote={handleSaveNote} handleClearValues={handleClearValues} />
       <NoteHeader
         title={title}
         setTitle={setTitle}
