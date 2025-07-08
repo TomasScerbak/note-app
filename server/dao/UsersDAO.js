@@ -15,7 +15,6 @@ class UsersDAO {
   }
 
   static async getUserIdByUID(user) {
-    console.log("user", user);
     const { uid } = user;
     const sql = "SELECT id FROM users WHERE uid = ?";
     const value = [uid];

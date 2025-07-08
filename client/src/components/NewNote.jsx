@@ -1,5 +1,6 @@
 import { useAuth } from "../contexts/authContext";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import classes from "./NewNote.module.css";
 
@@ -7,7 +8,8 @@ import NewNoteActions from "./NewNoteActions";
 import NoteHeader from "./NoteHeader";
 import NoteBody from "./NoteBody";
 import Modal from "../components/modals/Modal";
-import axios from "axios";
+
+import { fetchUserId } from "../api/user";
 
 const NewNote = () => {
   const [clearValues, setClearValues] = useState(false);
@@ -17,10 +19,16 @@ const NewNote = () => {
     no_title_error: false,
     no_text_error: false,
   });
-  const [userId, setUserId] = useState(null);
 
   const { user } = useAuth();
   const uid = user.uid;
+
+  const { data } = useQuery({
+    queryKey: ["user", uid],
+    queryFn: () => fetchUserId(uid),
+  });
+
+  console.log("User ID:", data);
 
   const handleClearValues = () => {
     setClearValues((prev) => !prev);
@@ -32,22 +40,6 @@ const NewNote = () => {
       no_text_error: noteText.trim() === "",
     });
   };
-
-  useEffect(() => {
-    if (uid) {
-      const fetchUserId = async () => {
-        try {
-          const response = await axios.get(`http://localhost:5000/api/user/${uid}`);
-          if (response.status === 200) {
-            setUserId(response.data[0]?.id);
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      fetchUserId();
-    }
-  }, [uid]);
 
   return (
     <div className={classes.note__container}>
