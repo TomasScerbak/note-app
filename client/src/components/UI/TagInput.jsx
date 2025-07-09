@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import classes from "./TagInput.module.css";
 
-const TagInput = ({ clearValues, handleClearValues }) => {
+const TagInput = ({ clearValues, handleClearValues, tags, setTags }) => {
   const [showPlaceholder, setShowPlaceholder] = useState(true);
-  const [tags, setTags] = useState([]);
 
   useEffect(() => {
     if (clearValues) {
@@ -11,7 +10,7 @@ const TagInput = ({ clearValues, handleClearValues }) => {
       setShowPlaceholder(true);
       handleClearValues(false);
     }
-  }, [clearValues, handleClearValues]);
+  }, [clearValues, handleClearValues, setTags]);
 
   return (
     <div onClick={() => setShowPlaceholder(false)} className={classes.input__container}>
@@ -21,7 +20,7 @@ const TagInput = ({ clearValues, handleClearValues }) => {
       <input
         value={tags}
         onChange={(event) => {
-          setTags(event.target.value);
+          setTags(event.target.value.split(",").map((tag) => tag.trim()));
         }}
         type="text"
         onFocus={() => setShowPlaceholder(false)}

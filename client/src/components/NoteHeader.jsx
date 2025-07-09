@@ -5,7 +5,7 @@ import classes from "./NoteHeader.module.css";
 import TagIcon from "../assets/icon-tag.svg";
 import ClockIcon from "../assets/icon-clock.svg";
 
-const NoteHeader = ({ clearValues, handleClearValues, title, setTitle }) => {
+const NoteHeader = ({ clearValues, handleClearValues, title, setTitle, tags, setTags }) => {
   return (
     <div className={classes.note__header_container}>
       <div className={classes.title__container}>
@@ -20,7 +20,12 @@ const NoteHeader = ({ clearValues, handleClearValues, title, setTitle }) => {
         <img className={classes.left__icon} src={TagIcon} alt="tag icon" />
         <div className={classes.left__text}>Tags</div>
         <div className={classes.right__input}>
-          <TagInput clearValues={clearValues} handleClearValues={handleClearValues} />
+          <TagInput
+            tags={tags}
+            setTags={setTags}
+            clearValues={clearValues}
+            handleClearValues={handleClearValues}
+          />
         </div>
       </div>
       <div className={classes.note__header__item}>
