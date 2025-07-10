@@ -2,7 +2,7 @@
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import { useAuth } from "../../contexts/authContext";
-import { extractFirebaseAuthError } from "../../utls/noteUtils";
+import { extractFirebaseAuthError } from "../../utils/noteUtils";
 
 import Button from "../UI/Button";
 

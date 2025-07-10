@@ -8,6 +8,7 @@ import NewNoteActions from "./NewNoteActions";
 import NoteHeader from "./NoteHeader";
 import NoteBody from "./NoteBody";
 import Modal from "../components/modals/Modal";
+import Toast from "../components/modals/Toast";
 
 import { fetchUserId } from "../api/user";
 import { createNote } from "../api/notes";
@@ -21,6 +22,11 @@ const NewNote = () => {
     no_title_error: false,
     no_text_error: false,
   });
+  const [showToast, setShowToast] = useState({
+    isActive: false,
+    message: "",
+    color: "",
+  });
 
   const { user } = useAuth();
   const uid = user.uid;
@@ -33,13 +39,24 @@ const NewNote = () => {
   const { mutate } = useMutation({
     mutationFn: (note) => createNote(note),
     onSuccess: () => {
-      console.log("Note created successfully!");
       setClearValues((prev) => !prev); // reset fields
       setTitle("");
       setNoteText("");
+      setTags([]);
+      setNoteErrors({}); // reset errors
+      setShowToast({
+        isActive: true,
+        message: "Note created successfully!",
+        color: "positive",
+      });
     },
     onError: (error) => {
       console.error("Error creating note:", error);
+      setShowToast({
+        isActive: true,
+        message: "Failed to create note. Please try again.",
+        color: "negative",
+      });
     },
   });
 
@@ -88,6 +105,13 @@ const NewNote = () => {
           setNoteErrors={setNoteErrors}
           header="Please Note"
           message="Title and note text are manadatory inputs."
+        />
+      ) : null}
+      {showToast.isActive ? (
+        <Toast
+          message={showToast.message}
+          color={showToast.color}
+          onClose={() => setShowToast({ ...showToast, isActive: false })}
         />
       ) : null}
     </div>

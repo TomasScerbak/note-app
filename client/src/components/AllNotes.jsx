@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import NoteCard from "./NoteCard";
 import Loader from "../components/UI/Loader";
 
-import { formatDate } from "../utls/noteUtils";
+import { formatDate } from "../utils/noteUtils";
 
 import classes from "./AllNotes.module.css";
 
