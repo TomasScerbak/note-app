@@ -2,6 +2,12 @@
 html {
   font-size: 62.5%;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 body {
   line-height: 1.5;
   font-size: 1.8rem;
@@ -19,11 +25,7 @@ body {
   margin: 0;
   padding: 0;
 }
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+
 :root {
   /* --neutral-950: hsl(222, 32%, 8%);
   --neutral-900: hsl(230, 19%, 12%); */

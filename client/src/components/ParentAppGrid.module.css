@@ -3,7 +3,7 @@
   grid-template-columns: 1fr;
   grid-template-rows: 5.4rem 1fr 5.6rem;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   grid-template-areas:
     "header"
     "body"
@@ -20,6 +20,19 @@
   grid-area: body;
   background-color: var(--app-main-color);
   padding: 0 1.6rem;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.body::-webkit-scrollbar {
+  background-color: var(--app-main-color);
+  scrollbar-width: thin;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background-color: var(--neutral-700);
+  border-radius: 1rem;
 }
 
 .footer {

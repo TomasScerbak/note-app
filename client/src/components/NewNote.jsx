@@ -1,6 +1,7 @@
 import { useAuth } from "../contexts/authContext";
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { useToast } from "../contexts/toastContext";
 
 import classes from "./NewNote.module.css";
 
@@ -8,12 +9,13 @@ import NewNoteActions from "./NewNoteActions";
 import NoteHeader from "./NoteHeader";
 import NoteBody from "./NoteBody";
 import Modal from "../components/modals/Modal";
-import Toast from "../components/modals/Toast";
 
 import { fetchUserId } from "../api/user";
 import { createNote } from "../api/notes";
 
 const NewNote = () => {
+  const { addToast } = useToast();
+
   const [clearValues, setClearValues] = useState(false);
   const [title, setTitle] = useState("");
   const [noteText, setNoteText] = useState("");
@@ -21,11 +23,6 @@ const NewNote = () => {
   const [noteErrors, setNoteErrors] = useState({
     no_title_error: false,
     no_text_error: false,
-  });
-  const [showToast, setShowToast] = useState({
-    isActive: false,
-    message: "",
-    color: "",
   });
 
   const { user } = useAuth();
@@ -44,18 +41,18 @@ const NewNote = () => {
       setNoteText("");
       setTags([]);
       setNoteErrors({}); // reset errors
-      setShowToast({
-        isActive: true,
+      addToast({
         message: "Note created successfully!",
         color: "positive",
+        duration: 5000,
       });
     },
     onError: (error) => {
       console.error("Error creating note:", error);
-      setShowToast({
-        isActive: true,
+      addToast({
         message: "Failed to create note. Please try again.",
         color: "negative",
+        duration: 5000,
       });
     },
   });
@@ -105,13 +102,6 @@ const NewNote = () => {
           setNoteErrors={setNoteErrors}
           header="Please Note"
           message="Title and note text are manadatory inputs."
-        />
-      ) : null}
-      {showToast.isActive ? (
-        <Toast
-          message={showToast.message}
-          color={showToast.color}
-          onClose={() => setShowToast({ ...showToast, isActive: false })}
         />
       ) : null}
     </div>

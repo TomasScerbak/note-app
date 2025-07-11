@@ -10,31 +10,42 @@ import CrossIcon from "../../assets/icon-cross.svg";
 
 const Toast = ({ message, color }) => {
   const [isActive, setIsActive] = useState(true);
+  const [hideAnimation, setHideAnimation] = useState(false);
 
   const handleClose = () => {
-    setIsActive(false);
+    setHideAnimation(true);
+    setTimeout(() => {
+      setIsActive(false);
+    }, 1000); // Match animation duration
   };
+
   return (
-    <dialog open={isActive} className={classes.toast}>
-      <div className={classes.toast__container}>
-        <div className={classes.toast__container__left}>
-          <img src={color === "positive" ? CheckMarkIcon : CrossIcon} className={classes.toast__image} />
-          <p className={classes.toast_message}>{message}</p>
+    isActive && (
+      <dialog open className={`${classes.toast} ${hideAnimation ? classes.hide : ""}`}>
+        <div className={classes.toast__container}>
+          <div className={classes.toast__container__left}>
+            <img
+              src={color === "positive" ? CheckMarkIcon : CrossIcon}
+              className={classes.toast__image}
+              alt={color === "positive" ? "Success" : "Error"}
+            />
+            <p className={classes.toast_message}>{message}</p>
+          </div>
+          <div className={classes.toast__container__right}>
+            <ButtonNoOutline
+              type="button"
+              hasImage={true}
+              src={CrossIcon}
+              size="small"
+              variant="primary"
+              title=""
+              onClick={handleClose}
+              btnImageClass={classes.close__toast__button}
+            />
+          </div>
         </div>
-        <div className={classes.toast__container__right}>
-          <ButtonNoOutline
-            type="button"
-            hasImage={true}
-            src={CrossIcon}
-            size="small"
-            variant="primary"
-            title=""
-            onClick={handleClose}
-            btnImageClass={classes.close__toast__button}
-          />
-        </div>
-      </div>
-    </dialog>
+      </dialog>
+    )
   );
 };
 
