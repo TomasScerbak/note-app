@@ -5,9 +5,9 @@ export const extractFirebaseAuthError = (errorMessage) => {
 
 export const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "2-digit",
+  return date.toLocaleDateString("en-GB", {
     day: "2-digit",
+    month: "long",
+    year: "numeric",
   });
 };
