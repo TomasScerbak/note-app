@@ -5,12 +5,13 @@ const TagInput = ({ clearValues, handleClearValues, tags, setTags }) => {
   const [showPlaceholder, setShowPlaceholder] = useState(true);
 
   useEffect(() => {
+    if (tags.length > 0) setShowPlaceholder(false);
     if (clearValues) {
       setTags([]);
       setShowPlaceholder(true);
       handleClearValues(false);
     }
-  }, [clearValues, handleClearValues, setTags]);
+  }, [clearValues, handleClearValues, setTags, tags]);
 
   return (
     <div onClick={() => setShowPlaceholder(false)} className={classes.input__container}>
@@ -18,7 +19,7 @@ const TagInput = ({ clearValues, handleClearValues, tags, setTags }) => {
         <div className={classes.placeholder}>Add tags separated by commas (e.g. Work, Planning)</div>
       )}
       <input
-        value={tags}
+        value={Array.isArray(tags) ? tags.join(", ") : ""}
         onChange={(event) => {
           setTags(event.target.value.split(",").map((tag) => tag.trim()));
         }}
