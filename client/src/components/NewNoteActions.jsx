@@ -10,7 +10,7 @@ const NewNoteActions = ({ handleClearValues, onSaveNote }) => {
   return (
     <div className={classes.new_note_action_container}>
       <div className={classes.left_col}>
-        <Link className={classes.go_back_container} to="/home/all-notes">
+        <Link onClick={handleClearValues} className={classes.go_back_container} to="/home/all-notes">
           <img className={classes.left_arrow} src={ArroLeftIcon} alt="Go to all notes page" />
           <span className={classes.back_to_all_notes}>Go Back</span>
         </Link>
