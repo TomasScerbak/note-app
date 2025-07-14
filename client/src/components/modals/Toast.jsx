@@ -13,16 +13,16 @@ const Toast = ({ message, color, duration = 5000, onRemove }) => {
   const [hideAnimation, setHideAnimation] = useState(false);
 
   useEffect(() => {
-    // // Start fade-out 1s before auto-removal
-    // const startFadeOut = setTimeout(() => {
-    //   setHideAnimation(true);
-    //   // Remove toast after fade-out animation finishes
-    //   const removeTimer = setTimeout(() => {
-    //     onRemove();
-    //   }, 1000); // match fadeOut duration
-    //   return () => clearTimeout(removeTimer);
-    // }, duration - 1000);
-    // return () => clearTimeout(startFadeOut);
+    // Start fade-out 1s before auto-removal
+    const startFadeOut = setTimeout(() => {
+      setHideAnimation(true);
+      // Remove toast after fade-out animation finishes
+      const removeTimer = setTimeout(() => {
+        () => onRemove();
+      }, 1000); // match fadeOut duration
+      return () => clearTimeout(removeTimer);
+    }, duration - 1000);
+    return () => clearTimeout(startFadeOut);
   }, [duration, onRemove]);
 
   const handleClose = () => {

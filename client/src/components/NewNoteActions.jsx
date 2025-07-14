@@ -6,7 +6,7 @@ import ArroLeftIcon from "../assets/icon-arrow-left.svg";
 
 import { Link } from "react-router";
 
-const NewNoteActions = ({ handleClearValues, handleSaveNote }) => {
+const NewNoteActions = ({ handleClearValues, onSaveNote }) => {
   return (
     <div className={classes.new_note_action_container}>
       <div className={classes.left_col}>
@@ -32,7 +32,7 @@ const NewNoteActions = ({ handleClearValues, handleSaveNote }) => {
           title="Save Note"
           type="button"
           btnImageClass=""
-          onClick={handleSaveNote}
+          onClick={onSaveNote}
         />
       </div>
     </div>

@@ -3,10 +3,20 @@ import axios from "axios";
 export const createNote = async (note) => {
   try {
     const response = await axios.post("http://localhost:5000/api/note", note);
+    console.log("Response from createNote:", response);
     return response.data;
   } catch (error) {
     console.error("Error creating note:", error);
     throw error;
+  }
+};
+
+export const updateNote = async (note) => {
+  try {
+    const response = await axios.put(`http://localhost:5000/api/note/${note.id}`, note);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating note:", error);
   }
 };
 

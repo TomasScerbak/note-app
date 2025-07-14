@@ -8,5 +8,6 @@ export const fetchUserId = async (uid) => {
     }
   } catch (error) {
     console.error(error);
+    throw new Error("Failed to fetch user ID");
   }
 };

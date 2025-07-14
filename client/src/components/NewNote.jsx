@@ -1,7 +1,8 @@
-import { useAuth } from "../contexts/authContext";
 import { useState } from "react";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { useToast } from "../contexts/toastContext";
+import { useFetchUserId } from "../hooks/queries/useFetchUserId";
+import { useCreateNote } from "../hooks/mutations/useCreateNote";
+import { useUpdateNote } from "../hooks/mutations/useUpdateNote";
+import { formatDate } from "../utils/noteUtils";
 
 import classes from "./NewNote.module.css";
 
@@ -10,79 +11,48 @@ import NoteHeader from "./NoteHeader";
 import NoteBody from "./NoteBody";
 import Modal from "../components/modals/Modal";
 
-import { fetchUserId } from "../api/user";
-import { createNote } from "../api/notes";
-
 const NewNote = () => {
-  const { addToast } = useToast();
-
   const [clearValues, setClearValues] = useState(false);
   const [title, setTitle] = useState("");
   const [noteText, setNoteText] = useState("");
   const [tags, setTags] = useState([]);
-  const [noteErrors, setNoteErrors] = useState({
-    no_title_error: false,
-    no_text_error: false,
-  });
+  const [noteObject, setNoteObject] = useState({});
 
-  const { user } = useAuth();
-  const uid = user.uid;
+  const { userId } = useFetchUserId();
+  const { handleSaveNote, noteErrors, setNoteErrors } = useCreateNote(userId);
 
-  const { data } = useQuery({
-    queryKey: ["user", uid],
-    queryFn: () => fetchUserId(uid),
-  });
-
-  const { mutate } = useMutation({
-    mutationFn: (note) => createNote(note),
-    onSuccess: () => {
-      setClearValues((prev) => !prev); // reset fields
-      setTitle("");
-      setNoteText("");
-      setTags([]);
-      setNoteErrors({}); // reset errors
-      addToast({
-        message: "Note created successfully!",
-        color: "positive",
-        duration: 5000,
-      });
-    },
-    onError: (error) => {
-      console.error("Error creating note:", error);
-      addToast({
-        message: "Failed to create note. Please try again.",
-        color: "negative",
-        duration: 5000,
-      });
-    },
-  });
+  const { handleUpdateNote } = useUpdateNote();
 
   const handleClearValues = () => {
     setClearValues((prev) => !prev);
+    setNoteObject({});
   };
 
-  const handleSaveNote = () => {
-    const hasTitle = title.trim() !== "";
-    const hasText = noteText.trim() !== "";
+  const onSaveOrUpdate = async () => {
+    try {
+      let response;
+      if (noteObject.id) {
+        response = await handleUpdateNote({
+          id: noteObject.id,
+          header: title,
+          content: noteText,
+          tags,
+        });
+      } else {
+        response = await handleSaveNote(title, noteText, tags);
+      }
 
-    setNoteErrors({
-      no_title_error: !hasTitle,
-      no_text_error: !hasText,
-    });
-
-    if (hasTitle && hasText && data) {
-      mutate({
-        header: title.trim(),
-        content: noteText.trim(),
-        tags: tags.map((tag) => tag.trim()).join(","),
-        userId: data,
-      });
+      if (response) {
+        setNoteObject(response);
+      }
+    } catch (error) {
+      console.error("Error saving note:", error.message);
     }
   };
 
   return (
     <div className={classes.note__container}>
-      <NewNoteActions handleSaveNote={handleSaveNote} handleClearValues={handleClearValues} />
+      <NewNoteActions onSaveNote={onSaveOrUpdate} handleClearValues={handleClearValues} />
       <NoteHeader
         tags={tags}
         setTags={setTags}
@@ -90,6 +60,7 @@ const NewNote = () => {
         setTitle={setTitle}
         clearValues={clearValues}
         handleClearValues={handleClearValues}
+        updatedAt={noteObject.updated_at ? formatDate(noteObject.updated_at) : "Not yet saved"}
       />
       <NoteBody
         noteText={noteText}

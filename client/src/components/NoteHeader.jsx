@@ -5,7 +5,7 @@ import classes from "./NoteHeader.module.css";
 import TagIcon from "../assets/icon-tag.svg";
 import ClockIcon from "../assets/icon-clock.svg";
 
-const NoteHeader = ({ clearValues, handleClearValues, title, setTitle, tags, setTags }) => {
+const NoteHeader = ({ clearValues, handleClearValues, title, setTitle, tags, setTags, updatedAt }) => {
   return (
     <div className={classes.note__header_container}>
       <div className={classes.title__container}>
@@ -31,7 +31,7 @@ const NoteHeader = ({ clearValues, handleClearValues, title, setTitle, tags, set
       <div className={classes.note__header__item}>
         <img className={classes.left__icon} src={ClockIcon} alt="clock icon" />
         <div className={classes.left__text}>Last Edited</div>
-        <div className={classes.right__input}>Not yet saved</div>
+        <div className={classes.right__input}>{updatedAt}</div>
       </div>
     </div>
   );

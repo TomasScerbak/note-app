@@ -7,7 +7,12 @@ class NotesDAO {
     const values = [header, content, tags, userId];
     try {
       const [result] = await db.query(sql, values);
-      return result;
+      const noteId = result.insertId;
+
+      const [rows] = await db.query("SELECT * FROM notes WHERE id = ? LIMIT 1", [noteId]);
+      const savedNote = rows[0];
+
+      return savedNote;
     } catch (error) {
       console.error("Error creating note:", error);
       throw error;
@@ -33,6 +38,7 @@ class NotesDAO {
     try {
       const [result] = await db.query(sql, values);
       return result;
+      console.log("Note updated successfully:", result);
     } catch (error) {
       console.error("Error updating note:", error);
       throw error;

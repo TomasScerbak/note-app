@@ -15,6 +15,27 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Update an existing note
+router.put("/:id", async (req, res) => {
+  const id = req.params.id;
+  const { header, content, tags } = req.body;
+
+  const note = { id, header, content, tags };
+
+  try {
+    const updatedNote = await NotesDAO.updateNote(note);
+
+    if (updatedNote.affectedRows > 0) {
+      res.status(200).json({ message: "Note updated successfully" });
+    } else {
+      res.status(404).json({ message: "Note not found" });
+    }
+  } catch (error) {
+    console.error("Error updating note:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 // Get all notes for a specific user
 router.get("/:userId", async (req, res) => {
   const { userId } = req.params;
