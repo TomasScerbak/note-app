@@ -9,6 +9,14 @@
   color: var(--blue-700);
 }
 
+.white-toast-cross {
+  filter: var(--image-filter-2);
+}
+
+.btn--white-cross {
+  color: var(--image-filter);
+}
+
 .btn--blue:hover {
   color: var(--blue-500);
 }

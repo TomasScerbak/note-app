@@ -102,6 +102,15 @@ main {
   align-items: center;
 }
 
+#toast {
+  position: fixed;
+  bottom: 10rem;
+  right: 0rem;
+  z-index: 9999;
+  background: rgba(0, 255, 0, 0.1);
+  width: 27.4rem;
+}
+
 h1 {
   font-size: 2.4rem;
   letter-spacing: -0.5px;
@@ -163,4 +172,10 @@ link {
 
 [font-family="serif"] {
   app-font-family: serif, sans-serif;
+}
+
+@media screen and (min-width: 768px) {
+  #toast {
+    bottom: 12rem;
+  }
 }

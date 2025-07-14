@@ -1,22 +1,37 @@
 /* Toast.module.css */
 .toast {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 1000;
   border: none;
   background-color: var(--app-login-signup-bg);
   padding: 0.9rem 0.8rem;
-  width: 27.4rem;
+  max-width: 27.4rem;
   height: 3.2rem;
-  color: white;
+  font-size: 1.2rem;
+  color: var(--neutral-300);
+  display: flex;
+  border-radius: var(--radius-8);
 }
 
 .toast__container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
+}
+
+.toast__container__left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toast__container__right {
+  margin: 0.7rem 0 0 3rem;
+}
+
+.green_filtered_icon {
+  filter: invert(32%) sepia(74%) saturate(420%) hue-rotate(95deg) brightness(95%) contrast(89%);
+}
+
+.red_filtered_icon {
+  filter: invert(27%) sepia(84%) saturate(650%) hue-rotate(-10deg) brightness(105%) contrast(90%);
 }
 
 @keyframes toastIn {
