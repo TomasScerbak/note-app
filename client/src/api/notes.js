@@ -1,9 +1,11 @@
 import axios from "axios";
 
+const BASE_URL = "http://localhost:5000/api/note";
+
+// Create Note
 export const createNote = async (note) => {
   try {
-    const response = await axios.post("http://localhost:5000/api/note", note);
-    console.log("Response from createNote:", response);
+    const response = await axios.post(`${BASE_URL}`, note);
     return response.data;
   } catch (error) {
     console.error("Error creating note:", error);
@@ -11,21 +13,35 @@ export const createNote = async (note) => {
   }
 };
 
+// Update Note
 export const updateNote = async (note) => {
   try {
-    const response = await axios.put(`http://localhost:5000/api/note/${note.id}`, note);
+    const response = await axios.put(`${BASE_URL}/${note.id}`, note);
     return response.data;
   } catch (error) {
     console.error("Error updating note:", error);
+    throw error;
   }
 };
 
-export const getNotesByUserId = async (userId) => {
+// Fetch Single Note by Note ID
+export const getNoteById = async (noteId) => {
   try {
-    const response = await axios.get(`http://localhost:5000/api/note/${userId}`);
+    const response = await axios.get(`${BASE_URL}/note/${noteId}`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching notes:", error);
+    console.error("Error fetching note by ID:", error);
+    throw error;
+  }
+};
+
+// Fetch All Notes by User ID
+export const getNotesByUserId = async (userId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching notes by user ID:", error);
     throw error;
   }
 };

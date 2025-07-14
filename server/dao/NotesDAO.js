@@ -31,6 +31,19 @@ class NotesDAO {
     }
   }
 
+  static async getNoteById(noteId) {
+    const sql = "SELECT * FROM notes WHERE id = ? LIMIT 1";
+    const value = [noteId];
+    try {
+      const [rows] = await db.query(sql, value);
+      console.log("Fetched note:", rows[0]);
+      return rows[0];
+    } catch (error) {
+      console.error("Error fetching note by ID:", error);
+      throw error;
+    }
+  }
+
   static async updateNote(note) {
     const { id, header, content, tags } = note;
     const sql = "UPDATE notes SET header = ?, content = ?, tags = ? WHERE id = ?";
@@ -38,7 +51,6 @@ class NotesDAO {
     try {
       const [result] = await db.query(sql, values);
       return result;
-      console.log("Note updated successfully:", result);
     } catch (error) {
       console.error("Error updating note:", error);
       throw error;

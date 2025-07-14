@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { getNotesByUserId } from "../api/notes";
 import { useAuth } from "../contexts/authContext";
 import { fetchUserId } from "../api/user";
@@ -6,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import NoteCard from "./NoteCard";
 import Loader from "../components/UI/Loader";
+import Modal from "../components/modals/Modal";
 
 import { formatDate } from "../utils/noteUtils";
 
@@ -33,26 +33,26 @@ const AllNotes = () => {
 
   if (isLoading) return <Loader />;
 
-  console.log(notesData);
-
   return (
     <div className={classes.all_notes}>
       <h2>All Notes</h2>
-      {!notesData.length ? (
+      {isError ? (
+        <Modal header="Please Note" message={`Error occurred when getting notes: ${error}`} />
+      ) : notesData && notesData.length ? (
+        notesData.map((note) => (
+          <NoteCard
+            key={note.id}
+            id={note.id}
+            tags={note.tags.split(",")}
+            noteHeading={note.header}
+            lastEdited={formatDate(note.updated_at)}
+          />
+        ))
+      ) : (
         <p className={classes.welcome__text}>
           You don’t have any notes yet. Start a new note to capture your thoughts and ideas.
         </p>
-      ) : null}
-      {notesData && notesData.length
-        ? notesData.map((note) => (
-            <NoteCard
-              key={note.id}
-              tags={note.tags.split(",")}
-              noteHeading={note.header}
-              lastEdited={formatDate(note.updated_at)}
-            />
-          ))
-        : null}
+      )}
     </div>
   );
 };

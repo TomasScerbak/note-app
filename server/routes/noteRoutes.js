@@ -19,12 +19,10 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const id = req.params.id;
   const { header, content, tags } = req.body;
-
   const note = { id, header, content, tags };
 
   try {
     const updatedNote = await NotesDAO.updateNote(note);
-
     if (updatedNote.affectedRows > 0) {
       res.status(200).json({ message: "Note updated successfully" });
     } else {
@@ -37,17 +35,34 @@ router.put("/:id", async (req, res) => {
 });
 
 // Get all notes for a specific user
-router.get("/:userId", async (req, res) => {
+router.get("/user/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
     const notes = await NotesDAO.getNotesByUserId(userId);
-    if (notes) {
+    if (notes.length) {
       res.status(200).json(notes);
     } else {
       res.status(404).json({ message: "No notes found for this user" });
     }
   } catch (error) {
     console.error("Error fetching notes:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// Get a note by its ID
+router.get("/note/:id", async (req, res) => {
+  const noteId = req.params.id;
+  try {
+    const note = await NotesDAO.getNoteById(noteId);
+    console.log("Fetched note:", note);
+    if (note) {
+      res.status(200).json(note);
+    } else {
+      res.status(404).json({ message: "Note not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching note by ID:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
