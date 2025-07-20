@@ -1,6 +1,6 @@
 import { getNotesByUserId } from "../api/notes";
-import { useAuth } from "../contexts/authContext";
 import { fetchUserId } from "../api/user";
+import { useAuth } from "../contexts/authContext";
 import { useQuery } from "@tanstack/react-query";
 
 import NoteCard from "./NoteCard";
