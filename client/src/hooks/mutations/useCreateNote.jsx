@@ -41,6 +41,8 @@ export const useCreateNote = (userId) => {
 
     setNoteErrors(errors);
 
+    if (!hasTitle || !hasText) return;
+
     const response = await createPost.mutateAsync({
       header: title.trim(),
       content: noteText.trim(),

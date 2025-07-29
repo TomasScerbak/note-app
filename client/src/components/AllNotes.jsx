@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 
 import NoteCard from "./NoteCard";
 import Loader from "../components/UI/Loader";
-import Modal from "../components/modals/Modal";
 
 import { formatDate } from "../utils/noteUtils";
 
@@ -19,16 +18,14 @@ const AllNotes = () => {
     queryKey: ["user", uid],
     queryFn: () => fetchUserId(uid),
     enabled: !!uid,
+    retry: false,
   });
 
-  const {
-    data: notesData,
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
+  const { data: notesData, isLoading } = useQuery({
     queryKey: ["notes", userId],
     queryFn: () => getNotesByUserId(userId),
+    enabled: !!userId,
+    retry: 1,
   });
 
   if (isLoading) return <Loader />;
@@ -36,9 +33,7 @@ const AllNotes = () => {
   return (
     <div className={classes.all_notes}>
       <h2>All Notes</h2>
-      {isError ? (
-        <Modal header="Please Note" message={`Error occurred when getting notes: ${error}`} />
-      ) : notesData && notesData.length ? (
+      {notesData && notesData.length ? (
         notesData.map((note) => (
           <NoteCard
             key={note.id}

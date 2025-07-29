@@ -55,7 +55,6 @@ router.get("/note/:id", async (req, res) => {
   const noteId = req.params.id;
   try {
     const note = await NotesDAO.getNoteById(noteId);
-    console.log("Fetched note:", note);
     if (note) {
       res.status(200).json(note);
     } else {
@@ -63,6 +62,22 @@ router.get("/note/:id", async (req, res) => {
     }
   } catch (error) {
     console.error("Error fetching note by ID:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// Delete a note by its ID
+router.delete("/note/:id", async (req, res) => {
+  const noteId = req.params.id;
+  try {
+    const result = await NotesDAO.deleteNote(noteId);
+    if (result.affectedRows > 0) {
+      res.status(200).json({ message: "Note deleted successfully" });
+    } else {
+      res.status(404).json({ message: "Note not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting note:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });

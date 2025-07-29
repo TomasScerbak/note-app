@@ -13,6 +13,8 @@
 
 .right_col {
   justify-self: end;
+  justify-content: center;
+  display: flex;
 }
 
 .go_back_container {

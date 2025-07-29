@@ -45,3 +45,14 @@ export const getNotesByUserId = async (userId) => {
     throw error;
   }
 };
+
+// Delete Note
+export const deleteNote = async (noteId) => {
+  try {
+    const response = await axios.delete(`${BASE_URL}/note/${noteId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting note:", error);
+    throw error;
+  }
+};

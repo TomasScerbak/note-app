@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useFetchUserId } from "../hooks/queries/useFetchUserId";
 import { useCreateNote } from "../hooks/mutations/useCreateNote";
 import { useUpdateNote } from "../hooks/mutations/useUpdateNote";
+
 import { formatDate } from "../utils/noteUtils";
 
 import classes from "./NewNote.module.css";

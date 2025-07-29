@@ -56,6 +56,18 @@ class NotesDAO {
       throw error;
     }
   }
+
+  static async deleteNote(noteId) {
+    const sql = "DELETE FROM notes WHERE id = ?";
+    const value = [noteId];
+    try {
+      const [result] = await db.query(sql, value);
+      return result;
+    } catch (error) {
+      console.error("Error deleting note:", error);
+      throw error;
+    }
+  }
 }
 
 export default NotesDAO;
