@@ -56,3 +56,14 @@ export const deleteNote = async (noteId) => {
     throw error;
   }
 };
+
+// Toggle is_archived status of a note
+export const toggleArchiveStatus = async (noteId, isArchived) => {
+  try {
+    const response = await axios.patch(`${BASE_URL}/note/${noteId}/archive`, { currentState: isArchived });
+    return response.data;
+  } catch (error) {
+    console.error("Error toggling archive status:", error);
+    throw error;
+  }
+};

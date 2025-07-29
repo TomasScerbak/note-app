@@ -82,4 +82,21 @@ router.delete("/note/:id", async (req, res) => {
   }
 });
 
+// Update is_archived status of a note
+router.patch("/note/:id/archive", async (req, res) => {
+  const noteId = req.params.id;
+  const { currentState } = req.body; // expects a boolean value
+  try {
+    const result = await NotesDAO.toggleArchive(noteId, currentState);
+    if (result.affectedRows > 0) {
+      res.status(200).json({ message: "Note archive status updated successfully" });
+    } else {
+      res.status(404).json({ message: "Note not found" });
+    }
+  } catch (error) {
+    console.error("Error toggling archive status:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 export default router;

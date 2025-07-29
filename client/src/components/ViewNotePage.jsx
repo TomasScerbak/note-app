@@ -5,6 +5,7 @@ import { useGetNoteById } from "../hooks/queries/useGetNoteById";
 import { formatDate } from "../utils/noteUtils";
 import { useUpdateNote } from "../hooks/mutations/useUpdateNote";
 import { useDeleteNote } from "../hooks/mutations/useDeleteNote";
+import { useArchiveNote } from "../hooks/mutations/useArchiveNote";
 import { useNavigate } from "react-router";
 
 import NoteHeader from "./NoteHeader";
@@ -38,6 +39,7 @@ const ViewNotePage = () => {
 
   const { handleUpdateNote } = useUpdateNote();
   const { handleDeleteNote } = useDeleteNote(id);
+  const { toggleArchive } = useArchiveNote();
 
   const onSaveOrUpdate = async () => {
     try {
@@ -76,6 +78,16 @@ const ViewNotePage = () => {
     }
   };
 
+  const onToggleArchive = async () => {
+    try {
+      if (!id) return;
+      await toggleArchive(id, Boolean(noteData.is_archived));
+      queryClient.invalidateQueries(["note", id]);
+    } catch (error) {
+      console.error("Error toggling archive status:", error.message);
+    }
+  };
+
   if (isLoading) return <Loader />;
   if (isError)
     return (
@@ -87,7 +99,12 @@ const ViewNotePage = () => {
 
   return (
     <div className={classes.note__container}>
-      <NewNoteActions id={id} onSaveNote={onSaveOrUpdate} onDeleteNote={onDeleteNote} />
+      <NewNoteActions
+        id={id}
+        onSaveNote={onSaveOrUpdate}
+        onDeleteNote={onDeleteNote}
+        onToggleArchive={onToggleArchive}
+      />
       <NoteHeader tags={tags} setTags={setTags} title={title} setTitle={setTitle} updatedAt={updatedAt} />
       <NoteBody setNoteText={setNoteText} noteText={noteText} />
     </div>

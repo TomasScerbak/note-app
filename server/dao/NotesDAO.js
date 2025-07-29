@@ -68,6 +68,19 @@ class NotesDAO {
       throw error;
     }
   }
+
+  static async toggleArchive(noteId, currentState) {
+    const newState = currentState ? 1 : 0; // ✅ must be number!
+    const sql = "UPDATE notes SET is_archived = ? WHERE id = ?";
+    const values = [newState, noteId];
+    try {
+      const [result] = await db.query(sql, values);
+      return result;
+    } catch (error) {
+      console.error("Error toggling archive status:", error);
+      throw error;
+    }
+  }
 }
 
 export default NotesDAO;

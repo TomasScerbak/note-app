@@ -8,7 +8,7 @@ import TrashIcon from "../assets/icon-delete.svg";
 
 import { Link } from "react-router";
 
-const NewNoteActions = ({ id, handleClearValues, onSaveNote, onDeleteNote }) => {
+const NewNoteActions = ({ id, handleClearValues, onSaveNote, onDeleteNote, onToggleArchive }) => {
   return (
     <div className={classes.new_note_action_container}>
       <div className={classes.left_col}>
@@ -27,7 +27,15 @@ const NewNoteActions = ({ id, handleClearValues, onSaveNote, onDeleteNote }) => 
             src={TrashIcon}
           />
         ) : null}
-        {id ? <ButtonNoOutline btnImageClass="" hasImage={true} variant="white" src={ArchiveIcon} /> : null}
+        {id ? (
+          <ButtonNoOutline
+            btnImageClass=""
+            hasImage={true}
+            variant="white"
+            src={ArchiveIcon}
+            onClick={onToggleArchive}
+          />
+        ) : null}
         {!id ? (
           <ButtonNoOutline
             variant="white"
