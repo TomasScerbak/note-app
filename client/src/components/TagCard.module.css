@@ -1,0 +1,18 @@
+.tag_card {
+  border-bottom: 1px solid var(--app-login-signup-bg);
+  height: 4rem;
+  padding: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.tag__icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.8rem;
+}
+
+.tag__label {
+  color: var(--neutral-300);
+}
