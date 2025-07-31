@@ -61,7 +61,6 @@ const ViewNotePage = () => {
   };
 
   const onDeleteNote = async () => {
-    console.log("Deleting note with ID:", id);
     try {
       let response;
       if (id) {
@@ -104,6 +103,7 @@ const ViewNotePage = () => {
         onSaveNote={onSaveOrUpdate}
         onDeleteNote={onDeleteNote}
         onToggleArchive={onToggleArchive}
+        isArchived={noteData.is_archived}
       />
       <NoteHeader tags={tags} setTags={setTags} title={title} setTitle={setTitle} updatedAt={updatedAt} />
       <NoteBody setNoteText={setNoteText} noteText={noteText} />

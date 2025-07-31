@@ -4,11 +4,12 @@ import classes from "./NewNoteActions.module.css";
 
 import ArroLeftIcon from "../assets/icon-arrow-left.svg";
 import ArchiveIcon from "../assets/icon-archive.svg";
+import ArchiveIconWhite from "../assets/icon-archive-white.svg";
 import TrashIcon from "../assets/icon-delete.svg";
 
 import { Link } from "react-router";
 
-const NewNoteActions = ({ id, handleClearValues, onSaveNote, onDeleteNote, onToggleArchive }) => {
+const NewNoteActions = ({ id, handleClearValues, onSaveNote, onDeleteNote, onToggleArchive, isArchived }) => {
   return (
     <div className={classes.new_note_action_container}>
       <div className={classes.left_col}>
@@ -32,7 +33,7 @@ const NewNoteActions = ({ id, handleClearValues, onSaveNote, onDeleteNote, onTog
             btnImageClass=""
             hasImage={true}
             variant="white"
-            src={ArchiveIcon}
+            src={isArchived ? ArchiveIconWhite : ArchiveIcon}
             onClick={onToggleArchive}
           />
         ) : null}
