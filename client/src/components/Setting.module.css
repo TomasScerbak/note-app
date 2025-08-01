@@ -1,0 +1,15 @@
+.setting__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  cursor: pointer;
+}
+
+.setting__image {
+  margin-right: 0.8rem;
+}
+
+.borderTop {
+  border-top: 1px solid var(--neutral-700);
+}
