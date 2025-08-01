@@ -37,8 +37,6 @@ const TagList = () => {
       ]
     : [];
 
-  console.log("Unique Tags:", uniqueTags);
-
   if (isError) return <Modal header="Please Note" message={error.message} />;
 
   return (

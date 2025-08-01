@@ -12,6 +12,7 @@ import Search from "./pages/Search";
 import Archive from "./pages/Archive";
 import TagList from "./pages/TagList";
 import Settings from "./pages/Settings";
+import TagDetailedList from "./pages/TagDetailedList";
 
 import "./App.css";
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="search-notes" element={<Search />} />
           <Route path="archive-notes" element={<Archive />} />
           <Route path="tag-list" element={<TagList />} />
+          <Route path="tag-detailed-list/:tag" element={<TagDetailedList />} />
           <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="/forgot_password" element={<Forgotten />} />

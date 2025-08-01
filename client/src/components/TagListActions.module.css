@@ -1,0 +1,20 @@
+.go_back_container {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  margin-top: 2.5rem;
+  margin-bottom: 1.7rem;
+}
+
+.left_arrow {
+  width: 1.8rem;
+  height: 1.8rem;
+  color: var(--neutral-300);
+}
+
+.back_to_all_tags {
+  color: var(--neutral-300);
+  font-size: 1.4rem;
+  margin-left: 0.8rem;
+}

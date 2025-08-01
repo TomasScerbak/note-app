@@ -1,0 +1,16 @@
+.taglist__heading {
+  color: var(--neutral-400);
+}
+
+.taglist__subheading {
+  color: var(--neutral-300);
+}
+
+.taglist__heading__value {
+  font-size: 2.9rem;
+  color: white;
+}
+
+.taglist__subheading__value {
+  letter-spacing: 0.12rem;
+}
