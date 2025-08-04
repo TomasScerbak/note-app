@@ -78,4 +78,6 @@
 .modal__footer {
   display: flex;
   justify-content: flex-end;
+  border-top: 1px solid var(--neutral-500);
+  padding-top: 1.6rem;
 }
