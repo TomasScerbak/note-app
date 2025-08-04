@@ -13,6 +13,10 @@ import NewNoteActions from "./NewNoteActions";
 import NoteBody from "./NoteBody";
 import Loader from "../components/UI/Loader";
 import Modal from "../components/modals/Modal";
+import CallToActionModal from "../components/modals/CallToActionModal";
+
+import TrashImage from "../assets/icon-delete-white.svg";
+import ArchiveImage from "../assets/icon-archive-white.svg";
 
 import classes from "./ViewNotePage.module.css";
 
@@ -25,6 +29,8 @@ const ViewNotePage = () => {
   const [title, setTitle] = useState("");
   const [noteText, setNoteText] = useState("");
   const [updatedAt, setUpdatedAt] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showArchiveModal, setShowArchiveModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -60,15 +66,21 @@ const ViewNotePage = () => {
     }
   };
 
-  const onDeleteNote = async () => {
+  const onDeleteNote = () => {
+    setShowDeleteModal(true);
+  };
+
+  const onArchiveNote = () => {
+    setShowArchiveModal(true);
+  };
+
+  const confirmDeleteNote = async () => {
     try {
-      let response;
       if (id) {
-        response = await handleDeleteNote(id);
+        const response = await handleDeleteNote(id);
         if (response) {
           queryClient.invalidateQueries(["notes"]);
           queryClient.removeQueries(["note", id]);
-          // Navigate back to all notes page after deletion
           navigate("/home/all-notes");
         }
       }
@@ -82,6 +94,7 @@ const ViewNotePage = () => {
       if (!id) return;
       await toggleArchive(id, Boolean(noteData.is_archived));
       queryClient.invalidateQueries(["note", id]);
+      setShowArchiveModal(false);
     } catch (error) {
       console.error("Error toggling archive status:", error.message);
     }
@@ -102,11 +115,41 @@ const ViewNotePage = () => {
         id={id}
         onSaveNote={onSaveOrUpdate}
         onDeleteNote={onDeleteNote}
-        onToggleArchive={onToggleArchive}
+        onToggleArchive={onArchiveNote}
         isArchived={noteData.is_archived}
       />
       <NoteHeader tags={tags} setTags={setTags} title={title} setTitle={setTitle} updatedAt={updatedAt} />
       <NoteBody setNoteText={setNoteText} noteText={noteText} />
+      {showDeleteModal && (
+        <CallToActionModal
+          header="Delete Note"
+          message="Are you sure you want to permanently delete this note? This action cannot be undone."
+          btnsArr={[
+            { title: "Cancel", variant: "cancel", onClick: () => setShowDeleteModal(false) },
+            { title: "Delete Note", variant: "delete", onClick: confirmDeleteNote },
+          ]}
+          image={TrashImage}
+        />
+      )}
+      {showArchiveModal && (
+        <CallToActionModal
+          header={noteData.is_archived ? "Please Note" : "Archive Note"}
+          message={
+            noteData.is_archived
+              ? "Note will be removed from Archive Note Section. You can archive this note back anytime."
+              : "Are you sure you want to archive this note? You can find it in the Archive notes section and restore it anytime."
+          }
+          btnsArr={[
+            { title: "Cancel", variant: "cancel", onClick: () => setShowArchiveModal(false) },
+            {
+              title: noteData.is_archived ? "Unarchive" : "Archive Note",
+              variant: "archive",
+              onClick: onToggleArchive,
+            },
+          ]}
+          image={ArchiveImage}
+        />
+      )}
     </div>
   );
 };

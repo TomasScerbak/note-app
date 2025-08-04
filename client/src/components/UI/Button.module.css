@@ -57,6 +57,38 @@
   z-index: 1000;
 }
 
+.btn--cancel {
+  width: 7.8rem;
+  height: 4.1rem;
+  background-color: var(--neutral-500);
+  color: var(--neutral-200);
+  font-size: 1.4rem;
+  border: none;
+  outline: none;
+}
+
+.btn--delete {
+  width: 11rem;
+  height: 4.1rem;
+  background-color: var(--red-500);
+  color: var(--neutral-200);
+  font-size: 1.4rem;
+  margin-left: 1.6rem;
+  border: none;
+  outline: none;
+}
+
+.btn--archive {
+  width: 11.7rem;
+  height: 4.1rem;
+  background-color: var(--blue-500);
+  color: var(--neutral-200);
+  font-size: 1.4rem;
+  margin-left: 1.6rem;
+  border: none;
+  outline: none;
+}
+
 @media screen and (min-width: 768px) {
   .btn--rounded {
     bottom: 10%;

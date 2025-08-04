@@ -1,0 +1,81 @@
+@keyframes slideInCenter {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal {
+  width: 34.3rem;
+  height: auto;
+  background-color: var(--neutral-600);
+  border: none;
+  border-radius: var(--radius-12);
+  animation: slideInCenter 0.5s ease-out forwards;
+  transform-origin: center;
+}
+
+.modal__content__wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.image__square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--radius-8);
+  overflow: hidden;
+  background-color: var(--neutral-500);
+  margin-top: 2rem;
+}
+
+.square__image {
+  width: 2.4rem;
+  height: 2.5rem;
+}
+
+.modal__content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex: 1 1 auto;
+}
+
+.content__left,
+.content__right {
+  box-sizing: border-box;
+  padding: 0 1.6rem 0 0;
+}
+
+.modal__header {
+  color: white;
+}
+
+.modal__text {
+  color: var(--neutral-200);
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+}
