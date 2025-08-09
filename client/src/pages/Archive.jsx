@@ -37,7 +37,7 @@ const Archive = () => {
 
   return (
     <div>
-      <ArchiveHedader />
+      <ArchiveHedader archivedNotes={archivedNotes} />
 
       {isLoading && <Loader />}
 

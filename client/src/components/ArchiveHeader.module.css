@@ -1,3 +1,18 @@
 .archive__subheader {
   color: var(--neutral-200);
 }
+
+.archive__text {
+  color: white;
+  background-color: var(--neutral-700);
+  padding: 0.8rem;
+  border-radius: var(--radius-8);
+}
+
+.archive__link {
+  all: unset;
+  text-decoration: underline;
+  color: inherit;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
