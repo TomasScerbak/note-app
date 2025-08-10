@@ -108,7 +108,6 @@ const ViewNotePage = () => {
         message={`Couldn't load the note. ${error?.message || "Please try again later."}`}
       />
     );
-
   return (
     <div className={classes.note__container}>
       <NewNoteActions

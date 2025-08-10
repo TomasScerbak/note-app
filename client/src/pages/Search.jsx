@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import SearchHeader from "../components/SearchHeader";
 import SearchInput from "../components/UI/SearchInput";
+import SearchSubHeder from "../components/SearchSubHeder";
 import Loader from "../components/UI/Loader";
 import Modal from "../components/modals/Modal";
 import NoteCard from "../components/NoteCard";
@@ -13,7 +14,7 @@ import { formatDate } from "../utils/noteUtils";
 
 const Search = () => {
   const { user } = useAuth();
-  const uid = user.uid;
+  const uid = user?.uid;
 
   const { data: userId } = useQuery({
     queryKey: ["user", uid],
@@ -29,6 +30,7 @@ const Search = () => {
   } = useQuery({
     queryKey: ["notes", userId],
     queryFn: () => getNotesByUserId(userId),
+    enabled: !!userId,
   });
 
   const [message, setMessage] = useState("");
@@ -48,9 +50,9 @@ const Search = () => {
         </p>
       );
 
-      const filtered = notesData.filter((note) =>
-        note.header.toLowerCase().startsWith(newValue.toLowerCase())
-      );
+      const filtered =
+        notesData?.filter((note) => note.header.toLowerCase().startsWith(newValue.toLowerCase())) || [];
+
       setFilteredNotes(filtered);
     } else {
       setMessage("");
@@ -65,20 +67,25 @@ const Search = () => {
       <SearchHeader />
       <SearchInput onChange={handleChange} message={message} />
       {isError ? (
-        <Modal header="Please Note" message={`Error occurred when getting notes: ${error}`} />
-      ) : filteredNotes && filteredNotes.length ? (
+        <Modal
+          header="Please Note"
+          message={`Error occurred when getting notes: ${error?.message || "Unknown error"}`}
+        />
+      ) : filteredNotes.length > 0 ? (
         <div>
           {filteredNotes.map((note) => (
             <NoteCard
               key={note.id}
               id={note.id}
-              tags={note.tags.split(",")}
+              tags={note.tags ? note.tags.split(",") : []}
               noteHeading={note.header}
               lastEdited={formatDate(note.updated_at)}
             />
           ))}
         </div>
-      ) : null}
+      ) : (
+        <SearchSubHeder />
+      )}
     </>
   );
 };

@@ -1,0 +1,18 @@
+.search__subheader__container {
+  color: var(--neutral-200);
+}
+
+.search__subheader__text {
+  color: white;
+  background-color: var(--neutral-700);
+  padding: 0.8rem;
+  border-radius: var(--radius-8);
+}
+
+.search__subheader_link {
+  all: unset;
+  text-decoration: underline;
+  color: inherit;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
