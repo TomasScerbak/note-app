@@ -13,6 +13,7 @@ import Archive from "./pages/Archive";
 import TagList from "./pages/TagList";
 import Settings from "./pages/Settings";
 import TagDetailedList from "./pages/TagDetailedList";
+import SettingsDetailedList from "./pages/SettingsDetailedList";
 
 import "./App.css";
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="tag-list" element={<TagList />} />
           <Route path="tag-detailed-list/:tag" element={<TagDetailedList />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="settings-detailed-list/:setting" element={<SettingsDetailedList />} />
         </Route>
         <Route path="/forgot_password" element={<Forgotten />} />
         <Route path="/reset_password" element={<Reset />} />

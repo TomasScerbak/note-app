@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/authContext";
+import { useNavigate } from "react-router";
 
 import Setting from "../components/Setting";
 import CallToActionModal from "../components/modals/CallToActionModal";
@@ -12,16 +13,22 @@ import LockIcon from "../assets/icon-lock.svg";
 const Settings = () => {
   const { signOut } = useAuth();
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const settings = [
-    { name: "Color Theme", image: SunIcon },
-    { name: "Font Theme", image: FontIcon },
-    { name: "Change Password", image: LockIcon },
-    { name: "Logout", image: LogoutIcon },
+    { name: "Color Theme", label: "color-theme", image: SunIcon },
+    { name: "Font Theme", label: "font-theme", image: FontIcon },
+    { name: "Change Password", label: "change-password", image: LockIcon },
+    { name: "Logout", label: "logout", image: LogoutIcon },
   ];
 
   const handleSettingClick = (setting) => {
-    if (setting.name === "Logout") setShowModal(true);
+    if (setting.label === "logout") setShowModal(true);
+
+    const validSettings = ["color-theme", "font-theme", "change-password"];
+    if (validSettings.includes(setting.label)) {
+      navigate(`/home/settings-detailed-list/${setting.label}`);
+    }
   };
 
   return (
