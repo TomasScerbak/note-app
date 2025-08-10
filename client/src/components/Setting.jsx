@@ -1,7 +1,6 @@
 import classes from "./Setting.module.css";
 
 const Setting = ({ img, text, borderTop = "" }) => {
-  console.log("borderTop:", borderTop);
   const containerClasses = `${classes.setting__container} ${borderTop ? classes[borderTop] : ""}`;
   console.log(containerClasses);
   return (

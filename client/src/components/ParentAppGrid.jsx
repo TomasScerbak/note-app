@@ -13,12 +13,14 @@ const ParentAppGrid = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const validURLs = ["/home/all-notes", "/home/archive-notes", "/home/search-notes", "/home/tag-list"];
+
   const navigateToNewNote = () => {
     navigate("/home/create-note");
   };
   return (
     <div className={classes.parent}>
-      {location.pathname === "/home/all-notes" ? (
+      {validURLs.includes(location.pathname) ? (
         <Button
           onClick={navigateToNewNote}
           variant="primary"

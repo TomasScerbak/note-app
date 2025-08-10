@@ -1,5 +1,5 @@
 const Main = ({ children }) => {
-  return <main>{children}</main>;
+  return <main style={{ height: "100dvh", overflow: "hidden" }}>{children}</main>;
 };
 
 export default Main;
