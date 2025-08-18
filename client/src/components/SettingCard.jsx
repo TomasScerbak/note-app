@@ -1,20 +1,23 @@
 import classes from "./SettingCard.module.css";
 
-const SettingCard = ({ heading, description, img }) => {
+import RadioButton from "./UI/RadioButtion";
+
+const SettingCard = ({ heading, description, img, active, onClick }) => {
   return (
-    <div className={classes.settingCard}>
+    <button className={`${classes.settingCard} ${active ? classes.active : ""}`} onClick={onClick}>
       <div className={classes.leftColumn}>
         <div className={classes.imageContainer}>
-          <img src={img} alt={heading} />
+          <img className={classes.setting__image} src={img} alt={heading} />
         </div>
-        <div>{description}</div>
+        <div className={classes.descriptionContainer}>
+          <h4 className={classes.descriptionHeading}>{heading}</h4>
+          <p className={classes.description}>{description}</p>
+        </div>
       </div>
       <div className={classes.rightColumn}>
-        <div>
-          <button>btn test</button>
-        </div>
+        <RadioButton name="setting" value={heading} checked={active} onChange={() => {}} />
       </div>
-    </div>
+    </button>
   );
 };
 

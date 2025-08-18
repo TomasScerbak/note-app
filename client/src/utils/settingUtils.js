@@ -3,8 +3,8 @@ import SerifImage from "../assets/icon-font-serif.svg";
 import Monospace from "../assets/icon-font-monospace.svg";
 
 import SunImage from "../assets/icon-sun.svg";
-import MoonImage from "../assets/icon-moon.svg";
-import SystemImage from "../assets/icon-system-theme.svg";
+import MoonImage from "../assets/icon-moon-white.svg";
+import SystemImage from "../assets/icon-system-theme-white.svg";
 
 const settingsData = {
   "font-theme": [

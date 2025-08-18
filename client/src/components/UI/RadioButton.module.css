@@ -1,0 +1,16 @@
+.radioInput {
+  appearance: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  background-color: transparent;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.radioInput:checked {
+  border-width: 4px;
+  border-color: var(--blue-500);
+}

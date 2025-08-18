@@ -6,23 +6,64 @@
   border-radius: var(--radius-12);
   background-color: transparent;
   border: 1px solid var(--app-login-signup-bg);
-  columns: white;
+  color: white;
+  margin-bottom: 1.6rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.active {
+  background-color: var(--neutral-700);
+  border-color: var(--neutral-500); /* Optional: subtle border change */
 }
 
 .leftColumn {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 95%;
+  width: 93%;
+}
+
+.descriptionContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.descriptionHeading {
+  color: white;
+  margin: 0;
+}
+
+.description {
+  color: var(--neutral-400);
+  margin: 0;
+  font-size: 1.4rem;
 }
 
 .imageContainer {
-  margin-left: 1.6rem;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.6rem;
+  border: 1px solid var(--app-login-signup-bg);
+  border-radius: var(--radius-12);
+  background-color: var(--app-main-color);
+}
+
+.setting__image {
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .rightColumn {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 5%;
+  width: 7%;
 }
