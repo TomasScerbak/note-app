@@ -1,0 +1,28 @@
+.settingCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1.75rem 1.6rem;
+  border-radius: var(--radius-12);
+  background-color: transparent;
+  border: 1px solid var(--app-login-signup-bg);
+  columns: white;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 95%;
+}
+
+.imageContainer {
+  margin-left: 1.6rem;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 5%;
+}
