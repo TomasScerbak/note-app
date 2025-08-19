@@ -18,6 +18,9 @@ import SettingsDetailedList from "./pages/SettingsDetailedList";
 import "./App.css";
 
 function App() {
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("color-theme", prefersDark ? "dark" : "light");
+
   return (
     <Main>
       <Routes>

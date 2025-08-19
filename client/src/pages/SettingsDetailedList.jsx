@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { isValidEmail } from "../validations/emailValidation.js";
 import { getSettingsData, getSettingLabels } from "../utils/settingUtils.js";
+import { useTheme } from "../contexts/themeContext/index.jsx";
+import { useFontTheme } from "../contexts/fontContext/index.jsx";
 
 import SettingActions from "../components/SettingActions";
 import SettingSubheadings from "../components/SettingSubheadings";
@@ -16,6 +18,8 @@ import Modal from "../components/modals/Modal.jsx";
 const SettingsDetailedList = () => {
   const { passwordResetEmail, passwordResetSent } = useAuth();
   const { setting } = useParams();
+  const { setTheme } = useTheme();
+  const { setFontTheme } = useFontTheme();
 
   const [email, setEmeil] = useState("");
   const [error, setError] = useState({});
@@ -47,7 +51,6 @@ const SettingsDetailedList = () => {
 
   const handleSettingChange = (settingName) => {
     const lowerCaseSettingName = settingName.toLowerCase();
-    console.log("Setting changed to:", setting);
 
     // Apply font family
     if (setting === "font-theme") {
@@ -55,28 +58,28 @@ const SettingsDetailedList = () => {
         case "sans-serif":
         case "serif":
         case "monospace":
-          document.documentElement.style.setProperty("--app-font-family", lowerCaseSettingName);
+          setFontTheme(lowerCaseSettingName);
           break;
         default:
-          document.documentElement.style.setProperty("--app-font-family", "sans-serif");
+          setFontTheme("sans-serif");
       }
     }
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
     // Apply color theme
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     if (setting === "color-theme") {
       switch (lowerCaseSettingName) {
         case "light mode":
-          document.documentElement.setAttribute("color-theme", "light");
+          setTheme("light");
           break;
         case "dark mode":
-          document.documentElement.setAttribute("color-theme", "dark");
+          setTheme("dark");
           break;
         case "system":
-          document.documentElement.setAttribute("color-theme", prefersDark ? "dark" : "light");
+          setTheme(prefersDark ? "dark" : "light");
           break;
         default:
-          document.documentElement.setAttribute("color-theme", "light");
+          setTheme("light");
       }
     }
   };
