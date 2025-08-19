@@ -22,6 +22,7 @@ const SettingsDetailedList = () => {
 
   const { label: settingLabel, subLabel: settingSubLabel } = getSettingLabels(setting);
   const [settingsData, setSettingsData] = useState(getSettingsData(setting));
+  const [activeSetting, setActiveSetting] = useState("");
 
   const handleEmailChange = (event) => {
     setEmeil(event.target.value);
@@ -33,6 +34,7 @@ const SettingsDetailedList = () => {
       active: index === indexToActivate,
     }));
     setSettingsData(updatedSettings);
+    setActiveSetting(updatedSettings[indexToActivate].heading);
   };
 
   const hanglePasswordResetEmail = async (email) => {
@@ -40,6 +42,42 @@ const SettingsDetailedList = () => {
       await passwordResetEmail(email);
     } else {
       setError({ message: "Please enter a valid email address." });
+    }
+  };
+
+  const handleSettingChange = (settingName) => {
+    const lowerCaseSettingName = settingName.toLowerCase();
+    console.log("Setting changed to:", setting);
+
+    // Apply font family
+    if (setting === "font-theme") {
+      switch (lowerCaseSettingName) {
+        case "sans-serif":
+        case "serif":
+        case "monospace":
+          document.documentElement.style.setProperty("--app-font-family", lowerCaseSettingName);
+          break;
+        default:
+          document.documentElement.style.setProperty("--app-font-family", "sans-serif");
+      }
+    }
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    // Apply color theme
+    if (setting === "color-theme") {
+      switch (lowerCaseSettingName) {
+        case "light mode":
+          document.documentElement.setAttribute("color-theme", "light");
+          break;
+        case "dark mode":
+          document.documentElement.setAttribute("color-theme", "dark");
+          break;
+        case "system":
+          document.documentElement.setAttribute("color-theme", prefersDark ? "dark" : "light");
+          break;
+        default:
+          document.documentElement.setAttribute("color-theme", "light");
+      }
     }
   };
 
@@ -67,7 +105,11 @@ const SettingsDetailedList = () => {
           hasImage={false}
           variant="primary"
           size="medium"
-          onClick={setting === "change-password" ? () => hanglePasswordResetEmail(email) : null}
+          onClick={
+            setting === "change-password"
+              ? () => hanglePasswordResetEmail(email)
+              : () => handleSettingChange(activeSetting)
+          }
           disabled={true}
         />
       </SettingDetailFooterContainer>

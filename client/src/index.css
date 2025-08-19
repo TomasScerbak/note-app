@@ -31,7 +31,9 @@ body {
   --neutral-900: hsl(230, 19%, 12%); */
   --app-login-signup-bg: hsl(231, 16%, 16%);
   --app-main-color: hsl(222, 32%, 8%);
-  --app-font-family: sans-serif;
+  --app-font-family: var(--app-sans-serif-family);
+  --app-serif-family: serif;
+  --app-monospace-family: monospace;
   --app-main-text: hsl(0, 0%, 100%);
   --app-secondary-text: hsl(219, 15%, 82%);
   --app--logo-test: "#ffff";
@@ -167,11 +169,15 @@ link {
 }
 
 [font-family="monospace"] {
-  --app-font-family: monospace, sans-serif;
+  --app-font-family: var(--app-monospace-family);
 }
 
 [font-family="serif"] {
-  app-font-family: serif, sans-serif;
+  --app-font-family: var(--app-serif-family);
+}
+
+[font-family="sans-serif"] {
+  --app-font-family: var(--app-sans-serif-family);
 }
 
 @media screen and (min-width: 768px) {
