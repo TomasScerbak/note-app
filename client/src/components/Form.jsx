@@ -122,7 +122,7 @@ const Form = ({ type }) => {
         await signIn(formDataObj.email, formDataObj.password);
         break;
       case "reset":
-        //
+        // await passwordResetEmail(formDataObj.email); // Reset password logic is not available in the form
         break;
       case "forgotten":
         passwordResetEmail(formDataObj.email);

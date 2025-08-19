@@ -64,7 +64,7 @@ export const getSettingLabels = (setting) => {
     case "change-password":
       return {
         label: "Change Password",
-        subLabel: "Update your account password",
+        subLabel: "Update your account password by sending a reset link to your email.",
       };
     default:
       return {
