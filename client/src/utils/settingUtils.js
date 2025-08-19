@@ -1,6 +1,6 @@
-import SansSerifImage from "../assets/icon-font-sans-serif.svg";
-import SerifImage from "../assets/icon-font-serif.svg";
-import Monospace from "../assets/icon-font-monospace.svg";
+import SansSerifImage from "../assets/icon-font-sans-serif-white.svg";
+import SerifImage from "../assets/icon-font-serif-white.svg";
+import Monospace from "../assets/icon-font-monospace-white.svg";
 
 import SunImage from "../assets/icon-sun.svg";
 import MoonImage from "../assets/icon-moon-white.svg";
