@@ -67,7 +67,7 @@ const Settings = () => {
               onClick: () => signOut(),
             },
           ]}
-          image={LogoutIcon}
+          image={theme === "light" ? LogoutDarkGreyIcon : LogoutIcon}
         />
       )}
     </>
