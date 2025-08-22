@@ -35,9 +35,11 @@ const Search = () => {
 
   const [message, setMessage] = useState("");
   const [filteredNotes, setFilteredNotes] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleChange = (event) => {
     const newValue = event.target.value;
+    setHasSearched(!!newValue.length); // true if input is non-empty
 
     if (newValue.length) {
       setMessage(
@@ -71,7 +73,9 @@ const Search = () => {
           header="Please Note"
           message={`Error occurred when getting notes: ${error?.message || "Unknown error"}`}
         />
-      ) : filteredNotes.length > 0 ? (
+      ) : hasSearched && filteredNotes.length === 0 ? (
+        <SearchSubHeder />
+      ) : (
         <div>
           {filteredNotes.map((note) => (
             <NoteCard
@@ -83,8 +87,6 @@ const Search = () => {
             />
           ))}
         </div>
-      ) : (
-        <SearchSubHeder />
       )}
     </>
   );
