@@ -4,13 +4,13 @@
   border: none;
   outline: none;
   cursor: text;
-  caret-color: white;
-  color: white;
+  caret-color: var(--app-main-text);
+  color: var(--app-main-text);
   font-size: 2.4rem;
 }
 
 .note__header__input::placeholder {
-  color: white;
+  color: var(--app-main-text);
   font-size: 2.4rem;
 }
 

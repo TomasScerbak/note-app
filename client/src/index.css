@@ -16,7 +16,6 @@ body {
   transition: background-color 0.3s ease;
   color: var(--app-main-text);
   height: 100vh;
-  line-height: 120%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -24,21 +23,50 @@ body {
   animation: fadeIn 0.5s ease-in forwards;
   margin: 0;
   padding: 0;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+input,
+button,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 :root {
-  /* --neutral-950: hsl(222, 32%, 8%);
-  --neutral-900: hsl(230, 19%, 12%); */
-  --app-login-signup-bg: hsl(231, 16%, 16%);
-  --app-main-color: hsl(222, 32%, 8%);
   --app-font-family: var(--app-sans-serif-family);
   --app-serif-family: serif;
   --app-monospace-family: monospace;
+
+  --app-main-color: hsl(222, 32%, 8%);
+  --app-login-signup-bg: hsl(231, 16%, 16%);
   --app-main-text: hsl(0, 0%, 100%);
+  --app-btn-main-text: hsl(0, 0%, 100%);
+  --app-btn-secondary-text: hsl(0, 0%, 100%);
   --app-secondary-text: hsl(219, 15%, 82%);
-  --app--logo-test: "#ffff";
+  --app-tag-background: hsl(222, 11%, 36%);
+  --app-last-edited-text: hsl(219, 15%, 82%);
   --app-input-border: hsl(222, 11%, 36%);
   --app-input-text: hsl(221, 8%, 48%);
+  --app-blue-input-text: hsl(0, 0%, 100%);
+  --app-placeholder-text: hsl(219, 15%, 82%);
+  --app-search-input-bg: transparent;
+  --app-search-input-border: hsl(222, 11%, 36%);
+  --app-cancel-btn: hsl(219, 15%, 82%);
+  --app-cancel-btn-hover: hsl(0, 0%, 100%);
+  --app-modal-background: hsl(222, 11%, 36%);
+  --app-modal-img-bg: hsl(221, 8%, 48%);
+  --app-modal-cancel-btn: hsl(221, 8%, 48%);
+
+  --neutral-950: hsl(222, 32%, 8%);
+  --neutral-900: hsl(230, 19%, 12%);
   --neutral-700: hsl(221, 16%, 20%);
   --neutral-600: hsl(222, 11%, 36%);
   --neutral-500: hsl(221, 8%, 48%);
@@ -128,7 +156,8 @@ h3 {
   letter-spacing: -0.3px;
 }
 
-h4 h5 {
+h4,
+h5 {
   font-size: 1.4rem;
   letter-spacing: -0.2px;
 }
@@ -145,6 +174,7 @@ p {
 
 label {
   font-size: 1.4rem;
+  font-weight: 500;
 }
 
 a {
@@ -166,6 +196,17 @@ link {
   --app-main-color: hsl(0, 0%, 100%);
   --app-input-border: hsl(219, 15%, 82%);
   --image-filter: hsl(222, 32%, 8%);
+  --app-btn-main-text: hsl(0, 0%, 100%);
+  --app-btn-secondary-text: hsl(222, 32%, 8%);
+  --neutral-600: hsl(216, 33%, 97%);
+  --app-tag-background: hsl(216, 19%, 90%);
+  --app-last-edited-text: hsl(221, 16%, 20%);
+  --app-search-input-bg: hsl(216, 33%, 97%);
+  --app-search-input-border: hsl(216, 19%, 90%);
+  --app-cancel-btn: hsl(222, 11%, 36%);
+  --app-cancel-btn-hover: hsl(222, 32%, 8%);
+  --app-modal-background: hsl(0, 0%, 100%);
+  --app-modal-img-bg: hsl(216, 26%, 96%);
 }
 
 [font-family="monospace"] {

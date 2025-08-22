@@ -1,20 +1,29 @@
+import { useTheme } from "../contexts/themeContext/index.jsx";
+
 import ButtonNoOutline from "../components/UI/ButtonNoOutline";
 
 import classes from "./NewNoteActions.module.css";
 
 import ArroLeftIcon from "../assets/icon-arrow-left.svg";
+import ArroLeftIconSecondary from "../assets/icon-arrow-left-secondary.svg";
 import ArchiveIcon from "../assets/icon-archive.svg";
 import ArchiveIconWhite from "../assets/icon-archive-white.svg";
+import ArchiveIconDarkGrey from "../assets/icon-archive-dark-grey.svg";
 import TrashIcon from "../assets/icon-delete.svg";
 
 import { Link } from "react-router";
 
 const NewNoteActions = ({ id, handleClearValues, onSaveNote, onDeleteNote, onToggleArchive, isArchived }) => {
+  const { theme } = useTheme();
   return (
     <div className={classes.new_note_action_container}>
       <div className={classes.left_col}>
         <Link onClick={handleClearValues} className={classes.go_back_container} to="/home/all-notes">
-          <img className={classes.left_arrow} src={ArroLeftIcon} alt="Go to all notes page" />
+          <img
+            className={classes.left_arrow}
+            src={theme === "light" ? ArroLeftIconSecondary : ArroLeftIcon}
+            alt="Go to all notes page"
+          />
           <span className={classes.back_to_all_notes}>Go Back</span>
         </Link>
       </div>
@@ -33,7 +42,7 @@ const NewNoteActions = ({ id, handleClearValues, onSaveNote, onDeleteNote, onTog
             btnImageClass=""
             hasImage={true}
             variant="white"
-            src={isArchived ? ArchiveIconWhite : ArchiveIcon}
+            src={!isArchived ? ArchiveIcon : theme === "light" ? ArchiveIconDarkGrey : ArchiveIconWhite}
             onClick={onToggleArchive}
           />
         ) : null}

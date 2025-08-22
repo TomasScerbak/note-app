@@ -18,7 +18,7 @@
   width: 6.2rem;
   height: 3.2rem;
   cursor: pointer;
-  background: transparent;
+  background: var(--app-main-color);
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -28,10 +28,18 @@
   height: 2.4rem;
 }
 
-.active {
+.active__dark {
   width: 6.2rem;
   height: 3.2rem;
   background-color: var(--neutral-700);
+  border-radius: var(--radius-4);
+}
+
+.active__light_mode {
+  width: 6.2rem;
+  height: 3.2rem;
+  background-color: var(--blue-50);
+  border: 1px solid var(--blue-500);
   border-radius: var(--radius-4);
 }
 

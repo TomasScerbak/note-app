@@ -1,25 +1,35 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { useNavigate } from "react-router";
+import { useTheme } from "../contexts/themeContext";
 
 import Setting from "../components/Setting";
 import CallToActionModal from "../components/modals/CallToActionModal";
 
 import SunIcon from "../assets/icon-sun.svg";
+import SunDarkGreyIcon from "../assets/icon-sun-dark-grey.svg";
 import FontIcon from "../assets/icon-font.svg";
-import LogoutIcon from "../assets/icon-logout.svg";
+import FontDarkGreyIcon from "../assets/icon-font-dark-grey.svg";
 import LockIcon from "../assets/icon-lock.svg";
+import LockDarkGreyIcon from "../assets/icon-lock-dark-grey.svg";
+import LogoutIcon from "../assets/icon-logout.svg";
+import LogoutDarkGreyIcon from "../assets/icon-logout-dark-grey.svg";
 
 const Settings = () => {
   const { signOut } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+  const { theme } = useTheme();
 
   const settings = [
-    { name: "Color Theme", label: "color-theme", image: SunIcon },
-    { name: "Font Theme", label: "font-theme", image: FontIcon },
-    { name: "Change Password", label: "change-password", image: LockIcon },
-    { name: "Logout", label: "logout", image: LogoutIcon },
+    { name: "Color Theme", label: "color-theme", image: theme === "light" ? SunDarkGreyIcon : SunIcon },
+    { name: "Font Theme", label: "font-theme", image: theme === "light" ? FontDarkGreyIcon : FontIcon },
+    {
+      name: "Change Password",
+      label: "change-password",
+      image: theme === "light" ? LockDarkGreyIcon : LockIcon,
+    },
+    { name: "Logout", label: "logout", image: theme === "light" ? LogoutDarkGreyIcon : LogoutIcon },
   ];
 
   const handleSettingClick = (setting) => {

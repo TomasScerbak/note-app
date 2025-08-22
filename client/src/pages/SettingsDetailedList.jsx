@@ -18,7 +18,7 @@ import Modal from "../components/modals/Modal.jsx";
 const SettingsDetailedList = () => {
   const { passwordResetEmail, passwordResetSent } = useAuth();
   const { setting } = useParams();
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const { setFontTheme } = useFontTheme();
 
   const [email, setEmeil] = useState("");
@@ -93,7 +93,7 @@ const SettingsDetailedList = () => {
           heading={item.heading}
           description={item.description}
           key={index}
-          img={item.img}
+          img={theme === "light" ? item.img2 : item.img}
           active={item.active}
           onClick={() => handleActiveSetting(index)}
         />

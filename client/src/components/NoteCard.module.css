@@ -16,5 +16,5 @@
 
 .last__edited {
   margin: 0.4rem 0;
-  color: var(--neutral-300);
+  color: var(--app-last-edited-text);
 }

@@ -128,7 +128,7 @@ const Form = ({ type }) => {
         passwordResetEmail(formDataObj.email);
         break;
       default:
-        console.log("Invalid form type");
+        console.error("Invalid form type");
     }
   };
 

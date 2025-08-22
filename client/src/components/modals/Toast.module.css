@@ -17,6 +17,10 @@
   align-items: center;
 }
 
+.toast__message {
+  color: var(--app-secondary-text);
+}
+
 .toast__container__left {
   display: flex;
   align-items: center;

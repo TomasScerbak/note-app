@@ -22,9 +22,9 @@
 }
 
 .btn--white {
-  color: var(--neutral-300);
+  color: var(--app-cancel-btn);
 }
 
 .btn--white:hover {
-  color: white;
+  color: var(--app-cancel-btn-hover);
 }

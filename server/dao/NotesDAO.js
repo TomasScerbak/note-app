@@ -36,7 +36,6 @@ class NotesDAO {
     const value = [noteId];
     try {
       const [rows] = await db.query(sql, value);
-      console.log("Fetched note:", rows[0]);
       return rows[0];
     } catch (error) {
       console.error("Error fetching note by ID:", error);

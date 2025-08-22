@@ -21,8 +21,8 @@
   border: none;
   outline: none;
   cursor: text;
-  caret-color: white;
-  color: white;
+  caret-color: var(--app-secondary-text);
+  color: var(--app-secondary-text);
 }
 
 .hidden {

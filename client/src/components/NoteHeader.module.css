@@ -26,7 +26,7 @@
 
 .left__text {
   font-size: 1.4rem;
-  color: var(--neutral-300);
+  color: var(--app-secondary-text);
   margin-left: 0.6rem;
   min-width: 9.5rem;
 }
@@ -35,4 +35,9 @@
   font-size: 1.4rem;
   color: var(--neutral-400);
   width: 100%;
+}
+
+.right__input__light_mode {
+  color: var(--app-secondary-text);
+  border: 1px solid var(--app-secondary-text);
 }

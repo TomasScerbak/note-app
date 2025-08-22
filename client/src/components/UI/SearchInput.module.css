@@ -6,11 +6,11 @@
   width: 100%;
   padding: 1.2rem 1.6rem 1.2rem 4rem;
   border-radius: var(--radius-8);
-  background: transparent;
+  background: var(--app-search-input-bg);
   box-shadow: none;
   outline: none;
-  border: 1px solid var(--neutral-600);
-  color: white;
+  border: 0.5px solid var(--app-search-input-border);
+  color: var(--app-main-text);
   font-size: 1.4rem;
 }
 
@@ -20,4 +20,6 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
+  width: 2rem;
+  height: 2rem;
 }

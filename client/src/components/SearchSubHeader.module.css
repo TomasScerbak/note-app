@@ -3,8 +3,8 @@
 }
 
 .search__subheader__text {
-  color: white;
-  background-color: var(--neutral-700);
+  color: var(--app-main-text);
+  background-color: var(--app-login-signup-bg);
   padding: 0.8rem;
   border-radius: var(--radius-8);
 }

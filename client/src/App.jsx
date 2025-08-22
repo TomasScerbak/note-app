@@ -1,6 +1,4 @@
 import { Routes, Route } from "react-router";
-import { useEffect } from "react";
-import { useTheme } from "./contexts/themeContext/index.jsx";
 
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
@@ -21,13 +19,6 @@ import SettingsDetailedList from "./pages/SettingsDetailedList";
 import "./App.css";
 
 function App() {
-  // Set the initial theme based on user preference or system setting
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const { setTheme } = useTheme();
-  useEffect(() => {
-    setTheme(prefersDark ? "dark" : "light");
-  }, [prefersDark, setTheme]);
-
   return (
     <Main>
       <Routes>

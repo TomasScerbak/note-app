@@ -14,8 +14,8 @@
 }
 
 .active {
-  background-color: var(--neutral-700);
-  border-color: var(--neutral-500); /* Optional: subtle border change */
+  background-color: var(--app-search-input-bg);
+  border-color: var(--app-search-input-border);
 }
 
 .leftColumn {
@@ -34,12 +34,12 @@
 }
 
 .descriptionHeading {
-  color: white;
+  color: var(--app-main-text);
   margin: 0;
 }
 
 .description {
-  color: var(--neutral-400);
+  color: var(--app-main-text);
   margin: 0;
   font-size: 1.4rem;
 }

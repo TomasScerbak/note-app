@@ -6,7 +6,7 @@ import { ToastProvider } from "./contexts/toastContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "./contexts/themeContext/index.jsx";
 import { FontThemeProvider } from "./contexts/fontContext/index.jsx";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./index.css";
 import App from "./App.jsx";
 
@@ -26,7 +26,7 @@ createRoot(document.getElementById("root")).render(
           </ToastProvider>
         </AuthProvider>
       </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   </StrictMode>
 );

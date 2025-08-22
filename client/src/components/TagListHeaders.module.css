@@ -1,14 +1,14 @@
 .taglist__heading {
-  color: var(--neutral-400);
+  color: var(--app-cancel-btn);
 }
 
 .taglist__subheading {
-  color: var(--neutral-300);
+  color: var(--app-secondary-text);
 }
 
 .taglist__heading__value {
   font-size: 2.9rem;
-  color: white;
+  color: var(--app-main-text);
 }
 
 .taglist__subheading__value {

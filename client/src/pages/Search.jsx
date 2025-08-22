@@ -41,7 +41,7 @@ const Search = () => {
 
     if (newValue.length) {
       setMessage(
-        <p>
+        <p style={{ color: "var(--app-secondary-text)" }}>
           All notes matching
           <strong>
             <q>{newValue}</q>

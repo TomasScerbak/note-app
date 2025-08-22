@@ -7,6 +7,7 @@ import { useUpdateNote } from "../hooks/mutations/useUpdateNote";
 import { useDeleteNote } from "../hooks/mutations/useDeleteNote";
 import { useArchiveNote } from "../hooks/mutations/useArchiveNote";
 import { useNavigate } from "react-router";
+import { useTheme } from "../contexts/themeContext";
 
 import NoteHeader from "./NoteHeader";
 import NewNoteActions from "./NewNoteActions";
@@ -16,7 +17,9 @@ import Modal from "../components/modals/Modal";
 import CallToActionModal from "../components/modals/CallToActionModal";
 
 import TrashImage from "../assets/icon-delete-white.svg";
+import TrashImageDark from "../assets/icon-delete-dark-grey.svg";
 import ArchiveImage from "../assets/icon-archive-white.svg";
+import ArchiveImageDark from "../assets/icon-archive-dark-grey.svg";
 
 import classes from "./ViewNotePage.module.css";
 
@@ -24,6 +27,7 @@ const ViewNotePage = () => {
   const queryClient = useQueryClient();
   const { id } = useParams();
   const { noteData, isLoading, isError, error } = useGetNoteById(id);
+  const { theme } = useTheme();
 
   const [tags, setTags] = useState([]);
   const [title, setTitle] = useState("");
@@ -127,7 +131,7 @@ const ViewNotePage = () => {
             { title: "Cancel", variant: "cancel", onClick: () => setShowDeleteModal(false) },
             { title: "Delete Note", variant: "delete", onClick: confirmDeleteNote },
           ]}
-          image={TrashImage}
+          image={theme === "light" ? TrashImageDark : TrashImage}
         />
       )}
       {showArchiveModal && (
@@ -146,7 +150,7 @@ const ViewNotePage = () => {
               onClick: onToggleArchive,
             },
           ]}
-          image={ArchiveImage}
+          image={theme === "light" ? ArchiveImageDark : ArchiveImage}
         />
       )}
     </div>

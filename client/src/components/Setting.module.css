@@ -11,5 +11,5 @@
 }
 
 .borderTop {
-  border-top: 1px solid var(--neutral-700);
+  border-top: 1px solid var(--app-search-input-border);
 }
