@@ -26,35 +26,51 @@ const Footer = () => {
       {
         text: "Home",
         label: "home",
-        image: theme === "light" ? HomeBlue : HomeImage,
+        image:
+          theme === "dark" && activeLabel === "home" ? HomeBlue : theme === "light" ? HomeBlue : HomeImage,
         navigate: "all-notes",
       },
       {
         text: "Search",
         label: "search",
-        image: theme === "light" ? SearchBlue : SearchImage,
+        image:
+          theme === "dark" && activeLabel === "search"
+            ? SearchBlue
+            : theme === "light"
+            ? SearchBlue
+            : SearchImage,
         navigate: "search-notes",
       },
       {
         text: "Archive",
         label: "archive",
-        image: theme === "light" ? ArchiveBlue : ArchiveImage,
+        image:
+          theme === "dark" && activeLabel === "archive"
+            ? ArchiveBlue
+            : theme === "light"
+            ? ArchiveBlue
+            : ArchiveImage,
         navigate: "archive-notes",
       },
       {
         text: "Tags",
         label: "tags",
-        image: theme === "light" ? TagBlue : TagImage,
+        image: theme === "dark" && activeLabel === "tags" ? TagBlue : theme === "light" ? TagBlue : TagImage,
         navigate: "tag-list",
       },
       {
         text: "Settings",
         label: "settings",
-        image: theme === "light" ? SettingsBlue : SettingsImage,
+        image:
+          theme === "dark" && activeLabel === "settings"
+            ? SettingsBlue
+            : theme === "light"
+            ? SettingsBlue
+            : SettingsImage,
         navigate: "settings",
       },
     ],
-    [theme]
+    [theme, activeLabel]
   );
 
   // Set the active label based on the current path
@@ -88,9 +104,9 @@ const Footer = () => {
             alt={item.text}
             className={`${classes.footer__item} ${
               activeLabel === item.label
-                ? theme === "light"
-                  ? classes.active__light_mode
-                  : classes.active__dark_mode
+                ? `${classes.footer__icon__active} ${
+                    theme === "light" ? classes.active__light_mode : classes.active__dark
+                  }`
                 : ""
             }`}
           />

@@ -18,7 +18,7 @@
   width: 6.2rem;
   height: 3.2rem;
   cursor: pointer;
-  background: var(--app-main-color);
+  background: transparent;
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -28,21 +28,9 @@
   height: 2.4rem;
 }
 
-.active__dark {
+.active {
   width: 6.2rem;
   height: 3.2rem;
-  background-color: var(--neutral-700);
+  background-color: var(--app-footer-item-bg);
   border-radius: var(--radius-4);
-}
-
-.active__light_mode {
-  width: 6.2rem;
-  height: 3.2rem;
-  background-color: var(--blue-50);
-  border: 1px solid var(--blue-500);
-  border-radius: var(--radius-4);
-}
-
-.footer__icon__active {
-  filter: invert(28%) sepia(99%) saturate(5200%) hue-rotate(218deg) brightness(100%) contrast(100%);
 }
