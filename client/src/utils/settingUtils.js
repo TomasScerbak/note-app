@@ -19,7 +19,7 @@ const settingsData = {
       description: "Clean and modern, easy to read.",
       img: SansSerifImage,
       img2: SansSerifImageDark,
-      active: false,
+      active: true,
     },
     {
       heading: "Serif",
@@ -33,7 +33,7 @@ const settingsData = {
       description: "Code-like, great for a technical vibe.",
       img: Monospace,
       img2: MonospaceDark,
-      active: true,
+      active: false,
     },
   ],
   "color-theme": [
