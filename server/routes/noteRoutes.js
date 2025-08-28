@@ -39,11 +39,7 @@ router.get("/user/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
     const notes = await NotesDAO.getNotesByUserId(userId);
-    if (notes.length) {
-      res.status(200).json(notes);
-    } else {
-      res.status(404).json({ message: "No notes found for this user" });
-    }
+    res.status(200).json(notes); // Always respond, even if notes is []
   } catch (error) {
     console.error("Error fetching notes:", error);
     res.status(500).json({ message: "Internal server error" });

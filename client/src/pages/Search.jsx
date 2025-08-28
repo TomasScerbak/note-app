@@ -23,7 +23,7 @@ const Search = () => {
   });
 
   const {
-    data: notesData,
+    data: notesData = [],
     isLoading,
     isError,
     error,
