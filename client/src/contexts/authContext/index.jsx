@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }) => {
       if (user && user.uid) {
         // Check if user exists in your DB
         const userCheck = await axios.get(`https://note-app-v05l.onrender.com/api/user/${user.uid}`);
-
+        console.log("userCheck", userCheck);
         if (userCheck.status === 404) {
           // If not found, create the user
           const userData = {
