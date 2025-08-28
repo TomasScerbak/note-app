@@ -2,6 +2,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { auth } from "../../firebase/firebase.js";
+import { fetchUserId } from "../../api/user.js";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -88,25 +89,26 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
+      console.log("Google user:", user);
       setUser(user);
       setAuthError(null);
 
       if (user && user.uid) {
         // Check if user exists in your DB
-        const userCheck = await axios.get(`https://note-app-v05l.onrender.com/api/user/${user.uid}`);
+        const userCheck = await fetchUserId(user.uid);
         console.log("userCheck", userCheck);
-        if (userCheck.status === 404) {
-          // If not found, create the user
-          const userData = {
-            email: user.email,
-            uid: user.uid,
-          };
-          await axios.post("https://note-app-v05l.onrender.com/api/user/", userData, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-        }
+        // if (userCheck.status === 404) {
+        //   // If not found, create the user
+        //   const userData = {
+        //     email: user.email,
+        //     uid: user.uid,
+        //   };
+        //   await axios.post("https://note-app-v05l.onrender.com/api/user/", userData, {
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //   });
+        // }
 
         setIsLoggedIn(true);
         navigate("/home/all-notes");
