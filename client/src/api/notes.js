@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://note-app-v05l.onrender.com";
+const BASE_URL = "https://note-app-v05l.onrender.com/api/note";
 
 // Create Note
 export const createNote = async (note) => {
