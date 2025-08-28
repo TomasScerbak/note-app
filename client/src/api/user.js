@@ -4,6 +4,7 @@ const BASE_URL = "https://note-app-v05l.onrender.com/api/user";
 
 export const fetchUserId = async (uid) => {
   try {
+    console.log("Fetching user ID for UID:", uid);
     const response = await axios.get(`${BASE_URL}/${uid}`);
     if (response.status === 200) {
       console.log("Fetched user ID: from user.js", response.data);
