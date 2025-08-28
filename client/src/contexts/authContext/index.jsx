@@ -86,16 +86,33 @@ export const AuthProvider = ({ children }) => {
   const signInWiGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider).then((result) => {
-        const user = result.user;
-        setUser(user);
-        setAuthError(null); // Clear previous error
-        if (user && user.uid) {
-          navigate("/home/all-notes"); // Redirect to the all notes page after sign in
-          setIsLoggedIn(true);
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      setUser(user);
+      setAuthError(null);
+
+      if (user && user.uid) {
+        // Check if user exists in your DB
+        const userCheck = await axios.get(`https://note-app-v05l.onrender.com/api/user/${user.uid}`);
+
+        if (userCheck.status === 404) {
+          // If not found, create the user
+          const userData = {
+            email: user.email,
+            uid: user.uid,
+          };
+          await axios.post("https://note-app-v05l.onrender.com/api/user/", userData, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
         }
-      });
+
+        setIsLoggedIn(true);
+        navigate("/home/all-notes");
+      }
     } catch (error) {
+      console.error("Google Sign-In Error:", error);
       setAuthError(error.message);
       return error.message;
     }
