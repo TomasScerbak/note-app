@@ -12,6 +12,7 @@ import PasswordInputContainer from "./UI/PasswordInputContainer";
 import AuthModal from "./modals/AuthModal";
 import ConfirmationModal from "./modals/ConfirmationModal";
 import Loader from "./UI/Loader";
+import Attribution from "./Attribution";
 
 const Form = ({ type }) => {
   const [error, setError] = useState({});
@@ -187,6 +188,7 @@ const Form = ({ type }) => {
         {authError ? <AuthModal /> : null}
         {passwordResetSent ? <ConfirmationModal /> : null}
       </form>
+      <Attribution />
     </>
   );
 };
