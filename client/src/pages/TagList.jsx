@@ -6,6 +6,7 @@ import { getNotesByUserId } from "../api/notes";
 import TagCard from "../components/TagCard";
 import Modal from "../components/modals/Modal";
 import Loader from "../components/UI/Loader";
+import TagHeader from "../components/TagHeader";
 
 const TagList = () => {
   const { user } = useAuth();
@@ -43,6 +44,7 @@ const TagList = () => {
     <div>
       <h1>Tags</h1>
       {isLoading && <Loader />}
+      {!isLoading && !uniqueTags.length ? <TagHeader /> : null}
       {uniqueTags.length ? uniqueTags.map((tag, index) => <TagCard key={index} tag={tag} />) : null}
     </div>
   );
