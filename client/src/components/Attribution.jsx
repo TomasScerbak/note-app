@@ -5,10 +5,14 @@ const Attribution = () => {
     <section>
       <div className={classes.attribution}>
         Challenge by{" "}
-        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noopener noreferrer">
           Frontend Mentor
         </a>
-        . Coded by <a href="#">Tomas Scerbak</a>.
+        . Coded by <span>Tomas Scerbak</span>. If you encounter any bugs or have feedback, feel free to{" "}
+        <a href="https://sweet-cat-91a83d.netlify.app/#footer" target="_blank" rel="noopener noreferrer">
+          contact me through my website
+        </a>
+        .
       </div>
     </section>
   );
