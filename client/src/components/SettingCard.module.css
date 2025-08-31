@@ -14,8 +14,8 @@
 }
 
 .active {
-  background-color: var(--app-search-input-bg);
-  border-color: var(--app-search-input-border);
+  background-color: var(--app-setting-card-bg);
+  border-color: var(--app-setting-card-border);
 }
 
 .leftColumn {

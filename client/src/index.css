@@ -65,6 +65,8 @@ label {
   --app-modal-img-bg: hsl(221, 8%, 48%);
   --app-modal-cancel-btn: hsl(221, 8%, 48%);
   --app-footer-item-bg: hsl(221, 16%, 20%);
+  --app-setting-card-bg: hsl(221, 16%, 20%);
+  --app-setting-card-border: hsl(222, 11%, 36%);
 
   --neutral-950: hsl(222, 32%, 8%);
   --neutral-900: hsl(230, 19%, 12%);
@@ -209,6 +211,8 @@ link {
   --app-modal-background: hsl(0, 0%, 100%);
   --app-modal-img-bg: hsl(216, 26%, 96%);
   --app-footer-item-bg: hsl(216, 33%, 97%);
+  --app-setting-card-bg: hsl(216, 33%, 97%);
+  --app-setting-card-border: hsl(216, 19%, 90%);
 }
 
 [font-family="monospace"] {
