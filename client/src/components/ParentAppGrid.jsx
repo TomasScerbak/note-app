@@ -6,6 +6,7 @@ import classes from "./ParentAppGrid.module.css";
 import HeaderSmall from "../components/HeaderSmall";
 import Footer from "../components/Footer";
 import Button from "../components/UI/Button";
+import Attribution from "./Attribution";
 
 import PlusImage from "../assets/icon-plus.svg";
 
@@ -46,6 +47,7 @@ const ParentAppGrid = () => {
       <div className={classes.left_inner_panel}>4</div>
       <div className={classes.right_inner_panel}>5</div>
       <div className={classes.right__sidebar}>6</div>
+      {location.pathname === "/home" ? <Attribution /> : null}
     </div>
   );
 };
