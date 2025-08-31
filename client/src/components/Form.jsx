@@ -11,6 +11,7 @@ import EmailInputContainer from "./UI/EmailInputContainer";
 import PasswordInputContainer from "./UI/PasswordInputContainer";
 import AuthModal from "./modals/AuthModal";
 import ConfirmationModal from "./modals/ConfirmationModal";
+import Loader from "./UI/Loader";
 
 const Form = ({ type }) => {
   const [error, setError] = useState({});
@@ -23,7 +24,7 @@ const Form = ({ type }) => {
     confirm_password: "",
   });
 
-  const { signUp, signIn, passwordResetEmail, authError, passwordResetSent } = useAuth();
+  const { signUp, signIn, passwordResetEmail, authError, passwordResetSent, isLoading } = useAuth();
 
   let btnTitle;
   let mediaBoxText;
@@ -133,57 +134,60 @@ const Form = ({ type }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={classes.form}>
-      <FormControl className={classes.form__control}>
-        {type === "signup" || type === "login" || type === "forgotten" ? (
-          <EmailInputContainer
-            htmlFor="email"
-            text="Email Address"
-            placeholder="email@example.com"
-            type="email"
-            name="email"
-            formType={type}
-            onChange={handleInputChange}
-            error={error.email}
-          />
-        ) : (
-          <PasswordInputContainer
-            htmlFor="new_password"
-            text="New Password"
-            placeholder=""
-            type="password"
-            name="new_password"
-            formType={type}
-            onChange={handleInputChange}
-            error={error.new_password}
-          />
-        )}
-      </FormControl>
-      <FormControl className={classes.form__control}>
-        {type === "forgotten" ? null : (
-          <PasswordInputContainer
-            htmlFor={type === "reset" ? "confirm_password" : "password"}
-            text={type === "reset" ? "Confirm New Password" : "Password"}
-            placeholder=""
-            name={type === "reset" ? "confirm_password" : "password"}
-            formType={type}
-            onChange={handleInputChange}
-            error={type === "reset" ? error.confirm_password : error.password}
-          />
-        )}
-      </FormControl>
-      <Button
-        variant="primary"
-        hasImage={false}
-        title={btnTitle}
-        type="submit"
-        formDataObj={formData}
-        formType={type}
-      />
-      {type === "login" || type === "signup" ? <AuthMediaBox text={mediaBoxText} /> : null}
-      {authError ? <AuthModal /> : null}
-      {passwordResetSent ? <ConfirmationModal /> : null}
-    </form>
+    <>
+      {isLoading ? <Loader /> : null}
+      <form onSubmit={handleSubmit} className={classes.form}>
+        <FormControl className={classes.form__control}>
+          {type === "signup" || type === "login" || type === "forgotten" ? (
+            <EmailInputContainer
+              htmlFor="email"
+              text="Email Address"
+              placeholder="email@example.com"
+              type="email"
+              name="email"
+              formType={type}
+              onChange={handleInputChange}
+              error={error.email}
+            />
+          ) : (
+            <PasswordInputContainer
+              htmlFor="new_password"
+              text="New Password"
+              placeholder=""
+              type="password"
+              name="new_password"
+              formType={type}
+              onChange={handleInputChange}
+              error={error.new_password}
+            />
+          )}
+        </FormControl>
+        <FormControl className={classes.form__control}>
+          {type === "forgotten" ? null : (
+            <PasswordInputContainer
+              htmlFor={type === "reset" ? "confirm_password" : "password"}
+              text={type === "reset" ? "Confirm New Password" : "Password"}
+              placeholder=""
+              name={type === "reset" ? "confirm_password" : "password"}
+              formType={type}
+              onChange={handleInputChange}
+              error={type === "reset" ? error.confirm_password : error.password}
+            />
+          )}
+        </FormControl>
+        <Button
+          variant="primary"
+          hasImage={false}
+          title={btnTitle}
+          type="submit"
+          formDataObj={formData}
+          formType={type}
+        />
+        {type === "login" || type === "signup" ? <AuthMediaBox text={mediaBoxText} /> : null}
+        {authError ? <AuthModal /> : null}
+        {passwordResetSent ? <ConfirmationModal /> : null}
+      </form>
+    </>
   );
 };
 

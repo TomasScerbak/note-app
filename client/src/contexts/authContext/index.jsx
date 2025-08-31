@@ -92,7 +92,7 @@ export const AuthProvider = ({ children }) => {
 
       setUser(user);
       setAuthError(null);
-      console.log("Before Google Sign-In:", user);
+
       if (user && user.uid) {
         // Check if user exists in your DB
         const existingUser = await fetchUserId(user.uid);
@@ -102,16 +102,15 @@ export const AuthProvider = ({ children }) => {
             email: user.email,
             uid: user.uid,
           };
-          console.log("Creating new user in DB:", userData);
+
           await axios.post("https://note-app-v05l.onrender.com/api/user/", userData, {
             headers: {
               "Content-Type": "application/json",
             },
           });
         }
-        console.log("User signed in with Google:", user);
+
         setIsLoggedIn(true);
-        console.log("After setIsLoggedIn");
         navigate("/home/all-notes");
       }
     } catch (error) {
