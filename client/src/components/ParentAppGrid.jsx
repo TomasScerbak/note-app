@@ -47,7 +47,7 @@ const ParentAppGrid = () => {
       <div className={classes.left_inner_panel}>4</div>
       <div className={classes.right_inner_panel}>5</div>
       <div className={classes.right__sidebar}>6</div>
-      {location.pathname === "/home" ? <Attribution /> : null}
+      {location.pathname === "/" ? <Attribution /> : null}
     </div>
   );
 };
