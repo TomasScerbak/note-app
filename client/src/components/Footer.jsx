@@ -96,6 +96,7 @@ const Footer = () => {
       {displayData.map((item) => (
         <button
           onClick={() => handleClick(item.label, item.navigate)}
+          onTouchStart={() => handleClick(item.label, item.navigate)}
           key={item.text}
           className={`${classes.footer__item} ${activeLabel === item.label ? classes.active : ""}`}
         >

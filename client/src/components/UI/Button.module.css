@@ -13,12 +13,15 @@
   height: 4.4rem;
   border-radius: var(--radius-8);
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .btn--primary {
   background-color: var(--blue-500);
   color: var(--app-btn-main-text);
   border: none;
+  cursor: pointer;
+  touch-action: manipulation;
 }
 
 .btn--primary:hover {
@@ -31,6 +34,8 @@
   margin-bottom: var(--spacing-200);
   color: var(--app-btn-secondary-text);
   letter-spacing: 0.5px;
+  cursor: pointer;
+  touch-action: manipulation;
 }
 
 .btn--secondary:hover {
