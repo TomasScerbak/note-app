@@ -4,7 +4,8 @@
 }
 
 .welcome__text {
-  background-color: var(--neutral-700);
+  color: var(--app-primary-text);
+  background-color: var(--app-login-signup-bg);
   border-radius: var(--radius-8);
   padding: 0.8rem;
   font-size: 1.4rem;
