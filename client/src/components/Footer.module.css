@@ -34,9 +34,3 @@
   background-color: var(--app-footer-item-bg);
   border-radius: var(--radius-4);
 }
-
-@supports (height: 100dvh) {
-  .footer {
-    height: 100dvh;
-  }
-}
