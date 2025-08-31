@@ -29,11 +29,11 @@ export const AuthProvider = ({ children }) => {
         setUser(user);
         setIsLoggedIn(true);
         setAuthError(null);
+        setIsLoading(false);
       } else {
         setUser(null);
         setIsLoggedIn(false);
       }
-      setIsLoading(false);
     });
 
     return () => unsubscribe();
