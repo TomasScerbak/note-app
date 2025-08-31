@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         setUser(user);
         setIsLoggedIn(true);
-        setAuthError(null); // Clear any previous error
+        setAuthError(null);
       } else {
         setUser(null);
         setIsLoggedIn(false);
@@ -40,13 +40,13 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signUp = async (email, password) => {
+    setIsLoading(true);
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       setUser(userCredential.user);
-      setAuthError(null); // Clear any previous error
+      setAuthError(null);
 
       if (userCredential.user && userCredential.user.uid) {
-        // Send user data to the backend
         const userData = {
           email: userCredential.user.email,
           uid: userCredential.user.uid,
@@ -58,33 +58,39 @@ export const AuthProvider = ({ children }) => {
         });
         if (response.status === 201) {
           setIsLoggedIn(true);
-          navigate("/home/all-notes"); // Redirect to the all notes page after signup
+          navigate("/home/all-notes");
         }
       }
     } catch (error) {
       console.error("Signup Error:", error.code, error.message);
-      setAuthError(error.message); // Store the error message
+      setAuthError(error.message);
       return error.message;
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const signIn = async (email, password) => {
+    setIsLoading(true);
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       setUser(userCredential.user);
-      setAuthError(null); // Clear previous error
+      setAuthError(null);
 
       if (userCredential.user && userCredential.user.uid) {
-        navigate("/home/all-notes"); // Redirect to the all notes page after sign in
         setIsLoggedIn(true);
+        navigate("/home/all-notes");
       }
     } catch (error) {
       setAuthError(error.message);
       return error.message;
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const signInWiGoogle = async () => {
+    setIsLoading(true);
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
@@ -94,10 +100,8 @@ export const AuthProvider = ({ children }) => {
       setAuthError(null);
 
       if (user && user.uid) {
-        // Check if user exists in your DB
         const existingUser = await fetchUserId(user.uid);
         if (!existingUser) {
-          // If not found, create the user
           const userData = {
             email: user.email,
             uid: user.uid,
@@ -117,31 +121,39 @@ export const AuthProvider = ({ children }) => {
       console.error("Google Sign-In Error:", error);
       setAuthError(error.message);
       return error.message;
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const signOut = async () => {
+    setIsLoading(true);
     try {
       await auth.signOut();
       setUser(null);
       setIsLoggedIn(false);
-      setAuthError(null); // Clear any previous error
-      navigate("/"); // Redirect to the login page after sign out
+      setAuthError(null);
+      navigate("/");
     } catch (error) {
       console.error("Error signing out:", error);
-      setAuthError(error.message); // Store the error message
+      setAuthError(error.message);
       return error.message;
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const passwordResetEmail = async (email) => {
+    setIsLoading(true);
     try {
-      sendPasswordResetEmail(auth, email);
+      await sendPasswordResetEmail(auth, email);
       setPasswordResetSent(true);
     } catch (error) {
       console.error("Error sending password reset email:", error);
-      setAuthError(error.message); // Store the error message
+      setAuthError(error.message);
       return error.message;
+    } finally {
+      setIsLoading(false);
     }
   };
 
