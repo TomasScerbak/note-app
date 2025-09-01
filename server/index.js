@@ -37,6 +37,16 @@ import NoteRouter from "./routes/noteRoutes.js";
 app.use("/api/user", UserRouter);
 app.use("/api/note", NoteRouter);
 
+// Server Health Check Endpoint
+app.get("/api/health-check", async (req, res) => {
+  try {
+    res.status(200).json({ status: "ok", message: "Backend is awake" });
+  } catch (error) {
+    console.error("Health check failed:", error.message);
+    res.status(500).json({ status: "error", message: "Backend not ready" });
+  }
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
