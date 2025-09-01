@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
         setUser(user);
         setIsLoggedIn(true);
         setAuthError(null);
-        // setIsLoading(false);
+        setIsLoading(false);
       } else {
         setUser(null);
         setIsLoggedIn(false);
