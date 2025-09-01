@@ -33,7 +33,6 @@ export const AuthProvider = ({ children }) => {
       } else {
         setUser(null);
         setIsLoggedIn(false);
-        setIsLoading(false);
       }
     });
 
