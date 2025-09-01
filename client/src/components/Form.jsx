@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../contexts/authContext";
 
 import {
-  getButtonAndMediaText,
+  getButtonAndMediaBoxText,
   validateInput,
   validateFormBeforeSubmit,
   trimFormData,
@@ -31,7 +31,7 @@ const Form = ({ type }) => {
   });
 
   const { signUp, signIn, passwordResetEmail, authError, passwordResetSent, isLoading } = useAuth();
-  const { btnTitle, mediaBoxText } = getButtonAndMediaText(type);
+  const { btnTitle, mediaBoxText } = getButtonAndMediaBoxText(type);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
