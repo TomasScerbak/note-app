@@ -65,12 +65,6 @@ const SettingsDetailedList = () => {
         default:
           setFontTheme("sans-serif");
       }
-
-      addToast({
-        message: "Settings updated successfully!",
-        color: "positive",
-        duration: 5000,
-      });
     }
 
     // Apply color theme
@@ -90,6 +84,12 @@ const SettingsDetailedList = () => {
           setTheme("light");
       }
     }
+
+    addToast({
+      message: "Settings updated successfully!",
+      color: "positive",
+      duration: 5000,
+    });
   };
 
   return (
