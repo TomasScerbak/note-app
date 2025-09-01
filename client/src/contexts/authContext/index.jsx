@@ -29,12 +29,12 @@ export const AuthProvider = ({ children }) => {
         setUser(user);
         setIsLoggedIn(true);
         setAuthError(null);
-
-        const response = axios.get("https://note-app-v05l.onrender.com/api/health-check");
-        console.log("Health Check Response:", response);
+        setIsLoading(false);
       } else {
         setUser(null);
         setIsLoggedIn(false);
+        setIsLoading(false);
+        setAuthError(null);
       }
     });
 
