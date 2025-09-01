@@ -32,7 +32,7 @@ const AllNotes = () => {
 
   return (
     <div className={classes.all_notes}>
-      <h2>All Notes</h2>
+      <h1>All Notes</h1>
       {notesData && notesData.length ? (
         notesData.map((note) => (
           <NoteCard
