@@ -34,3 +34,10 @@
   background-color: var(--app-footer-item-bg);
   border-radius: var(--radius-4);
 }
+
+@media screen and (min-width: 768px) {
+  .footer__item {
+    width: 8rem;
+    height: 5rem;
+  }
+}
