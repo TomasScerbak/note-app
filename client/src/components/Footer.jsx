@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { useTheme } from "../contexts/themeContext";
-import { getDisplayData, determineActiveLabel } from "../utils/footerUtil";
+import { getDisplayData, determineActiveLabel } from "../utils/footerUtils.js";
 
 import classes from "./Footer.module.css";
 
