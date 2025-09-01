@@ -9,7 +9,7 @@ export const useDeleteNote = (noteId) => {
     mutationFn: () => deleteNote(noteId),
     onSuccess: () => {
       addToast({
-        message: "Note deleted successfully!",
+        message: "Note permanently deleted!",
         color: "positive",
         duration: 5000,
       });

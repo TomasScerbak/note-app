@@ -5,6 +5,7 @@ import { isValidEmail } from "../validations/emailValidation.js";
 import { getSettingsData, getSettingLabels } from "../utils/settingUtils.js";
 import { useTheme } from "../contexts/themeContext/index.jsx";
 import { useFontTheme } from "../contexts/fontContext/index.jsx";
+import { useToast } from "../contexts/toastContext.jsx";
 
 import SettingActions from "../components/SettingActions";
 import SettingSubheadings from "../components/SettingSubheadings";
@@ -20,6 +21,7 @@ const SettingsDetailedList = () => {
   const { setting } = useParams();
   const { theme, setTheme } = useTheme();
   const { setFontTheme } = useFontTheme();
+  const { addToast } = useToast();
 
   const [email, setEmeil] = useState("");
   const [error, setError] = useState({});
@@ -63,6 +65,12 @@ const SettingsDetailedList = () => {
         default:
           setFontTheme("sans-serif");
       }
+
+      addToast({
+        message: "Settings updated successfully!",
+        color: "positive",
+        duration: 5000,
+      });
     }
 
     // Apply color theme
