@@ -6,7 +6,7 @@ import {
   validateInput,
   validateFormBeforeSubmit,
   trimFormData,
-} from "../utils/formUtils";
+} from "../utils/formUtils.js";
 
 import classes from "./Form.module.css";
 
