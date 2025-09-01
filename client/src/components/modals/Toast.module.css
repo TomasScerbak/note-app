@@ -10,7 +10,7 @@
   display: flex;
   border-radius: var(--radius-8);
   white-space: nowrap;
-  margin-right: 1.5rem;
+  margin-right: 0.5rem;
 }
 
 .toast__container {
@@ -25,12 +25,11 @@
 .toast__container__left {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
 }
 
-.toast__container__right {
+/* .toast__container__right {
   margin: 0.7rem 0 0 1.5rem;
-}
+} */
 
 .green_filtered_icon {
   filter: invert(32%) sepia(74%) saturate(420%) hue-rotate(95deg) brightness(95%) contrast(89%);
