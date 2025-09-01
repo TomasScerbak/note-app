@@ -5,7 +5,7 @@ import { isValidEmail } from "../validations/emailValidation.js";
 import { getSettingsData, getSettingLabels } from "../utils/settingUtils.js";
 import { useTheme } from "../contexts/themeContext/index.jsx";
 import { useFontTheme } from "../contexts/fontContext/index.jsx";
-import { useToast } from "../contexts/toastContext.jsx";
+import { useToast } from "../contexts/toastContext/index.jsx";
 
 import SettingActions from "../components/SettingActions";
 import SettingSubheadings from "../components/SettingSubheadings";
