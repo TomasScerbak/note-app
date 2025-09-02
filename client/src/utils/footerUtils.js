@@ -11,7 +11,7 @@ import TagLight from "../assets/icon-tag.svg";
 import TagBlue from "../assets/icon-tag-blue.svg";
 import TagDark from "../assets/icon-tag-dark.svg";
 import SettingsLight from "../assets/icon-settings.svg";
-import SettingsDark
+import SettingsDark from "../assets/icon-settings-dark.svg";
 import SettingsBlue from "../assets/icon-settings-blue.svg";
 
 export const getDisplayData = (theme, activeLabel) => [
@@ -74,12 +74,7 @@ export const getDisplayData = (theme, activeLabel) => [
   {
     text: "Settings",
     label: "settings",
-    image:
-      activeLabel === "settings"
-        ? SettingsBlue
-        : theme === "light"
-        ? SettingsDark
-        : SettingsLight,
+    image: activeLabel === "settings" ? SettingsBlue : theme === "light" ? SettingsDark : SettingsLight,
     textClass:
       theme === "dark"
         ? activeLabel === "settings"
