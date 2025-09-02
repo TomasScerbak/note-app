@@ -4,18 +4,21 @@ import HomeBlue from "../assets/icon-home-blue.svg";
 import SearchLight from "../assets/icon-search.svg";
 import SearchDark from "../assets/icon-search-dark.svg";
 import SearchBlue from "../assets/icon-search-blue.svg";
-import ArchiveImage from "../assets/icon-archive.svg";
+import ArchiveLight from "../assets/icon-archive.svg";
 import ArchiveBlue from "../assets/icon-archive-blue.svg";
-import TagImage from "../assets/icon-tag.svg";
+import ArchiveDark from "../assets/icon-archive-dark.svg";
+import TagLight from "../assets/icon-tag.svg";
 import TagBlue from "../assets/icon-tag-blue.svg";
-import SettingsImage from "../assets/icon-settings.svg";
+import TagDark from "../assets/icon-tag-dark.svg";
+import SettingsLight from "../assets/icon-settings.svg";
+import SettingsDark
 import SettingsBlue from "../assets/icon-settings-blue.svg";
 
 export const getDisplayData = (theme, activeLabel) => [
   {
     text: "Home",
     label: "home",
-    image: theme === "dark" && activeLabel === "home" ? HomeBlue : theme === "light" ? HomeDark : HomeLight,
+    image: activeLabel === "home" ? HomeBlue : theme === "light" ? HomeDark : HomeLight,
     textClass:
       theme === "dark"
         ? activeLabel === "home"
@@ -29,12 +32,7 @@ export const getDisplayData = (theme, activeLabel) => [
   {
     text: "Search",
     label: "search",
-    image:
-      theme === "dark" && activeLabel === "search"
-        ? SearchBlue
-        : theme === "light"
-        ? SearchDark
-        : SearchLight,
+    image: activeLabel === "search" ? SearchBlue : theme === "light" ? SearchDark : SearchLight,
     textClass:
       theme === "dark"
         ? activeLabel === "search"
@@ -48,12 +46,7 @@ export const getDisplayData = (theme, activeLabel) => [
   {
     text: "Archive",
     label: "archive",
-    image:
-      theme === "dark" && activeLabel === "archive"
-        ? ArchiveBlue
-        : theme === "light"
-        ? ArchiveBlue
-        : ArchiveImage,
+    image: activeLabel === "archive" ? ArchiveBlue : theme === "light" ? ArchiveDark : ArchiveLight,
     textClass:
       theme === "dark"
         ? activeLabel === "archive"
@@ -67,7 +60,7 @@ export const getDisplayData = (theme, activeLabel) => [
   {
     text: "Tags",
     label: "tags",
-    image: theme === "dark" && activeLabel === "tags" ? TagBlue : theme === "light" ? TagBlue : TagImage,
+    image: activeLabel === "tags" ? TagBlue : theme === "light" ? TagDark : TagLight,
     textClass:
       theme === "dark"
         ? activeLabel === "tags"
@@ -82,11 +75,11 @@ export const getDisplayData = (theme, activeLabel) => [
     text: "Settings",
     label: "settings",
     image:
-      theme === "dark" && activeLabel === "settings"
+      activeLabel === "settings"
         ? SettingsBlue
         : theme === "light"
-        ? SettingsBlue
-        : SettingsImage,
+        ? SettingsDark
+        : SettingsLight,
     textClass:
       theme === "dark"
         ? activeLabel === "settings"
