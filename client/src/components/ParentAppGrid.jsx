@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router";
 
 import classes from "./ParentAppGrid.module.css";
 
+import Logo from "../components/Logo";
 import HeaderSmall from "../components/HeaderSmall";
 import Footer from "../components/Footer";
 import Button from "../components/UI/Button";
@@ -19,7 +20,7 @@ const ParentAppGrid = () => {
     navigate("/home/create-note");
   };
   return (
-    <div className={classes.parent}>
+    <section className={classes.parent}>
       {validURLs.includes(location.pathname) ? (
         <Button
           onClick={navigateToNewNote}
@@ -30,23 +31,25 @@ const ParentAppGrid = () => {
           src={PlusImage}
         />
       ) : null}
-      <div className={classes.header}>
+      <header className={classes.header}>
         <HeaderSmall />
-      </div>
-      <div className={classes.body}>
+      </header>
+      <section className={classes.body}>
         <Outlet />
-      </div>
-      <div className={classes.footer}>
+      </section>
+      <section className={classes.footer}>
         <Footer />
-      </div>
-      <div className={classes.top__left}>1</div>
-      <div className={classes.top__header}>0</div>
-      <div className={classes.left__sidebar}>2</div>
-      <div className={classes.top__header}>3</div>
-      <div className={classes.left_inner_panel}>4</div>
-      <div className={classes.right_inner_panel}>5</div>
-      <div className={classes.right__sidebar}>6</div>
-    </div>
+      </section>
+      <section className={classes.top__left}>
+        <Logo />
+      </section>
+      <header className={classes.top__header}>0</header>
+      <aside className={classes.left__sidebar}>2</aside>
+      <header className={classes.top__header}>3</header>
+      <section className={classes.left_inner_panel}>4</section>
+      <section className={classes.right_inner_panel}>5</section>
+      <aside className={classes.right__sidebar}>6</aside>
+    </section>
   );
 };
 
