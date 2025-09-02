@@ -3,3 +3,9 @@
   height: 3.2rem;
   display: inline-block;
 }
+
+@media screen and (min-width: 768px) {
+  .separator {
+    height: 5rem;
+  }
+}

@@ -44,7 +44,7 @@ const Footer = () => {
             <img
               src={item.image}
               alt={item.text}
-              className={`${classes.footer__item} ${
+              className={`${classes.footer__image} ${
                 activeLabel === item.label
                   ? `${classes.footer__icon__active} ${
                       theme === "light" ? classes.active__light_mode : classes.active__dark
