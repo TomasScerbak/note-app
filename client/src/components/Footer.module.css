@@ -28,6 +28,10 @@
   height: 2.4rem;
 }
 
+.footer__text {
+  display: none;
+}
+
 .active {
   width: 6.2rem;
   height: 3.2rem;
@@ -39,5 +43,10 @@
   .footer__item {
     width: 8rem;
     height: 5rem;
+  }
+
+  .footer__text {
+    display: inline;
+    color: ;
   }
 }

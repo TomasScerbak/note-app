@@ -41,17 +41,20 @@ const Footer = () => {
             key={item.text}
             className={`${classes.footer__item} ${activeLabel === item.label ? classes.active : ""}`}
           >
-            <img
-              src={item.image}
-              alt={item.text}
-              className={`${classes.footer__image} ${
-                activeLabel === item.label
-                  ? `${classes.footer__icon__active} ${
-                      theme === "light" ? classes.active__light_mode : classes.active__dark
-                    }`
-                  : ""
-              }`}
-            />
+            <div className={classes.footer__item__wrapper}>
+              <img
+                src={item.image}
+                alt={item.text}
+                className={`${classes.footer__image} ${
+                  activeLabel === item.label
+                    ? `${classes.footer__icon__active} ${
+                        theme === "light" ? classes.active__light_mode : classes.active__dark
+                      }`
+                    : ""
+                }`}
+              />
+              <p className={classes.footer__text}>{item.text}</p>
+            </div>
           </button>
           {index !== displayData.length - 1 ? <Separator orientation="vertical" /> : null}
         </>
