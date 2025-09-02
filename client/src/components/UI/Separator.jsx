@@ -1,4 +1,4 @@
-import classes from "./UI/Separator.module.css";
+import classes from "./Separator.module.css";
 
 const Separator = () => {
   return <div className={classes.separator}></div>;

@@ -5,6 +5,8 @@ import { getDisplayData, determineActiveLabel } from "../utils/footerUtils.js";
 
 import classes from "./Footer.module.css";
 
+import Separator from "../components/UI/Separator.jsx";
+
 const Footer = () => {
   const [activeLabel, setActiveLabel] = useState("home");
   const navigate = useNavigate();
@@ -31,25 +33,28 @@ const Footer = () => {
 
   return (
     <footer className={classes.footer}>
-      {displayData.map((item) => (
-        <button
-          onClick={() => handleClick(item.label, item.navigate)}
-          onTouchStart={() => handleClick(item.label, item.navigate)}
-          key={item.text}
-          className={`${classes.footer__item} ${activeLabel === item.label ? classes.active : ""}`}
-        >
-          <img
-            src={item.image}
-            alt={item.text}
-            className={`${classes.footer__item} ${
-              activeLabel === item.label
-                ? `${classes.footer__icon__active} ${
-                    theme === "light" ? classes.active__light_mode : classes.active__dark
-                  }`
-                : ""
-            }`}
-          />
-        </button>
+      {displayData.map((item, index) => (
+        <>
+          <button
+            onClick={() => handleClick(item.label, item.navigate)}
+            onTouchStart={() => handleClick(item.label, item.navigate)}
+            key={item.text}
+            className={`${classes.footer__item} ${activeLabel === item.label ? classes.active : ""}`}
+          >
+            <img
+              src={item.image}
+              alt={item.text}
+              className={`${classes.footer__item} ${
+                activeLabel === item.label
+                  ? `${classes.footer__icon__active} ${
+                      theme === "light" ? classes.active__light_mode : classes.active__dark
+                    }`
+                  : ""
+              }`}
+            />
+          </button>
+          {index !== displayData.length - 1 ? <Separator orientation="vertical" /> : null}
+        </>
       ))}
     </footer>
   );
