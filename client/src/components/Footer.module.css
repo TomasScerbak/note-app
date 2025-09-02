@@ -45,11 +45,11 @@
 }
 
 .text__neutral400 {
-  color: var(--app-neutral-400);
+  color: hsl(220, 11%, 64%);
 }
 
 .text__neutral600 {
-  color: var(--app-neutral-600);
+  color: hsl(222, 11%, 36%);
 }
 
 .active {
