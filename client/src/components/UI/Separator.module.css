@@ -1,3 +1,5 @@
 .separator {
-  border-right: 1px solid #ccc;
+  border-right: 1px solid white;
+  height: 100%;
+  display: inline-block;
 }
