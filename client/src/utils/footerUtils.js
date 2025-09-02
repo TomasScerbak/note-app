@@ -14,6 +14,14 @@ export const getDisplayData = (theme, activeLabel) => [
     text: "Home",
     label: "home",
     image: theme === "dark" && activeLabel === "home" ? HomeBlue : theme === "light" ? HomeBlue : HomeImage,
+    textClass:
+      theme === "dark"
+        ? activeLabel === "home"
+          ? "text__blue"
+          : "text__white"
+        : activeLabel === "home"
+        ? "text__blue"
+        : "text__neutral600",
     navigate: "all-notes",
   },
   {
@@ -25,6 +33,14 @@ export const getDisplayData = (theme, activeLabel) => [
         : theme === "light"
         ? SearchBlue
         : SearchImage,
+    textClass:
+      theme === "dark"
+        ? activeLabel === "search"
+          ? "text__blue"
+          : "text__white"
+        : activeLabel === "search"
+        ? "text__blue"
+        : "text__neutral600",
     navigate: "search-notes",
   },
   {
@@ -36,12 +52,28 @@ export const getDisplayData = (theme, activeLabel) => [
         : theme === "light"
         ? ArchiveBlue
         : ArchiveImage,
+    textClass:
+      theme === "dark"
+        ? activeLabel === "archive"
+          ? "text__blue"
+          : "text__white"
+        : activeLabel === "archive"
+        ? "text__blue"
+        : "text__neutral600",
     navigate: "archive-notes",
   },
   {
     text: "Tags",
     label: "tags",
     image: theme === "dark" && activeLabel === "tags" ? TagBlue : theme === "light" ? TagBlue : TagImage,
+    textClass:
+      theme === "dark"
+        ? activeLabel === "tags"
+          ? "text__blue"
+          : "text__white"
+        : activeLabel === "tags"
+        ? "text__blue"
+        : "text__neutral600",
     navigate: "tag-list",
   },
   {
@@ -53,6 +85,14 @@ export const getDisplayData = (theme, activeLabel) => [
         : theme === "light"
         ? SettingsBlue
         : SettingsImage,
+    textClass:
+      theme === "dark"
+        ? activeLabel === "settings"
+          ? "text__blue"
+          : "text__white"
+        : activeLabel === "settings"
+        ? "text__blue"
+        : "text__neutral600",
     navigate: "settings",
   },
 ];
