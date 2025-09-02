@@ -1,6 +1,8 @@
-import HomeImage from "../assets/icon-home.svg";
+import HomeLight from "../assets/icon-home.svg";
+import HomeDark from "../assets/icon-home-dark.svg";
 import HomeBlue from "../assets/icon-home-blue.svg";
-import SearchImage from "../assets/icon-search.svg";
+import SearchLight from "../assets/icon-search.svg";
+import SearchDark from "../assets/icon-search-dark.svg";
 import SearchBlue from "../assets/icon-search-blue.svg";
 import ArchiveImage from "../assets/icon-archive.svg";
 import ArchiveBlue from "../assets/icon-archive-blue.svg";
@@ -13,7 +15,7 @@ export const getDisplayData = (theme, activeLabel) => [
   {
     text: "Home",
     label: "home",
-    image: theme === "dark" && activeLabel === "home" ? HomeBlue : theme === "light" ? HomeBlue : HomeImage,
+    image: theme === "dark" && activeLabel === "home" ? HomeBlue : theme === "light" ? HomeDark : HomeLight,
     textClass:
       theme === "dark"
         ? activeLabel === "home"
@@ -31,8 +33,8 @@ export const getDisplayData = (theme, activeLabel) => [
       theme === "dark" && activeLabel === "search"
         ? SearchBlue
         : theme === "light"
-        ? SearchBlue
-        : SearchImage,
+        ? SearchDark
+        : SearchLight,
     textClass:
       theme === "dark"
         ? activeLabel === "search"
