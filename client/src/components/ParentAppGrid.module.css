@@ -87,16 +87,20 @@
 
   .top__left {
     display: block;
-    padding: 1.2rem 1.6rem;
+    padding: 0 1.6rem;
     background-color: var(--app-main-color);
   }
 
   .top__header {
     display: block;
+    padding: 2.6rem auto 2.6rem 3.2rem;
+    background-color: var(--app-main-color);
   }
 
   .left__sidebar {
     display: block;
+    background-color: var(--app-main-color);
+    padding: 1.2rem 1.6rem;
   }
 
   .left_inner_panel {
