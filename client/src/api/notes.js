@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const BASE_URL = "https://note-app-v05l.onrender.com/api/note";
+const isProduction = import.meta.env.MODE === "production";
+
+const BASE_URL = isProduction
+  ? "https://note-app-v05l.onrender.com/api/note"
+  : import.meta.env.VITE_NOTES_BASE_URL;
 
 // Create Note
 export const createNote = async (note) => {

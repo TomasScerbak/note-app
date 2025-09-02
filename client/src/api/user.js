@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const BASE_URL = "https://note-app-v05l.onrender.com/api/user";
+const isProduction = import.meta.env.MODE === "production";
+
+const BASE_URL = isProduction
+  ? "https://note-app-v05l.onrender.com/api/user"
+  : import.meta.env.VITE_USERS_BASE_URL;
 
 export const fetchUserId = async (uid) => {
   try {

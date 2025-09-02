@@ -7,11 +7,13 @@ import path from "path";
 
 const app = express();
 
+const isProduction = process.env.NODE_ENV === "production";
+
 //Midleware
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://dev-tomo-note-app.netlify.app",
+    origin: isProduction ? "https://dev-tomo-note-app.netlify.app" : "http://localhost:5173",
     credentials: true,
   })
 );
