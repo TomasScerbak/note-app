@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router";
 
 import classes from "./ParentAppGrid.module.css";
 
-import Logo from "../components/Logo";
+import Logo from "../components/UI/Logo";
 import HeaderSmall from "../components/HeaderSmall";
 import Footer from "../components/Footer";
 import Button from "../components/UI/Button";
