@@ -1,5 +1,5 @@
 .separator {
-  border-right: 1px solid white;
-  height: 100%;
+  border-right: 1px solid var(--app-login-signup-bg);
+  height: 3.2rem;
   display: inline-block;
 }
