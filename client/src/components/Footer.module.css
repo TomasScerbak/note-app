@@ -37,19 +37,19 @@
 
 .footer__text {
   display: none;
-  margin: 0;
+  margin: 0.4rem 0 0 0;
 }
 
 .text__blue {
   color: var(--blue-500);
 }
 
-.text__white {
-  color: #ffffff;
+.text__neutral400 {
+  color: var(--app-neutral-400);
 }
 
 .text__neutral600 {
-  color: #6c757d;
+  color: var(--app-neutral-600);
 }
 
 .active {

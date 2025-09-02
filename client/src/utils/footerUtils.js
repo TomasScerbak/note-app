@@ -23,7 +23,7 @@ export const getDisplayData = (theme, activeLabel) => [
       theme === "dark"
         ? activeLabel === "home"
           ? "text__blue"
-          : "text__white"
+          : "text__neutral400"
         : activeLabel === "home"
         ? "text__blue"
         : "text__neutral600",
@@ -37,7 +37,7 @@ export const getDisplayData = (theme, activeLabel) => [
       theme === "dark"
         ? activeLabel === "search"
           ? "text__blue"
-          : "text__white"
+          : "text__neutral400"
         : activeLabel === "search"
         ? "text__blue"
         : "text__neutral600",
@@ -51,7 +51,7 @@ export const getDisplayData = (theme, activeLabel) => [
       theme === "dark"
         ? activeLabel === "archive"
           ? "text__blue"
-          : "text__white"
+          : "text__neutral400"
         : activeLabel === "archive"
         ? "text__blue"
         : "text__neutral600",
@@ -65,7 +65,7 @@ export const getDisplayData = (theme, activeLabel) => [
       theme === "dark"
         ? activeLabel === "tags"
           ? "text__blue"
-          : "text__white"
+          : "text__neutral400"
         : activeLabel === "tags"
         ? "text__blue"
         : "text__neutral600",
@@ -79,7 +79,7 @@ export const getDisplayData = (theme, activeLabel) => [
       theme === "dark"
         ? activeLabel === "settings"
           ? "text__blue"
-          : "text__white"
+          : "text__neutral400"
         : activeLabel === "settings"
         ? "text__blue"
         : "text__neutral600",
