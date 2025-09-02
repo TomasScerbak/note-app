@@ -7,6 +7,8 @@ import Logo from "../components/UI/Logo";
 import HeaderSmall from "../components/HeaderSmall";
 import Footer from "../components/Footer";
 import Button from "../components/UI/Button";
+import DesktopTopHeader from "./DesktopTopHeader";
+import DesktopLeftSideBar from "./DesktopLeftSideBar";
 
 import PlusImage from "../assets/icon-plus.svg";
 
@@ -43,8 +45,12 @@ const ParentAppGrid = () => {
       <section className={classes.top__left}>
         <Logo />
       </section>
-      <header className={classes.top__header}>0</header>
-      <aside className={classes.left__sidebar}>2</aside>
+      <header className={classes.top__header}>
+        <DesktopTopHeader>Here header</DesktopTopHeader>
+      </header>
+      <aside className={classes.left__sidebar}>
+        <DesktopLeftSideBar>Here sidebar</DesktopLeftSideBar>
+      </aside>
       <header className={classes.top__header}>3</header>
       <section className={classes.left_inner_panel}>4</section>
       <section className={classes.right_inner_panel}>5</section>

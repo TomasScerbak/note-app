@@ -99,6 +99,14 @@
   outline: none;
 }
 
+.btn--desktop-selectable {
+  width: 100%;
+  height: 4rem;
+  padding: 1.5rem 1.2rem;
+  background-color: var(--app-main-color);
+  color: var(--app-primary-text);
+}
+
 @media screen and (min-width: 768px) {
   .btn--rounded {
     bottom: 10.5%;

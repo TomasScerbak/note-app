@@ -87,6 +87,8 @@
 
   .top__left {
     display: block;
+    padding: 1.2rem 1.6rem;
+    background-color: var(--app-main-color);
   }
 
   .top__header {
