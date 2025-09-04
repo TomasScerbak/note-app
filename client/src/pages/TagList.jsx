@@ -26,17 +26,19 @@ const TagList = () => {
   } = useQuery({
     queryKey: ["notes", userId],
     queryFn: () => getNotesByUserId(userId),
+    enabled: !!userId,
   });
 
-  const uniqueTags = notesData
-    ? [
-        ...new Set(
-          notesData.flatMap((note) =>
-            typeof note.tags === "string" ? note.tags.split(",").map((tag) => tag.trim()) : note.tags
-          )
-        ),
-      ]
-    : [];
+  const uniqueTags =
+    notesData && notesData.length
+      ? [
+          ...new Set(
+            notesData.flatMap((note) =>
+              typeof note.tags === "string" ? note.tags.split(",").map((tag) => tag.trim()) : note.tags
+            )
+          ),
+        ]
+      : [];
 
   if (isError) return <Modal header="Please Note" message={error.message} />;
 

@@ -21,7 +21,7 @@ const AllNotes = () => {
     retry: false,
   });
 
-  const { data: notesData, isLoading } = useQuery({
+  const { data: notesData = [], isLoading } = useQuery({
     queryKey: ["notes", userId],
     queryFn: () => getNotesByUserId(userId),
     enabled: !!userId,

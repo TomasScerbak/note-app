@@ -13,6 +13,12 @@ import {
 
 import axios from "axios";
 
+const isProduction = import.meta.env.MODE === "production";
+
+const BASE_URL = isProduction
+  ? "https://note-app-v05l.onrender.com/api/user"
+  : import.meta.env.VITE_USERS_BASE_URL;
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -53,7 +59,7 @@ export const AuthProvider = ({ children }) => {
           email: userCredential.user.email,
           uid: userCredential.user.uid,
         };
-        const response = await axios.post("https://note-app-v05l.onrender.com/api/user/", userData, {
+        const response = await axios.post(BASE_URL, userData, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -97,23 +103,28 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-
+      console.log("USER", user);
       setUser(user);
       setAuthError(null);
 
       if (user && user.uid) {
-        const existingUser = await fetchUserId(user.uid);
-        if (!existingUser) {
-          const userData = {
-            email: user.email,
-            uid: user.uid,
-          };
+        try {
+          const existingUser = await fetchUserId(user.uid);
+          console.log("existingUser", existingUser);
+          if (!existingUser) {
+            const userData = {
+              email: user.email,
+              uid: user.uid,
+            };
 
-          await axios.post("https://note-app-v05l.onrender.com/api/user/", userData, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
+            await axios.post(BASE_URL, userData, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+          }
+        } catch (err) {
+          console.log("ERROR FROM DB", err);
         }
 
         setIsLoggedIn(true);
