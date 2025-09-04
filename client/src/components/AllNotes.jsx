@@ -1,32 +1,13 @@
-import { getNotesByUserId } from "../api/notes";
-import { fetchUserId } from "../api/user";
-import { useAuth } from "../contexts/authContext";
-import { useQuery } from "@tanstack/react-query";
+import { useNotes } from "../contexts/notesContext";
+import { formatDate } from "../utils/noteUtils";
 
 import NoteCard from "./NoteCard";
 import Loader from "../components/UI/Loader";
 
-import { formatDate } from "../utils/noteUtils";
-
 import classes from "./AllNotes.module.css";
 
 const AllNotes = () => {
-  const { user } = useAuth();
-  const uid = user.uid;
-
-  const { data: userId } = useQuery({
-    queryKey: ["user", uid],
-    queryFn: () => fetchUserId(uid),
-    enabled: !!uid,
-    retry: false,
-  });
-
-  const { data: notesData = [], isLoading } = useQuery({
-    queryKey: ["notes", userId],
-    queryFn: () => getNotesByUserId(userId),
-    enabled: !!userId,
-    retry: 1,
-  });
+  const { notesData, isLoading } = useNotes();
 
   if (isLoading) return <Loader />;
 

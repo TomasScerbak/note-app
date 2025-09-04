@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router";
+import { NotesProvider } from "./contexts/notesContext";
 
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
@@ -25,7 +26,14 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/home" element={<Home />}>
-          <Route path="all-notes" element={<AllNotes />} />
+          <Route
+            path="all-notes"
+            element={
+              <NotesProvider>
+                <AllNotes />
+              </NotesProvider>
+            }
+          />
           <Route path="create-note" element={<NewNote />} />
           <Route path="note/:id" element={<ViewNotePage />} />
           <Route path="search-notes" element={<Search />} />

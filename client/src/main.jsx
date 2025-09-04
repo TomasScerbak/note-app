@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
 import { AuthProvider } from "./contexts/authContext";
+import { NotesProvider } from "./contexts/notesContext";
 import { ToastProvider } from "./contexts/toastContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "./contexts/themeContext/index.jsx";
@@ -20,7 +21,9 @@ createRoot(document.getElementById("root")).render(
           <ToastProvider>
             <ThemeProvider>
               <FontThemeProvider>
-                <App />
+                <NotesProvider>
+                  <App />
+                </NotesProvider>
               </FontThemeProvider>
             </ThemeProvider>
           </ToastProvider>

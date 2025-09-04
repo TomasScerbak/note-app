@@ -2,7 +2,7 @@
 import { createContext, useContext, useState } from "react";
 import { getNotesByUserId } from "../../api/notes";
 import { fetchUserId } from "../../api/user";
-import { useAuth } from "../contexts/authContext";
+import { useAuth } from "../authContext";
 import { useQuery } from "@tanstack/react-query";
 
 const NotesContext = createContext();
@@ -48,17 +48,18 @@ export const NotesProvider = ({ children }) => {
     setHasSearched(!!value.length);
   };
 
-  const filteredNotes =
-    notesData?.filter((note) => {
-      const search = searchTerm.toLowerCase();
-      const headerMatch = note.header?.toLowerCase().includes(search);
-      const contentMatch = note.content?.toLowerCase().includes(search);
-      const tagsMatch = note.tags
-        ?.split(",")
-        .map((tag) => tag.trim().toLowerCase())
-        .some((tag) => tag.includes(search));
-      return headerMatch || contentMatch || tagsMatch;
-    }) || [];
+  const filteredNotes = searchTerm.length
+    ? notesData?.filter((note) => {
+        const search = searchTerm.toLowerCase();
+        const headerMatch = note.header?.toLowerCase().includes(search);
+        const contentMatch = note.content?.toLowerCase().includes(search);
+        const tagsMatch = note.tags
+          ?.split(",")
+          .map((tag) => tag.trim().toLowerCase())
+          .some((tag) => tag.includes(search));
+        return headerMatch || contentMatch || tagsMatch;
+      }) ?? []
+    : [];
 
   return (
     <NotesContext.Provider

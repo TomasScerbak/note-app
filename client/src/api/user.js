@@ -9,10 +9,11 @@ const BASE_URL = isProduction
 export const fetchUserId = async (uid) => {
   try {
     const response = await axios.get(`${BASE_URL}/${uid}`);
-    if (Array.isArray(response) && !response.length) {
+    const data = response.data;
+    if (Array.isArray(data) && !data.length) {
       return null;
     }
-    const userId = response.data[0]?.id;
+    const userId = data[0]?.id;
     return userId;
   } catch (error) {
     console.error("Failed to fetch user ID:", error);

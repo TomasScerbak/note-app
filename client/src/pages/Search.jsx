@@ -1,9 +1,5 @@
-import { useAuth } from "../contexts/authContext";
-import { fetchUserId } from "../api/user";
-import { useQuery } from "@tanstack/react-query";
-import { getNotesByUserId } from "../api/notes";
-import { useState } from "react";
-
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useNotes } from "../contexts/notesContext";
 import SearchHeader from "../components/SearchHeader";
 import SearchInput from "../components/UI/SearchInput";
 import SearchSubHeder from "../components/SearchSubHeder";
@@ -11,67 +7,28 @@ import Loader from "../components/UI/Loader";
 import Modal from "../components/modals/Modal";
 import NoteCard from "../components/NoteCard";
 import { formatDate } from "../utils/noteUtils";
+import { useEffect } from "react";
 
 const Search = () => {
-  const { user } = useAuth();
-  const uid = user?.uid;
+  const { isLoading, searchTerm, isError, error, hasSearched, filteredNotes, handleSearchChange } =
+    useNotes();
 
-  const { data: userId } = useQuery({
-    queryKey: ["user", uid],
-    queryFn: () => fetchUserId(uid),
-    enabled: !!uid,
-  });
+  useEffect(() => {
+    // clear searchTerm each time user navigates to this page
+    handleSearchChange("");
+  }, []);
 
-  const {
-    data: notesData = [],
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["notes", userId],
-    queryFn: () => getNotesByUserId(userId),
-    enabled: !!userId,
-  });
-
-  const [message, setMessage] = useState("");
-  const [filteredNotes, setFilteredNotes] = useState([]);
-  const [hasSearched, setHasSearched] = useState(false);
-
-  const handleChange = (event) => {
-    const newValue = event.target.value;
-    setHasSearched(!!newValue.length); // true if input is non-empty
-
-    if (newValue.length) {
-      setMessage(
-        <p style={{ color: "var(--app-secondary-text)" }}>
-          All notes matching
-          <strong>
-            <q>{newValue}</q>
-          </strong>
-          are displayed below.
-        </p>
-      );
-
-      const search = newValue.toLowerCase();
-
-      const filtered =
-        notesData?.filter((note) => {
-          const headerMatch = note.header?.toLowerCase().includes(search);
-          const contentMatch = note.content?.toLowerCase().includes(search);
-          const tagsMatch = note.tags
-            ?.split(",")
-            .map((tag) => tag.trim().toLowerCase())
-            .some((tag) => tag.includes(search));
-
-          return headerMatch || contentMatch || tagsMatch;
-        }) || [];
-
-      setFilteredNotes(filtered);
-    } else {
-      setMessage("");
-      setFilteredNotes([]);
-    }
-  };
+  const message = searchTerm.length ? (
+    <p style={{ color: "var(--app-secondary-text)" }}>
+      All notes matching
+      <strong>
+        <q>{searchTerm}</q>
+      </strong>
+      are displayed below.
+    </p>
+  ) : (
+    ""
+  );
 
   if (isLoading) return <Loader />;
 
@@ -79,7 +36,7 @@ const Search = () => {
     <>
       <SearchHeader />
       <SearchInput
-        onChange={handleChange}
+        onChange={(e) => handleSearchChange(e.target.value)}
         message={message}
         placeholder="Search by title, content, or tags..."
       />

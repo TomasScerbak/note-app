@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect, useMemo } from "react";
+import { useCallback, useState, useEffect, useMemo, Fragment } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { useTheme } from "../contexts/themeContext";
 import { getDisplayData, determineActiveLabel } from "../utils/footerUtils.js";
@@ -34,7 +34,7 @@ const Footer = () => {
   return (
     <footer className={classes.footer}>
       {displayData.map((item, index) => (
-        <>
+        <Fragment key={item.id}>
           <button
             onClick={() => handleClick(item.label, item.navigate)}
             onTouchStart={() => handleClick(item.label, item.navigate)}
@@ -57,7 +57,7 @@ const Footer = () => {
             </div>
           </button>
           {index !== displayData.length - 1 ? <Separator orientation="vertical" /> : null}
-        </>
+        </Fragment>
       ))}
     </footer>
   );
