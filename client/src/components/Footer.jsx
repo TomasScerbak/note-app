@@ -56,7 +56,7 @@ const Footer = () => {
               <p className={`${classes.footer__text} ${classes[item.textClass]}`}>{item.text}</p>
             </div>
           </button>
-          {index !== displayData.length - 1 ? <Separator orientation="vertical" /> : null}
+          {index !== displayData.length - 1 ? <Separator /> : null}
         </Fragment>
       ))}
     </footer>

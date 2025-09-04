@@ -6,14 +6,14 @@ import Loader from "../components/UI/Loader";
 
 import classes from "./AllNotes.module.css";
 
-const AllNotes = () => {
+const AllNotes = ({ isDesktop = false }) => {
   const { notesData, isLoading } = useNotes();
 
   if (isLoading) return <Loader />;
 
   return (
     <div className={classes.all_notes}>
-      <h1>All Notes</h1>
+      {isDesktop ? null : <h1>All Notes</h1>}
       {notesData && notesData.length ? (
         notesData.map((note) => (
           <NoteCard

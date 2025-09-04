@@ -91,13 +91,14 @@
     align-items: center;
     padding: 1.2rem 1.6rem;
     background-color: var(--app-main-color);
+    border-right: 1px solid var(--app-login-signup-bg);
   }
 
   .top__header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
-    padding: 2.6rem 0 2.6rem 3.2rem;
+    padding: 2.6rem 3.2rem 2.6rem 3.2rem;
     background-color: var(--app-main-color);
   }
 
@@ -105,18 +106,27 @@
     display: flex;
     background-color: var(--app-main-color);
     padding: 1.2rem 1.6rem;
+    border-right: 1px solid var(--app-login-signup-bg);
+    border-top: 1px solid var(--app-login-signup-bg);
   }
 
   .left_inner_panel {
     display: block;
+    padding: 2rem 1.6rem 0 3.2rem;
+    background-color: var(--app-main-color);
+    border: 1px solid var(--app-login-signup-bg);
   }
 
   .right_inner_panel {
     display: block;
+    background-color: var(--app-main-color);
+    border: 1px solid var(--app-login-signup-bg);
   }
 
   .right__sidebar {
     display: block;
+    background-color: var(--app-main-color);
+    border: 1px solid var(--app-login-signup-bg);
   }
 
   .header {
