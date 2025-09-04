@@ -11,9 +11,18 @@ const isProduction = process.env.NODE_ENV === "production";
 
 //Midleware
 app.use(express.json());
+
+const allowedOrigins = ["http://localhost:5173", "https://dev-tomo-note-app.netlify.app"];
+
 app.use(
   cors({
-    origin: isProduction ? "https://dev-tomo-note-app.netlify.app" : "http://localhost:5173",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
