@@ -38,7 +38,7 @@ const Footer = () => {
           <button
             onClick={() => handleClick(item.label, item.navigate)}
             onTouchStart={() => handleClick(item.label, item.navigate)}
-            key={item.text}
+            key={item.id}
             className={`${classes.footer__item} ${activeLabel === item.label ? classes.active : ""}`}
           >
             <div className={classes.footer__item__wrapper}>

@@ -7,9 +7,6 @@ import Logo from "../components/UI/Logo";
 import HeaderSmall from "../components/HeaderSmall";
 import Footer from "../components/Footer";
 import Button from "../components/UI/Button";
-import DesktopTopHeader from "./DesktopTopHeader";
-import DesktopLeftSideBar from "./DesktopLeftSideBar";
-
 import PlusImage from "../assets/icon-plus.svg";
 
 const ParentAppGrid = () => {
@@ -17,6 +14,19 @@ const ParentAppGrid = () => {
   const location = useLocation();
 
   const validURLs = ["/home/all-notes", "/home/archive-notes", "/home/search-notes", "/home/tag-list"];
+
+  let topHeaderText = "";
+
+  switch (location.pathname) {
+    case "/home/all-notes":
+      topHeaderText = "All Notes";
+      break;
+    case "/home/archive-notes":
+      topHeaderText = "Archive Notes";
+      break;
+    default:
+      topHeaderText = "All Notes";
+  }
 
   const navigateToNewNote = () => {
     navigate("/home/create-note");
@@ -46,12 +56,9 @@ const ParentAppGrid = () => {
         <Logo />
       </section>
       <header className={classes.top__header}>
-        <DesktopTopHeader>Here header</DesktopTopHeader>
+        <h1>{topHeaderText}</h1>
       </header>
-      <aside className={classes.left__sidebar}>
-        <DesktopLeftSideBar>Here sidebar</DesktopLeftSideBar>
-      </aside>
-      <header className={classes.top__header}>3</header>
+      <div className={classes.left__sidebar}></div>
       <section className={classes.left_inner_panel}>4</section>
       <section className={classes.right_inner_panel}>5</section>
       <aside className={classes.right__sidebar}>6</aside>

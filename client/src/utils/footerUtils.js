@@ -16,6 +16,7 @@ import SettingsBlue from "../assets/icon-settings-blue.svg";
 
 export const getDisplayData = (theme, activeLabel) => [
   {
+    id: 1,
     text: "Home",
     label: "home",
     image: activeLabel === "home" ? HomeBlue : theme === "light" ? HomeDark : HomeLight,
@@ -30,6 +31,7 @@ export const getDisplayData = (theme, activeLabel) => [
     navigate: "all-notes",
   },
   {
+    id: 2,
     text: "Search",
     label: "search",
     image: activeLabel === "search" ? SearchBlue : theme === "light" ? SearchDark : SearchLight,
@@ -44,6 +46,7 @@ export const getDisplayData = (theme, activeLabel) => [
     navigate: "search-notes",
   },
   {
+    id: 3,
     text: "Archive",
     label: "archive",
     image: activeLabel === "archive" ? ArchiveBlue : theme === "light" ? ArchiveDark : ArchiveLight,
@@ -58,6 +61,7 @@ export const getDisplayData = (theme, activeLabel) => [
     navigate: "archive-notes",
   },
   {
+    id: 4,
     text: "Tags",
     label: "tags",
     image: activeLabel === "tags" ? TagBlue : theme === "light" ? TagDark : TagLight,
@@ -72,6 +76,7 @@ export const getDisplayData = (theme, activeLabel) => [
     navigate: "tag-list",
   },
   {
+    id: 5,
     text: "Settings",
     label: "settings",
     image: activeLabel === "settings" ? SettingsBlue : theme === "light" ? SettingsDark : SettingsLight,

@@ -19,7 +19,7 @@ const TagList = () => {
   });
 
   const {
-    data: notesData,
+    data: notesData = [],
     isLoading,
     isError,
     error,

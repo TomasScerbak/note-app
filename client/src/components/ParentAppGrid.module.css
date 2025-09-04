@@ -79,26 +79,30 @@
 @media screen and (min-width: 1024px) {
   .parent {
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 5.2rem 1fr;
+    grid-template-rows: 8.1rem 1fr;
     grid-template-areas:
       "top__left top__header top__header top__header top__header"
       "left__sidebar left_inner_panel right_inner_panel right_inner_panel right__sidebar";
   }
 
   .top__left {
-    display: block;
-    padding: 0 1.6rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1.2rem 1.6rem;
     background-color: var(--app-main-color);
   }
 
   .top__header {
-    display: block;
-    padding: 2.6rem auto 2.6rem 3.2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2.6rem 0 2.6rem 3.2rem;
     background-color: var(--app-main-color);
   }
 
   .left__sidebar {
-    display: block;
+    display: flex;
     background-color: var(--app-main-color);
     padding: 1.2rem 1.6rem;
   }
