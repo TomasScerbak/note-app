@@ -52,8 +52,19 @@ const Search = () => {
         </p>
       );
 
+      const search = newValue.toLowerCase();
+
       const filtered =
-        notesData?.filter((note) => note.header.toLowerCase().startsWith(newValue.toLowerCase())) || [];
+        notesData?.filter((note) => {
+          const headerMatch = note.header?.toLowerCase().includes(search);
+          const contentMatch = note.content?.toLowerCase().includes(search);
+          const tagsMatch = note.tags
+            ?.split(",")
+            .map((tag) => tag.trim().toLowerCase())
+            .some((tag) => tag.includes(search));
+
+          return headerMatch || contentMatch || tagsMatch;
+        }) || [];
 
       setFilteredNotes(filtered);
     } else {
@@ -67,7 +78,11 @@ const Search = () => {
   return (
     <>
       <SearchHeader />
-      <SearchInput onChange={handleChange} message={message} />
+      <SearchInput
+        onChange={handleChange}
+        message={message}
+        placeholder="Search by title, content, or tags..."
+      />
       {isError ? (
         <Modal
           header="Please Note"
