@@ -1,7 +1,4 @@
-import { useAuth } from "../contexts/authContext";
-import { fetchUserId } from "../api/user";
-import { useQuery } from "@tanstack/react-query";
-import { getNotesByUserId } from "../api/notes";
+import { useNotes } from "../contexts/notesContext";
 import { useParams } from "react-router";
 
 import { formatDate } from "../utils/noteUtils";
@@ -14,25 +11,7 @@ import NoteCard from "../components/NoteCard";
 
 const TagDetailedList = () => {
   const { tag } = useParams();
-
-  const { user } = useAuth();
-  const uid = user.uid;
-
-  const { data: userId } = useQuery({
-    queryKey: ["user", uid],
-    queryFn: () => fetchUserId(uid),
-    enabled: !!uid,
-  });
-
-  const {
-    data: notesData,
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["notes", userId],
-    queryFn: () => getNotesByUserId(userId),
-  });
+  const { notesData, isLoading, isError, error } = useNotes();
 
   const filteredNotes = notesData
     ? notesData.filter((note) => {

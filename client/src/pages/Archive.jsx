@@ -1,35 +1,13 @@
-import { useAuth } from "../contexts/authContext";
-import { fetchUserId } from "../api/user";
-import { useQuery } from "@tanstack/react-query";
-import { getNotesByUserId } from "../api/notes";
-
-import Loader from "../components/UI/Loader";
-import Modal from "../components/modals/Modal";
-import NoteCard from "../components/NoteCard";
+import { useNotes } from "../contexts/notesContext";
 import { formatDate } from "../utils/noteUtils";
 
 import ArchiveHedader from "../components/ArchiveHeader";
+import Loader from "../components/UI/Loader";
+import Modal from "../components/modals/Modal";
+import NoteCard from "../components/NoteCard";
 
 const Archive = () => {
-  const { user } = useAuth();
-  const uid = user.uid;
-
-  const { data: userId } = useQuery({
-    queryKey: ["user", uid],
-    queryFn: () => fetchUserId(uid),
-    enabled: !!uid,
-  });
-
-  const {
-    data: notesData,
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["notes", userId],
-    queryFn: () => getNotesByUserId(userId),
-    enabled: !!userId,
-  });
+  const { notesData, isLoading, isError, error } = useNotes();
 
   if (isError) return <Modal header="Please Note" message={error.message} />;
 

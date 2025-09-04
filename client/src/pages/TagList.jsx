@@ -1,7 +1,4 @@
-import { useAuth } from "../contexts/authContext";
-import { fetchUserId } from "../api/user";
-import { useQuery } from "@tanstack/react-query";
-import { getNotesByUserId } from "../api/notes";
+import { useNotes } from "../contexts/notesContext";
 
 import TagCard from "../components/TagCard";
 import Modal from "../components/modals/Modal";
@@ -9,25 +6,7 @@ import Loader from "../components/UI/Loader";
 import TagHeader from "../components/TagHeader";
 
 const TagList = () => {
-  const { user } = useAuth();
-  const uid = user.uid;
-
-  const { data: userId } = useQuery({
-    queryKey: ["user", uid],
-    queryFn: () => fetchUserId(uid),
-    enabled: !!uid,
-  });
-
-  const {
-    data: notesData = [],
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["notes", userId],
-    queryFn: () => getNotesByUserId(userId),
-    enabled: !!userId,
-  });
+  const { notesData, isLoading, isError, error } = useNotes();
 
   const uniqueTags =
     notesData && notesData.length

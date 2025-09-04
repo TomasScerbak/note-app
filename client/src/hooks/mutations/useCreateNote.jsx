@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "../../contexts/toastContext";
 import { createNote } from "../../api/notes";
 
 export const useCreateNote = (userId) => {
   const { addToast } = useToast();
+  const queryClient = useQueryClient();
 
   const [noteErrors, setNoteErrors] = useState({
     no_title_error: false,
@@ -14,6 +15,7 @@ export const useCreateNote = (userId) => {
   const createPost = useMutation({
     mutationFn: createNote,
     onSuccess: () => {
+      queryClient.invalidateQueries(["notes"]);
       addToast({
         message: "Note created successfully!",
         color: "positive",
@@ -49,7 +51,7 @@ export const useCreateNote = (userId) => {
       tags: tags.map((tag) => tag.trim()).join(","),
       userId,
     });
-
+    console.log("handleSaveNote > response >", response);
     return response;
   };
 

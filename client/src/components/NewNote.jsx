@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNotes } from "../contexts/notesContext";
 import { useFetchUserId } from "../hooks/queries/useFetchUserId";
 import { useCreateNote } from "../hooks/mutations/useCreateNote";
 import { useUpdateNote } from "../hooks/mutations/useUpdateNote";
@@ -13,6 +14,7 @@ import NoteBody from "./NoteBody";
 import Modal from "../components/modals/Modal";
 
 const NewNote = () => {
+  const { refetchNotes } = useNotes();
   const [clearValues, setClearValues] = useState(false);
   const [title, setTitle] = useState("");
   const [noteText, setNoteText] = useState("");
@@ -39,8 +41,10 @@ const NewNote = () => {
           content: noteText,
           tags,
         });
+        refetchNotes();
       } else {
         response = await handleSaveNote(title, noteText, tags);
+        refetchNotes();
       }
 
       if (response) {
