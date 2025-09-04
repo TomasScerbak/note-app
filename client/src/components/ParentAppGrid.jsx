@@ -2,12 +2,12 @@ import { Outlet } from "react-router";
 import { useNavigate, useLocation } from "react-router";
 
 import classes from "./ParentAppGrid.module.css";
+import PlusImage from "../assets/icon-plus.svg";
 
 import Logo from "../components/UI/Logo";
 import HeaderSmall from "../components/HeaderSmall";
 import Footer from "../components/Footer";
 import Button from "../components/UI/Button";
-import PlusImage from "../assets/icon-plus.svg";
 
 const ParentAppGrid = () => {
   const navigate = useNavigate();
