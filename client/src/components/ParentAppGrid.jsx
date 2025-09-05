@@ -1,6 +1,9 @@
+import { useState } from "react";
+import { useTheme } from "../contexts/themeContext";
 import { Outlet } from "react-router";
 import { useNavigate, useLocation } from "react-router";
 import { useNotes } from "../contexts/notesContext";
+import { initialBtnData, getBtnImages } from "../utils/desktopButtonsUtils";
 
 import classes from "./ParentAppGrid.module.css";
 import PlusImage from "../assets/icon-plus.svg";
@@ -12,17 +15,14 @@ import Button from "../components/UI/Button";
 import SearchInput from "../components/UI/SearchInput";
 import Loader from "../components/UI/Loader";
 import AllNotes from "../components/AllNotes";
+import Separator from "../components/UI/Separator";
 
 const ParentAppGrid = () => {
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-  const { isLoading, searchTerm, isError, error, hasSearched, filteredNotes, handleSearchChange } =
-    useNotes();
-
-  console.log("searchTerm", searchTerm);
-  console.log("hasSearched", hasSearched);
-  console.log("filteredNotes", filteredNotes);
-
+  const { isLoading, searchTerm, hasSearched, filteredNotes, handleSearchChange } = useNotes();
+  const [deskBtnData, setDeskBtnData] = useState(initialBtnData);
   const validURLs = ["/home/all-notes", "/home/archive-notes", "/home/search-notes", "/home/tag-list"];
 
   let headerText = "";
@@ -53,6 +53,13 @@ const ParentAppGrid = () => {
   const navigateToNewNote = () => {
     navigate("/home/create-note");
   };
+
+  const handleActiveBtn = (id) => {
+    setDeskBtnData((prev) =>
+      prev.map((btn) => (btn.id === id ? { ...btn, active: true } : { ...btn, active: false }))
+    );
+  };
+
   return (
     <section className={classes.parent}>
       {validURLs.includes(location.pathname) ? (
@@ -93,7 +100,28 @@ const ParentAppGrid = () => {
           isDesktop={true}
         />
       </header>
-      <div className={classes.left__sidebar}></div>
+      <div className={classes.left__sidebar}>
+        {deskBtnData.map((btn) => {
+          const { img } = getBtnImages(btn, theme);
+          return (
+            <Button
+              key={btn.id}
+              active={btn.active}
+              src={img}
+              secondarySrc={btn.img2}
+              type={btn.type}
+              hasImage={true}
+              size={btn.size}
+              variant={btn.variant}
+              title={btn.title}
+              btnImageClass="image-left"
+              btnSecondaryImageClass="image-right"
+              onClick={() => handleActiveBtn(btn.id)}
+            />
+          );
+        })}
+        <Separator />
+      </div>
       <section className={classes.left_inner_panel}>
         <Button size="large" variant="primary" title="Create New Note " />
         {searchTerm ? message : null}

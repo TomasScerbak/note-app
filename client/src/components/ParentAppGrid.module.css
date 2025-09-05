@@ -104,10 +104,10 @@
 
   .left__sidebar {
     display: flex;
+    flex-direction: column;
     background-color: var(--app-main-color);
     padding: 1.2rem 1.6rem;
     border-right: 1px solid var(--app-login-signup-bg);
-    border-top: 1px solid var(--app-login-signup-bg);
   }
 
   .left_inner_panel {

@@ -62,6 +62,10 @@
   height: 4.1rem;
 }
 
+.btn--max {
+  width: 100%;
+}
+
 .btn--rounded {
   border-radius: 100%;
   width: 4.8rem;
@@ -104,14 +108,6 @@
   outline: none;
 }
 
-.btn--desktop-selectable {
-  width: 100%;
-  height: 4rem;
-  padding: 1.5rem 1.2rem;
-  background-color: var(--app-main-color);
-  color: var(--app-primary-text);
-}
-
 @media screen and (min-width: 768px) {
   .btn--rounded {
     bottom: 10.5%;
@@ -123,5 +119,26 @@
 @media screen and (min-width: 900px) {
   .btn--rounded {
     display: none;
+  }
+  .image-left {
+    margin-right: 0.8rem;
+  }
+  .image-right {
+    margin-left: auto;
+  }
+  .btn--desktop-primary {
+    min-width: 24rem;
+    height: 4rem;
+    padding: 1.5rem 1.2rem;
+    background-color: var(--app-main-color);
+    color: var(--app-primary-text);
+    justify-content: flex-start;
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+
+  .btn--active {
+    background-color: var(--app-footer-item-bg);
   }
 }
