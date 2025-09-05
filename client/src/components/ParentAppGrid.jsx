@@ -60,6 +60,8 @@ const ParentAppGrid = () => {
     );
   };
 
+  const activeBtn = deskBtnData.find((btn) => btn.active);
+
   return (
     <section className={classes.parent}>
       {validURLs.includes(location.pathname) ? (
@@ -126,7 +128,7 @@ const ParentAppGrid = () => {
         <Button size="large" variant="primary" title="Create New Note " />
         {searchTerm ? message : null}
         {isLoading ? <Loader /> : null}
-        {searchTerm ? null : <AllNotes isDesktop={true} />}
+        {searchTerm || activeBtn.title !== "All Notes" ? null : <AllNotes isDesktop={true} />}
       </section>
       <section className={classes.right_inner_panel}>5</section>
       <aside className={classes.right__sidebar}>6</aside>
