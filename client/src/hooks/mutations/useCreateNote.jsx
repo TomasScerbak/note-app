@@ -51,7 +51,7 @@ export const useCreateNote = (userId) => {
       tags: tags.map((tag) => tag.trim()).join(","),
       userId,
     });
-    console.log("handleSaveNote > response >", response);
+
     return response;
   };
 

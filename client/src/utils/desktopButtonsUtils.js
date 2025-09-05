@@ -36,7 +36,6 @@ export const getBtnImages = (btnData, theme) => {
     };
   }
 
-  console.log("theme", theme);
   if (theme === "dark") {
     if (btnData && btnData.title === "All Notes") {
       return {

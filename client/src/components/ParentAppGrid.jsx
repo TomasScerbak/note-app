@@ -21,7 +21,7 @@ const ParentAppGrid = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-  const { isLoading, searchTerm, hasSearched, filteredNotes, handleSearchChange } = useNotes();
+  const { isLoading, searchTerm, handleSearchChange } = useNotes();
   const [deskBtnData, setDeskBtnData] = useState(initialBtnData);
   const validURLs = ["/home/all-notes", "/home/archive-notes", "/home/search-notes", "/home/tag-list"];
 
@@ -126,7 +126,7 @@ const ParentAppGrid = () => {
         <Button size="large" variant="primary" title="Create New Note " />
         {searchTerm ? message : null}
         {isLoading ? <Loader /> : null}
-        <AllNotes isDesktop={true} />
+        {searchTerm ? null : <AllNotes isDesktop={true} />}
       </section>
       <section className={classes.right_inner_panel}>5</section>
       <aside className={classes.right__sidebar}>6</aside>
