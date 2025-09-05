@@ -23,10 +23,12 @@ import ArchiveImageDark from "../assets/icon-archive-dark-grey.svg";
 
 import classes from "./ViewNotePage.module.css";
 
-const ViewNotePage = () => {
+const ViewNotePage = ({ deskNoteId, isDesktop }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
-  const { noteData, isLoading, isError, error } = useGetNoteById(id);
+  const actualId = isDesktop ? deskNoteId : id;
+  console.log("actualId", actualId);
+  const { noteData, isLoading, isError, error } = useGetNoteById(actualId);
   const { theme } = useTheme();
 
   const [tags, setTags] = useState([]);
@@ -48,22 +50,22 @@ const ViewNotePage = () => {
   }, [noteData]);
 
   const { handleUpdateNote } = useUpdateNote();
-  const { handleDeleteNote } = useDeleteNote(id);
+  const { handleDeleteNote } = useDeleteNote(actualId);
   const { toggleArchive } = useArchiveNote();
 
   const onSaveOrUpdate = async () => {
     try {
       let response;
-      if (id) {
+      if (actualId) {
         response = await handleUpdateNote({
-          id: id,
+          id: actualId,
           header: title,
           content: noteText,
           tags: tags.join(","),
         });
       }
       if (response) {
-        queryClient.invalidateQueries(["note", id]);
+        queryClient.invalidateQueries(["note", actualId]);
       }
     } catch (error) {
       console.error("Error updating note:", error.message);
@@ -80,11 +82,11 @@ const ViewNotePage = () => {
 
   const confirmDeleteNote = async () => {
     try {
-      if (id) {
-        const response = await handleDeleteNote(id);
+      if (actualId) {
+        const response = await handleDeleteNote(actualId);
         if (response) {
           queryClient.invalidateQueries(["notes"]);
-          queryClient.removeQueries(["note", id]);
+          queryClient.removeQueries(["note", actualId]);
           navigate("/home/all-notes");
         }
       }
@@ -95,9 +97,9 @@ const ViewNotePage = () => {
 
   const onToggleArchive = async () => {
     try {
-      if (!id) return;
-      await toggleArchive(id, Boolean(noteData.is_archived));
-      queryClient.invalidateQueries(["note", id]);
+      if (!actualId) return;
+      await toggleArchive(actualId, Boolean(noteData.is_archived));
+      queryClient.invalidateQueries(["note", actualId]);
       setShowArchiveModal(false);
     } catch (error) {
       console.error("Error toggling archive status:", error.message);
@@ -114,13 +116,15 @@ const ViewNotePage = () => {
     );
   return (
     <div className={classes.note__container}>
-      <NewNoteActions
-        id={id}
-        onSaveNote={onSaveOrUpdate}
-        onDeleteNote={onDeleteNote}
-        onToggleArchive={onArchiveNote}
-        isArchived={noteData.is_archived}
-      />
+      {isDesktop ? null : (
+        <NewNoteActions
+          id={actualId}
+          onSaveNote={onSaveOrUpdate}
+          onDeleteNote={onDeleteNote}
+          onToggleArchive={onArchiveNote}
+          isArchived={noteData.is_archived}
+        />
+      )}
       <NoteHeader tags={tags} setTags={setTags} title={title} setTitle={setTitle} updatedAt={updatedAt} />
       <NoteBody setNoteText={setNoteText} noteText={noteText} />
       {showDeleteModal && (

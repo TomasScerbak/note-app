@@ -10,3 +10,9 @@
   padding: 0.8rem;
   font-size: 1.4rem;
 }
+
+@media screen and (min-width: 1024px) {
+  .all_notes {
+    margin-top: 1.6rem;
+  }
+}

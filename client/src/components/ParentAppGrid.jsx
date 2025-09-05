@@ -16,6 +16,7 @@ import SearchInput from "../components/UI/SearchInput";
 import Loader from "../components/UI/Loader";
 import AllNotes from "../components/AllNotes";
 import Separator from "../components/UI/Separator";
+import ViewNotePage from "./ViewNotePage";
 
 const ParentAppGrid = () => {
   const { theme } = useTheme();
@@ -23,6 +24,8 @@ const ParentAppGrid = () => {
   const location = useLocation();
   const { isLoading, searchTerm, handleSearchChange } = useNotes();
   const [deskBtnData, setDeskBtnData] = useState(initialBtnData);
+  const [activeNoteId, setActiveNoteId] = useState(null);
+  console.log("activenote id", activeNoteId);
   const validURLs = ["/home/all-notes", "/home/archive-notes", "/home/search-notes", "/home/tag-list"];
 
   let headerText = "";
@@ -128,9 +131,15 @@ const ParentAppGrid = () => {
         <Button size="large" variant="primary" title="Create New Note " />
         {searchTerm ? message : null}
         {isLoading ? <Loader /> : null}
-        {searchTerm || activeBtn.title !== "All Notes" ? null : <AllNotes isDesktop={true} />}
+        {searchTerm || activeBtn.title !== "All Notes" ? null : (
+          <AllNotes isDesktop={true} activeNoteId={activeNoteId} setActiveNoteId={setActiveNoteId} />
+        )}
       </section>
-      <section className={classes.right_inner_panel}>5</section>
+      <section className={classes.right_inner_panel}>
+        {activeBtn.title === "All Notes" && activeNoteId && !searchTerm ? (
+          <ViewNotePage isDesktop={true} deskNoteId={activeNoteId} />
+        ) : null}
+      </section>
       <aside className={classes.right__sidebar}>6</aside>
     </section>
   );

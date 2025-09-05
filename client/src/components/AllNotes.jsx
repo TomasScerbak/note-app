@@ -6,8 +6,12 @@ import Loader from "../components/UI/Loader";
 
 import classes from "./AllNotes.module.css";
 
-const AllNotes = ({ isDesktop = false }) => {
+const AllNotes = ({ isDesktop = false, activeNoteId, setActiveNoteId }) => {
   const { notesData, isLoading } = useNotes();
+
+  const handleCardClick = (id) => {
+    setActiveNoteId(id);
+  };
 
   if (isLoading) return <Loader />;
 
@@ -22,6 +26,9 @@ const AllNotes = ({ isDesktop = false }) => {
             tags={note.tags.split(",")}
             noteHeading={note.header}
             lastEdited={formatDate(note.updated_at)}
+            isDesktop={isDesktop}
+            onCardClick={handleCardClick}
+            isActive={activeNoteId === note.id}
           />
         ))
       ) : (

@@ -41,3 +41,12 @@
   color: var(--app-secondary-text);
   border: 1px solid var(--app-secondary-text);
 }
+
+@media screen and (min-width: 1024px) {
+  .note__header_container {
+    border-top: none;
+  }
+  .note__header__item {
+    margin-bottom: 0.8rem;
+  }
+}
