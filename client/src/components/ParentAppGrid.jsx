@@ -55,6 +55,9 @@ const ParentAppGrid = () => {
     setDeskBtnData((prev) =>
       prev.map((btn) => (btn.id === id ? { ...btn, active: true } : { ...btn, active: false }))
     );
+    setActiveNoteId("");
+    setIsNewNoteRequested(false);
+    handleSearchChange("");
   };
 
   const activeBtn = deskBtnData.find((btn) => btn.active);
@@ -104,10 +107,14 @@ const ParentAppGrid = () => {
           <h1>{headerText}</h1>
         )}
         <SearchInput
-          onChange={(e) => handleSearchChange(e.target.value)}
+          onChange={(e) => {
+            handleSearchChange(e.target.value);
+            setActiveNoteId("");
+          }}
           message={message}
           placeholder="Search by title, content, or tags..."
           isDesktop={true}
+          value={searchTerm ?? ""}
         />
       </header>
       <div className={classes.left__sidebar}>
@@ -152,6 +159,12 @@ const ParentAppGrid = () => {
                   tags={note.tags ? note.tags.split(",") : []}
                   noteHeading={note.header}
                   lastEdited={formatDate(note.updated_at)}
+                  onCardClick={() => {
+                    setActiveNoteId(note.id);
+                    setIsNewNoteRequested(false);
+                  }}
+                  isActive={activeNoteId === note.id}
+                  isDesktop={true}
                 />
               );
             })
@@ -159,7 +172,7 @@ const ParentAppGrid = () => {
         {isLoading ? <Loader /> : null}
       </section>
       <section className={classes.right_inner_panel}>
-        {activeBtn.title === "All Notes" && activeNoteId && !searchTerm && !isNewNoteRequested ? (
+        {activeBtn.title === "All Notes" && activeNoteId && !isNewNoteRequested ? (
           <ViewNotePage isDesktop={true} deskNoteId={activeNoteId} />
         ) : null}
         {isNewNoteRequested && activeBtn.title !== "Archived Notes" ? <NewNote isDesktop={true} /> : null}
