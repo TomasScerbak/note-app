@@ -3,7 +3,7 @@ import { useTheme } from "../contexts/themeContext";
 import { Outlet } from "react-router";
 import { useNavigate, useLocation } from "react-router";
 import { useNotes } from "../contexts/notesContext";
-import { initialBtnData, getBtnImages } from "../utils/desktopButtonsUtils";
+import { initialBtnData, getBtnImages, btnActionsData } from "../utils/desktopButtonsUtils";
 import { formatDate } from "../utils/noteUtils";
 import useIsMobileOrTablet from "../hooks/useIsMobileOrTablet";
 
@@ -68,6 +68,8 @@ const ParentAppGrid = () => {
     handleSearchChange("");
     setActiveNoteId("");
   };
+
+  console.log("activeNoteId", activeNoteId);
 
   return (
     <section className={classes.parent}>
@@ -177,7 +179,27 @@ const ParentAppGrid = () => {
         ) : null}
         {isNewNoteRequested && activeBtn.title !== "Archived Notes" ? <NewNote isDesktop={true} /> : null}
       </section>
-      <aside className={classes.right__sidebar}>6</aside>
+      <aside className={classes.right__sidebar}>
+        {activeNoteId &&
+          btnActionsData.map((btn) => {
+            const { img } = getBtnImages(btn, theme);
+            return (
+              <Button
+                key={btn.id}
+                active={btn.active}
+                src={img}
+                secondarySrc={btn.img2}
+                type={btn.type}
+                hasImage={true}
+                size={btn.size}
+                variant={btn.variant}
+                title={btn.title}
+                btnImageClass="image-left"
+                btnSecondaryImageClass="image-right"
+              />
+            );
+          })}
+      </aside>
     </section>
   );
 };

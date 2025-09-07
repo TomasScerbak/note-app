@@ -29,6 +29,29 @@ export const initialBtnData = [
   },
 ];
 
+export const btnActionsData = [
+  {
+    id: 1,
+    title: "Archive Note",
+    img: null,
+    img2: null,
+    active: false,
+    type: "button",
+    variant: "desktop-secondary",
+    size: "max",
+  },
+  {
+    id: 2,
+    title: "Delete Note",
+    img: null,
+    img2: null,
+    active: false,
+    type: "button",
+    variant: "desktop-secondary",
+    size: "max",
+  },
+];
+
 export const getBtnImages = (btnData, theme) => {
   if (!Object.keys(btnData).length || !theme) {
     return {
@@ -61,4 +84,6 @@ export const getBtnImages = (btnData, theme) => {
       };
     }
   }
+
+  return { img: null };
 };
