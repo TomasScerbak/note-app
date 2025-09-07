@@ -4,6 +4,8 @@ import { Outlet } from "react-router";
 import { useNavigate, useLocation } from "react-router";
 import { useNotes } from "../contexts/notesContext";
 import { initialBtnData, getBtnImages } from "../utils/desktopButtonsUtils";
+import { formatDate } from "../utils/noteUtils";
+import useIsMobileOrTablet from "../hooks/useIsMobileOrTablet";
 
 import classes from "./ParentAppGrid.module.css";
 import PlusImage from "../assets/icon-plus.svg";
@@ -17,29 +19,21 @@ import Loader from "../components/UI/Loader";
 import AllNotes from "../components/AllNotes";
 import Separator from "../components/UI/Separator";
 import ViewNotePage from "./ViewNotePage";
+import NewNote from "./NewNote";
+import NoteCard from "./NoteCard";
 
 const ParentAppGrid = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-  const { isLoading, searchTerm, handleSearchChange } = useNotes();
+  const isMobileOrTablet = useIsMobileOrTablet();
+
+  const { isLoading, searchTerm, handleSearchChange, filteredNotes } = useNotes();
   const [deskBtnData, setDeskBtnData] = useState(initialBtnData);
   const [activeNoteId, setActiveNoteId] = useState(null);
-  console.log("activenote id", activeNoteId);
+  const [isNewNoteRequested, setIsNewNoteRequested] = useState(false);
+
   const validURLs = ["/home/all-notes", "/home/archive-notes", "/home/search-notes", "/home/tag-list"];
-
-  let headerText = "";
-
-  switch (location.pathname) {
-    case "/home/all-notes":
-      headerText = "All Notes";
-      break;
-    case "/home/archive-notes":
-      headerText = "Archive Notes";
-      break;
-    default:
-      headerText = "All Notes";
-  }
 
   const message = searchTerm.length ? (
     <p style={{ color: "var(--app-secondary-text)" }}>
@@ -52,7 +46,7 @@ const ParentAppGrid = () => {
   ) : (
     ""
   );
-
+  // only for tablet and mobile version
   const navigateToNewNote = () => {
     navigate("/home/create-note");
   };
@@ -64,6 +58,13 @@ const ParentAppGrid = () => {
   };
 
   const activeBtn = deskBtnData.find((btn) => btn.active);
+  const headerText = activeBtn.title === "All Notes" ? "All Notes" : "Archived Notes";
+
+  const handleCreateNewNote = () => {
+    setIsNewNoteRequested(true);
+    handleSearchChange("");
+    setActiveNoteId("");
+  };
 
   return (
     <section className={classes.parent}>
@@ -77,15 +78,19 @@ const ParentAppGrid = () => {
           src={PlusImage}
         />
       ) : null}
-      <header className={classes.header}>
-        <HeaderSmall />
-      </header>
-      <section className={classes.body}>
-        <Outlet />
-      </section>
-      <section className={classes.footer}>
-        <Footer />
-      </section>
+      {isMobileOrTablet ? (
+        <>
+          <header className={classes.header}>
+            <HeaderSmall />
+          </header>
+          <section className={classes.body}>
+            <Outlet />
+          </section>
+          <section className={classes.footer}>
+            <Footer />
+          </section>
+        </>
+      ) : null}
       <section className={classes.top__left}>
         <Logo />
       </section>
@@ -128,17 +133,36 @@ const ParentAppGrid = () => {
         <Separator />
       </div>
       <section className={classes.left_inner_panel}>
-        <Button size="large" variant="primary" title="Create New Note " />
+        <Button onClick={handleCreateNewNote} size="large" variant="primary" title="Create New Note " />
         {searchTerm ? message : null}
-        {isLoading ? <Loader /> : null}
         {searchTerm || activeBtn.title !== "All Notes" ? null : (
-          <AllNotes isDesktop={true} activeNoteId={activeNoteId} setActiveNoteId={setActiveNoteId} />
+          <AllNotes
+            isDesktop={true}
+            activeNoteId={activeNoteId}
+            setActiveNoteId={setActiveNoteId}
+            setIsNewNoteRequested={setIsNewNoteRequested}
+          />
         )}
+        {searchTerm
+          ? filteredNotes.map((note) => {
+              return (
+                <NoteCard
+                  key={note.id}
+                  id={note.id}
+                  tags={note.tags ? note.tags.split(",") : []}
+                  noteHeading={note.header}
+                  lastEdited={formatDate(note.updated_at)}
+                />
+              );
+            })
+          : null}
+        {isLoading ? <Loader /> : null}
       </section>
       <section className={classes.right_inner_panel}>
-        {activeBtn.title === "All Notes" && activeNoteId && !searchTerm ? (
+        {activeBtn.title === "All Notes" && activeNoteId && !searchTerm && !isNewNoteRequested ? (
           <ViewNotePage isDesktop={true} deskNoteId={activeNoteId} />
         ) : null}
+        {isNewNoteRequested && activeBtn.title !== "Archived Notes" ? <NewNote isDesktop={true} /> : null}
       </section>
       <aside className={classes.right__sidebar}>6</aside>
     </section>

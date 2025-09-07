@@ -1,12 +1,13 @@
 import { Link } from "react-router";
 import { useTheme } from "../../contexts/themeContext/index.jsx";
+import { getRedirectPath } from "../../utils/generalUtils.js";
 
 const Logo = () => {
   const { theme } = useTheme();
   const themeColor = theme === "light" ? "#0E121B" : "#FFFFFF";
 
   return (
-    <Link to="/home/all-notes">
+    <Link to={getRedirectPath()}>
       <svg xmlns="http://www.w3.org/2000/svg" width="95" height="28" fill="none" viewBox="0 0 95 28">
         <g clipPath="url(#a)">
           <g fill="#335CFF" fillRule="evenodd" clipPath="url(#b)" clipRule="evenodd">

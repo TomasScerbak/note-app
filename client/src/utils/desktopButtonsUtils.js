@@ -32,7 +32,7 @@ export const initialBtnData = [
 export const getBtnImages = (btnData, theme) => {
   if (!Object.keys(btnData).length || !theme) {
     return {
-      img: "",
+      img: null,
     };
   }
 

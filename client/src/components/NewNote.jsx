@@ -13,7 +13,7 @@ import NoteHeader from "./NoteHeader";
 import NoteBody from "./NoteBody";
 import Modal from "../components/modals/Modal";
 
-const NewNote = () => {
+const NewNote = ({ isDesktop }) => {
   const { refetchNotes } = useNotes();
   const [clearValues, setClearValues] = useState(false);
   const [title, setTitle] = useState("");
@@ -57,7 +57,9 @@ const NewNote = () => {
 
   return (
     <div className={classes.note__container}>
-      <NewNoteActions onSaveNote={onSaveOrUpdate} handleClearValues={handleClearValues} />
+      {isDesktop ? null : (
+        <NewNoteActions onSaveNote={onSaveOrUpdate} handleClearValues={handleClearValues} />
+      )}
       <NoteHeader
         tags={tags}
         setTags={setTags}

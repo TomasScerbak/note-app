@@ -11,6 +11,8 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 
+import { getRedirectPath } from "../../utils/generalUtils.js";
+
 import axios from "axios";
 
 const isProduction = import.meta.env.MODE === "production";
@@ -66,7 +68,7 @@ export const AuthProvider = ({ children }) => {
         });
         if (response.status === 201) {
           setIsLoggedIn(true);
-          navigate("/home/all-notes");
+          navigate(getRedirectPath());
         }
       }
     } catch (error) {
@@ -88,6 +90,7 @@ export const AuthProvider = ({ children }) => {
       if (userCredential.user && userCredential.user.uid) {
         setIsLoggedIn(true);
         navigate("/home/all-notes");
+        navigate(getRedirectPath());
       }
     } catch (error) {
       setAuthError(error.message);
@@ -128,7 +131,7 @@ export const AuthProvider = ({ children }) => {
         }
 
         setIsLoggedIn(true);
-        navigate("/home/all-notes");
+        navigate(getRedirectPath());
       }
     } catch (error) {
       console.error("Google Sign-In Error:", error);

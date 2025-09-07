@@ -6,11 +6,12 @@ import Loader from "../components/UI/Loader";
 
 import classes from "./AllNotes.module.css";
 
-const AllNotes = ({ isDesktop = false, activeNoteId, setActiveNoteId }) => {
+const AllNotes = ({ isDesktop = false, activeNoteId, setActiveNoteId, setIsNewNoteRequested }) => {
   const { notesData, isLoading } = useNotes();
 
   const handleCardClick = (id) => {
     setActiveNoteId(id);
+    setIsNewNoteRequested(false);
   };
 
   if (isLoading) return <Loader />;
