@@ -61,11 +61,29 @@ export const NotesProvider = ({ children }) => {
       }) ?? []
     : [];
 
+  const filteredArchivedNotes = searchTerm.length
+    ? notesData?.filter((note) => {
+        const isArchived = note.is_archived;
+        if (isArchived) {
+          const search = searchTerm.toLowerCase();
+          const headerMatch = note.header?.toLowerCase().includes(search);
+          const contentMatch = note.content?.toLowerCase().includes(search);
+          const tagsMatch = note.tags
+            ?.split(",")
+            .map((tag) => tag.trim().toLowerCase())
+            .some((tag) => tag.includes(search));
+
+          return headerMatch || contentMatch || tagsMatch;
+        }
+      })
+    : [];
+
   return (
     <NotesContext.Provider
       value={{
         notesData,
         filteredNotes,
+        filteredArchivedNotes,
         isLoading,
         isError,
         error,

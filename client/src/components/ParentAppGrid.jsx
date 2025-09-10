@@ -28,7 +28,7 @@ const ParentAppGrid = () => {
   const location = useLocation();
   const isMobileOrTablet = useIsMobileOrTablet();
 
-  const { isLoading, searchTerm, handleSearchChange, filteredNotes } = useNotes();
+  const { isLoading, searchTerm, handleSearchChange, filteredNotes, filteredArchivedNotes } = useNotes();
   const [deskBtnData, setDeskBtnData] = useState(initialBtnData);
   const [activeNoteId, setActiveNoteId] = useState(null);
   const [isNewNoteRequested, setIsNewNoteRequested] = useState(false);
@@ -68,8 +68,6 @@ const ParentAppGrid = () => {
     handleSearchChange("");
     setActiveNoteId("");
   };
-
-  console.log("activeNoteId", activeNoteId);
 
   return (
     <section className={classes.parent}>
@@ -152,7 +150,7 @@ const ParentAppGrid = () => {
             setIsNewNoteRequested={setIsNewNoteRequested}
           />
         )}
-        {searchTerm
+        {searchTerm && activeBtn.title === "All Notes"
           ? filteredNotes.map((note) => {
               return (
                 <NoteCard
@@ -164,6 +162,27 @@ const ParentAppGrid = () => {
                   onCardClick={() => {
                     setActiveNoteId(note.id);
                     setIsNewNoteRequested(false);
+                    handleSearchChange("");
+                  }}
+                  isActive={activeNoteId === note.id}
+                  isDesktop={true}
+                />
+              );
+            })
+          : null}
+        {searchTerm && activeBtn.title === "Archived Notes"
+          ? filteredArchivedNotes.map((note) => {
+              return (
+                <NoteCard
+                  key={note.id}
+                  id={note.id}
+                  tags={note.tags ? note.tags.split(",") : []}
+                  noteHeading={note.header}
+                  lastEdited={formatDate(note.updated_at)}
+                  onCardClick={() => {
+                    setActiveNoteId(note.id);
+                    setIsNewNoteRequested(false);
+                    handleSearchChange("");
                   }}
                   isActive={activeNoteId === note.id}
                   isDesktop={true}
