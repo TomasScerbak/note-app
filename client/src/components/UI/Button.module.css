@@ -139,13 +139,14 @@
   }
 
   .btn--desktop-secondary {
-    min-width: 24rem;
+    min-width: 24.2rem;
     height: 4rem;
     padding: 1.5rem 1.2rem;
     background-color: transparent;
     color: var(--app-primary-text);
     border: 1px solid var(--app-setting-card-border);
     margin-bottom: 1.2rem;
+    justify-content: flex-start;
   }
 
   .btn--active {

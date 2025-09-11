@@ -142,4 +142,8 @@
   .footer {
     display: none;
   }
+
+  .archived__notes__container {
+    margin-top: 1.6rem;
+  }
 }

@@ -28,7 +28,8 @@ const ParentAppGrid = () => {
   const location = useLocation();
   const isMobileOrTablet = useIsMobileOrTablet();
 
-  const { isLoading, searchTerm, handleSearchChange, filteredNotes, filteredArchivedNotes } = useNotes();
+  const { isLoading, searchTerm, handleSearchChange, filteredNotes, filteredArchivedNotes, archivedNotes } =
+    useNotes();
   const [deskBtnData, setDeskBtnData] = useState(initialBtnData);
   const [activeNoteId, setActiveNoteId] = useState(null);
   const [isNewNoteRequested, setIsNewNoteRequested] = useState(false);
@@ -190,13 +191,36 @@ const ParentAppGrid = () => {
               );
             })
           : null}
+        {activeBtn.title === "Archived Notes" && !searchTerm
+          ? archivedNotes.map((note) => {
+              return (
+                <div key={note.id} className={classes.archived__notes__container}>
+                  <NoteCard
+                    key={note.id}
+                    id={note.id}
+                    tags={note.tags ? note.tags.split(",") : []}
+                    noteHeading={note.header}
+                    lastEdited={formatDate(note.updated_at)}
+                    onCardClick={() => {
+                      setActiveNoteId(note.id);
+                      setIsNewNoteRequested(false);
+                      handleSearchChange("");
+                    }}
+                    isActive={activeNoteId === note.id}
+                    isDesktop={true}
+                  />
+                </div>
+              );
+            })
+          : null}
         {isLoading ? <Loader /> : null}
       </section>
       <section className={classes.right_inner_panel}>
-        {activeBtn.title === "All Notes" && activeNoteId && !isNewNoteRequested ? (
+        {activeBtn.title === "All Notes" ||
+        (activeBtn.title === "Archived Notes" && activeNoteId && !isNewNoteRequested) ? (
           <ViewNotePage isDesktop={true} deskNoteId={activeNoteId} />
         ) : null}
-        {isNewNoteRequested && activeBtn.title !== "Archived Notes" ? <NewNote isDesktop={true} /> : null}
+        {isNewNoteRequested ? <NewNote isDesktop={true} /> : null}
       </section>
       <aside className={classes.right__sidebar}>
         {activeNoteId &&

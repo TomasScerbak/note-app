@@ -5,6 +5,8 @@ import ArchiveImageWhite from "../assets/icon-archive-white.svg";
 import ArchiveImageBlue from "../assets/icon-archive-blue.svg";
 import ArchiveImageDark from "../assets/icon-archive-dark-grey.svg";
 import RightChevronWhite from "../assets/icon-chevron-right-white.svg";
+import DeleteImageWhite from "../assets/icon-delete-white.svg";
+import DeleteImageDark from "../assets/icon-delete-dark-grey.svg";
 
 export const initialBtnData = [
   {
@@ -70,6 +72,16 @@ export const getBtnImages = (btnData, theme) => {
         img: btnData.active ? ArchiveImageBlue : ArchiveImageWhite,
       };
     }
+    if (btnData && btnData.title === "Archive Note") {
+      return {
+        img: ArchiveImageWhite,
+      };
+    }
+    if (btnData && btnData.title === "Delete Note") {
+      return {
+        img: DeleteImageWhite,
+      };
+    }
   }
 
   if (theme === "light") {
@@ -81,6 +93,16 @@ export const getBtnImages = (btnData, theme) => {
     if (btnData && btnData.title === "Archived Notes") {
       return {
         img: btnData.active ? ArchiveImageBlue : ArchiveImageDark,
+      };
+    }
+    if (btnData && btnData.title === "Archive Note") {
+      return {
+        img: ArchiveImageDark,
+      };
+    }
+    if (btnData && btnData.title === "Delete Note") {
+      return {
+        img: DeleteImageDark,
       };
     }
   }

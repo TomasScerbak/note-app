@@ -78,11 +78,14 @@ export const NotesProvider = ({ children }) => {
       })
     : [];
 
+  const archivedNotes = notesData.filter((note) => note.is_archived);
+
   return (
     <NotesContext.Provider
       value={{
         notesData,
         filteredNotes,
+        archivedNotes,
         filteredArchivedNotes,
         isLoading,
         isError,
