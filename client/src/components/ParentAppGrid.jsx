@@ -27,7 +27,6 @@ const ParentAppGrid = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isMobileOrTablet = useIsMobileOrTablet();
-
   const { isLoading, searchTerm, handleSearchChange, filteredNotes, filteredArchivedNotes, archivedNotes } =
     useNotes();
   const [deskBtnData, setDeskBtnData] = useState(initialBtnData);
@@ -216,8 +215,9 @@ const ParentAppGrid = () => {
         {isLoading ? <Loader /> : null}
       </section>
       <section className={classes.right_inner_panel}>
-        {activeBtn.title === "All Notes" ||
-        (activeBtn.title === "Archived Notes" && activeNoteId && !isNewNoteRequested) ? (
+        {(activeBtn.title === "All Notes" || activeBtn.title === "Archived Notes") &&
+        activeNoteId &&
+        !isNewNoteRequested ? (
           <ViewNotePage isDesktop={true} deskNoteId={activeNoteId} />
         ) : null}
         {isNewNoteRequested ? <NewNote isDesktop={true} /> : null}

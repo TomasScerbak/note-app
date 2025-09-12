@@ -1,12 +1,8 @@
 import { useState, useEffect } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import { useGetNoteById } from "../hooks/queries/useGetNoteById";
 import { formatDate } from "../utils/noteUtils";
-import { useUpdateNote } from "../hooks/mutations/useUpdateNote";
-import { useDeleteNote } from "../hooks/mutations/useDeleteNote";
-import { useArchiveNote } from "../hooks/mutations/useArchiveNote";
-import { useNavigate } from "react-router";
+import { useNoteActions } from "../hooks/useNoteActions";
 import { useTheme } from "../contexts/themeContext";
 
 import NoteHeader from "./NoteHeader";
@@ -24,10 +20,8 @@ import ArchiveImageDark from "../assets/icon-archive-dark-grey.svg";
 import classes from "./ViewNotePage.module.css";
 
 const ViewNotePage = ({ deskNoteId, isDesktop }) => {
-  const queryClient = useQueryClient();
   const { id } = useParams();
   const actualId = isDesktop ? deskNoteId : id;
-  console.log("actualId", actualId);
   const { noteData, isLoading, isError, error } = useGetNoteById(actualId);
   const { theme } = useTheme();
 
@@ -37,8 +31,14 @@ const ViewNotePage = ({ deskNoteId, isDesktop }) => {
   const [updatedAt, setUpdatedAt] = useState("");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showArchiveModal, setShowArchiveModal] = useState(false);
-
-  const navigate = useNavigate();
+  const { confirmDeleteNote, onToggleArchive, onSaveOrUpdate } = useNoteActions(
+    actualId,
+    noteData,
+    isDesktop,
+    title,
+    noteText,
+    tags
+  );
 
   useEffect(() => {
     if (noteData) {
@@ -49,61 +49,12 @@ const ViewNotePage = ({ deskNoteId, isDesktop }) => {
     }
   }, [noteData]);
 
-  const { handleUpdateNote } = useUpdateNote();
-  const { handleDeleteNote } = useDeleteNote(actualId);
-  const { toggleArchive } = useArchiveNote();
-
-  const onSaveOrUpdate = async () => {
-    try {
-      let response;
-      if (actualId) {
-        response = await handleUpdateNote({
-          id: actualId,
-          header: title,
-          content: noteText,
-          tags: tags.join(","),
-        });
-      }
-      if (response) {
-        queryClient.invalidateQueries(["note", actualId]);
-      }
-    } catch (error) {
-      console.error("Error updating note:", error.message);
-    }
-  };
-
   const onDeleteNote = () => {
     setShowDeleteModal(true);
   };
 
   const onArchiveNote = () => {
     setShowArchiveModal(true);
-  };
-
-  const confirmDeleteNote = async () => {
-    try {
-      if (actualId) {
-        const response = await handleDeleteNote(actualId);
-        if (response) {
-          queryClient.invalidateQueries(["notes"]);
-          queryClient.removeQueries(["note", actualId]);
-          navigate("/home/all-notes");
-        }
-      }
-    } catch (error) {
-      console.error("Error deleting note:", error.message);
-    }
-  };
-
-  const onToggleArchive = async () => {
-    try {
-      if (!actualId) return;
-      await toggleArchive(actualId, Boolean(noteData.is_archived));
-      queryClient.invalidateQueries(["note", actualId]);
-      setShowArchiveModal(false);
-    } catch (error) {
-      console.error("Error toggling archive status:", error.message);
-    }
   };
 
   if (isLoading) return <Loader />;
@@ -151,7 +102,10 @@ const ViewNotePage = ({ deskNoteId, isDesktop }) => {
             {
               title: noteData.is_archived ? "Unarchive" : "Archive Note",
               variant: "archive",
-              onClick: onToggleArchive,
+              onClick: () => {
+                onToggleArchive();
+                setShowArchiveModal(false);
+              },
             },
           ]}
           image={theme === "light" ? ArchiveImageDark : ArchiveImage}
