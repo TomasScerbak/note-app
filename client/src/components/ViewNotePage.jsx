@@ -11,7 +11,9 @@ import Loader from "../components/UI/Loader";
 import Modal from "../components/modals/Modal";
 import NoteModals from "./NoteModals";
 
-const ViewNotePage = ({ deskNoteId, isDesktop }) => {
+import classes from "./ViewNotePage.module.css";
+
+const ViewNotePage = ({ deskNoteId, isDesktop, isNewNoteRequested }) => {
   const { id } = useParams();
   const actualId = isDesktop ? deskNoteId : id;
   const { noteData, isLoading, isError, error } = useGetNoteById(actualId);
@@ -59,7 +61,7 @@ const ViewNotePage = ({ deskNoteId, isDesktop }) => {
     );
 
   return (
-    <div>
+    <div className={classes.note__container}>
       {isDesktop ? null : (
         <NewNoteActions
           id={actualId}
@@ -70,7 +72,13 @@ const ViewNotePage = ({ deskNoteId, isDesktop }) => {
         />
       )}
       <NoteHeader tags={tags} setTags={setTags} title={title} setTitle={setTitle} updatedAt={updatedAt} />
-      <NoteBody setNoteText={setNoteText} noteText={noteText} />
+      <NoteBody
+        setNoteText={setNoteText}
+        noteText={noteText}
+        isNewNoteRequested={isNewNoteRequested}
+        isDesktop={isDesktop}
+        onSaveNote={onSaveOrUpdate}
+      />
       <NoteModals
         showDeleteModal={showDeleteModal}
         setShowDeleteModal={setShowDeleteModal}

@@ -2,11 +2,19 @@ import { useState, useEffect } from "react";
 
 import classes from "./NoteBody.module.css";
 
-import NewNoteFooter from "./NewNoteFooter";
+import NoteFooter from "./NoteFooter";
 
-const NoteBody = ({ clearValues, onSaveNote, handleClearValues, noteText, setNoteText, isDesktop }) => {
+const NoteBody = ({
+  clearValues,
+  onSaveNote,
+  handleClearValues,
+  noteText,
+  setNoteText,
+  isDesktop,
+  isNewNoteRequested,
+}) => {
   const [placeholder, setPlaceholder] = useState("Start typing your note here…");
-
+  console.log("isDesktop", isDesktop);
   useEffect(() => {
     if (clearValues) {
       setNoteText(""); // Reset title
@@ -22,7 +30,13 @@ const NoteBody = ({ clearValues, onSaveNote, handleClearValues, noteText, setNot
         placeholder={placeholder}
         className={classes.note__body__input}
       ></textarea>
-      {isDesktop ? <NewNoteFooter onSaveNote={onSaveNote} handleClearValues={handleClearValues} /> : null}
+      {isDesktop ? (
+        <NoteFooter
+          onSaveNote={onSaveNote}
+          handleClearValues={handleClearValues}
+          isNewNoteRequested={isNewNoteRequested}
+        />
+      ) : null}
     </div>
   );
 };

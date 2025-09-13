@@ -1,0 +1,15 @@
+.note__container {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+}
+
+.note__container::-webkit-scrollbar {
+  background-color: var(--app-main-color);
+  scrollbar-width: thin;
+}
+
+.note__container::-webkit-scrollbar-thumb {
+  background-color: var(--neutral-700);
+  border-radius: 1rem;
+}

@@ -218,7 +218,7 @@ const ParentAppGrid = () => {
         {(activeBtn.title === "All Notes" || activeBtn.title === "Archived Notes") &&
         activeNoteId &&
         !isNewNoteRequested ? (
-          <ViewNotePage isDesktop={true} deskNoteId={activeNoteId} />
+          <ViewNotePage isNewNoteRequested={isNewNoteRequested} isDesktop={true} deskNoteId={activeNoteId} />
         ) : null}
         {isNewNoteRequested ? <NewNote isDesktop={true} /> : null}
       </section>
