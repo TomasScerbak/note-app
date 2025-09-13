@@ -239,6 +239,7 @@ const ParentAppGrid = () => {
                 title={btn.title}
                 btnImageClass="image-left"
                 btnSecondaryImageClass="image-right"
+                onClick={() => console.log("btn", btn)}
               />
             );
           })}

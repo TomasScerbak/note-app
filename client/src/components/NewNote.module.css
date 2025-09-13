@@ -1,3 +1,16 @@
 .note__container {
   background-color: var(--app-main-color);
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+}
+
+.note__body::-webkit-scrollbar {
+  background-color: var(--app-main-color);
+  scrollbar-width: thin;
+}
+
+.note__body::-webkit-scrollbar-thumb {
+  background-color: var(--neutral-700);
+  border-radius: 1rem;
 }

@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 
 import classes from "./NoteBody.module.css";
 
-const NoteBody = ({ clearValues, handleClearValues, noteText, setNoteText }) => {
+import NewNoteFooter from "./NewNoteFooter";
+
+const NoteBody = ({ clearValues, onSaveNote, handleClearValues, noteText, setNoteText, isDesktop }) => {
   const [placeholder, setPlaceholder] = useState("Start typing your note here…");
 
   useEffect(() => {
@@ -20,6 +22,7 @@ const NoteBody = ({ clearValues, handleClearValues, noteText, setNoteText }) => 
         placeholder={placeholder}
         className={classes.note__body__input}
       ></textarea>
+      {isDesktop ? <NewNoteFooter onSaveNote={onSaveNote} handleClearValues={handleClearValues} /> : null}
     </div>
   );
 };

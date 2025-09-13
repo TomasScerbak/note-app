@@ -1,5 +1,9 @@
 .note__body {
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .note__body__input {
@@ -18,4 +22,14 @@
 
 .note__body__input::placeholder {
   color: white;
+}
+
+.note__body__input::-webkit-scrollbar {
+  background-color: var(--app-main-color);
+  scrollbar-width: thin;
+}
+
+.note__body__input::-webkit-scrollbar-thumb {
+  background-color: var(--neutral-700);
+  border-radius: 1rem;
 }

@@ -45,8 +45,10 @@ class NotesDAO {
 
   static async updateNote(note) {
     const { id, header, content, tags } = note;
-    const sql = "UPDATE notes SET header = ?, content = ?, tags = ? WHERE id = ?";
-    const values = [header, content, tags, id];
+    const formattedTags = Array.isArray(tags) ? tags.join(",") : tags;
+    const sql = "UPDATE notes SET header = ?, content = ?, tags = ?, updated_at = NOW() WHERE id = ?";
+
+    const values = [header, content, formattedTags, id];
     try {
       const [result] = await db.query(sql, values);
       return result;

@@ -13,6 +13,18 @@
 
 @media screen and (min-width: 1024px) {
   .all_notes {
+    height: calc(100% - 180px);
     margin-top: 1.6rem;
+    overflow-y: auto;
+  }
+
+  .all_notes::-webkit-scrollbar {
+    background-color: var(--app-main-color);
+    scrollbar-width: thin;
+  }
+
+  .all_notes::-webkit-scrollbar-thumb {
+    background-color: var(--neutral-700);
+    border-radius: 1rem;
   }
 }

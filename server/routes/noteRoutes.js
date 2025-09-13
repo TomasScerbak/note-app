@@ -1,3 +1,4 @@
+import db from "../index.js";
 import express from "express";
 import NotesDAO from "../dao/NotesDAO.js";
 
@@ -22,9 +23,13 @@ router.put("/:id", async (req, res) => {
   const note = { id, header, content, tags };
 
   try {
-    const updatedNote = await NotesDAO.updateNote(note);
-    if (updatedNote.affectedRows > 0) {
-      res.status(200).json({ message: "Note updated successfully" });
+    await NotesDAO.updateNote(note);
+
+    const [rows] = await db.query("SELECT * FROM notes WHERE id = ?", [id]);
+    const updatedNote = rows[0];
+
+    if (updatedNote) {
+      res.status(200).json(updatedNote);
     } else {
       res.status(404).json({ message: "Note not found" });
     }

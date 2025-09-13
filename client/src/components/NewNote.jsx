@@ -73,6 +73,8 @@ const NewNote = ({ isDesktop }) => {
         noteText={noteText}
         setNoteText={setNoteText}
         clearValues={clearValues}
+        isDesktop={isDesktop}
+        onSaveNote={onSaveOrUpdate}
         handleClearValues={handleClearValues}
       />
       {noteErrors.no_title_error || noteErrors.no_text_error ? (

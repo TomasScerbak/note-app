@@ -11,8 +11,6 @@ import Loader from "../components/UI/Loader";
 import Modal from "../components/modals/Modal";
 import NoteModals from "./NoteModals";
 
-import classes from "./ViewNotePage.module.css";
-
 const ViewNotePage = ({ deskNoteId, isDesktop }) => {
   const { id } = useParams();
   const actualId = isDesktop ? deskNoteId : id;
@@ -61,7 +59,7 @@ const ViewNotePage = ({ deskNoteId, isDesktop }) => {
     );
 
   return (
-    <div className={classes.note__container}>
+    <div>
       {isDesktop ? null : (
         <NewNoteActions
           id={actualId}

@@ -54,6 +54,29 @@ export const btnActionsData = [
   },
 ];
 
+export const newNoteFooterBtns = [
+  {
+    id: 1,
+    title: "Save Note",
+    img: null,
+    img2: null,
+    active: false,
+    type: "button",
+    variant: "footer-primary",
+    size: "",
+  },
+  {
+    id: 2,
+    title: "Cancel",
+    img: null,
+    img2: null,
+    active: false,
+    type: "button",
+    variant: "footer-secondary",
+    size: "",
+  },
+];
+
 export const getBtnImages = (btnData, theme) => {
   if (!Object.keys(btnData).length || !theme) {
     return {

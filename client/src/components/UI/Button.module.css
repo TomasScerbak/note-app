@@ -149,6 +149,33 @@
     justify-content: flex-start;
   }
 
+  .btn--footer-primary {
+    max-width: 9.9rem;
+    height: 4.1rem;
+    background-color: var(--blue-500);
+    outline: none;
+    box-shadow: none;
+    color: var(--app-btn-main-text);
+    border: none;
+    margin-right: 1.6rem;
+    padding-right: 1.2rem;
+  }
+
+  .btn--footer-secondary {
+    max-width: 7.8rem;
+    height: 4.1rem;
+    background-color: var(--app-footer-item-bg);
+    outline: none;
+    color: var(--app-secondary-text);
+    box-shadow: none;
+    border: none;
+    padding-right: 1.2rem;
+  }
+
+  .btn--footer-primary:hover {
+    background-color: var(--blue-700);
+  }
+
   .btn--active {
     background-color: var(--app-footer-item-bg);
   }
