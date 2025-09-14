@@ -23,6 +23,8 @@ import ViewNotePage from "./ViewNotePage";
 import NewNote from "./NewNote";
 import NoteCard from "./NoteCard";
 import NoteModals from "./NoteModals";
+import TagList from "../pages/TagList";
+import ArchiveHeader from "../components/ArchiveHeader";
 
 const ParentAppGrid = () => {
   const { theme } = useTheme();
@@ -168,6 +170,7 @@ const ParentAppGrid = () => {
           );
         })}
         <Separator />
+        <TagList isDesktop={true} />
       </div>
       <section className={classes.left_inner_panel}>
         <Button onClick={handleCreateNewNote} size="large" variant="primary" title="Create New Note " />
@@ -220,6 +223,9 @@ const ParentAppGrid = () => {
               );
             })
           : null}
+        {activeBtn.title === "Archived Notes" && !searchTerm && !filteredArchivedNotes.length ? (
+          <ArchiveHeader isDesktop={true} archivedNotes={archivedNotes} />
+        ) : null}
         {activeBtn.title === "Archived Notes" && !searchTerm
           ? archivedNotes.map((note) => {
               return (

@@ -1,7 +1,7 @@
 import { useNotes } from "../contexts/notesContext";
 import { formatDate } from "../utils/noteUtils";
 
-import ArchiveHedader from "../components/ArchiveHeader";
+import ArchiveHeader from "../components/ArchiveHeader";
 import Loader from "../components/UI/Loader";
 import Modal from "../components/modals/Modal";
 import NoteCard from "../components/NoteCard";
@@ -15,7 +15,7 @@ const Archive = () => {
 
   return (
     <div>
-      <ArchiveHedader archivedNotes={archivedNotes} />
+      <ArchiveHeader archivedNotes={archivedNotes} />
 
       {isLoading && <Loader />}
 
