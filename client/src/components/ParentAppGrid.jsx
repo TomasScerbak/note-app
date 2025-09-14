@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router";
 import { useNotes } from "../contexts/notesContext";
 import { initialBtnData, getBtnImages, btnActionsData } from "../utils/desktopButtonsUtils";
 import { formatDate } from "../utils/noteUtils";
+import { useNoteActions } from "../hooks/useNoteActions";
 import useIsMobileOrTablet from "../hooks/useIsMobileOrTablet";
 
 import classes from "./ParentAppGrid.module.css";
@@ -21,6 +22,7 @@ import Separator from "../components/UI/Separator";
 import ViewNotePage from "./ViewNotePage";
 import NewNote from "./NewNote";
 import NoteCard from "./NoteCard";
+import NoteModals from "./NoteModals";
 
 const ParentAppGrid = () => {
   const { theme } = useTheme();
@@ -32,6 +34,18 @@ const ParentAppGrid = () => {
   const [deskBtnData, setDeskBtnData] = useState(initialBtnData);
   const [activeNoteId, setActiveNoteId] = useState(null);
   const [isNewNoteRequested, setIsNewNoteRequested] = useState(false);
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showArchiveModal, setShowArchiveModal] = useState(false);
+  const { confirmDeleteNote, onToggleArchive } = useNoteActions(
+    activeNoteId,
+    null,
+    true,
+    undefined,
+    undefined,
+    undefined,
+    () => setActiveNoteId(null)
+  );
 
   const validURLs = ["/home/all-notes", "/home/archive-notes", "/home/search-notes", "/home/tag-list"];
 
@@ -60,6 +74,14 @@ const ParentAppGrid = () => {
     handleSearchChange("");
   };
 
+  const onDeleteNote = () => {
+    setShowDeleteModal(true);
+  };
+
+  const onArchiveNote = () => {
+    setShowArchiveModal(true);
+  };
+
   const activeBtn = deskBtnData.find((btn) => btn.active);
   const headerText = activeBtn.title === "All Notes" ? "All Notes" : "Archived Notes";
 
@@ -71,6 +93,14 @@ const ParentAppGrid = () => {
 
   return (
     <section className={classes.parent}>
+      <NoteModals
+        showDeleteModal={showDeleteModal}
+        setShowDeleteModal={setShowDeleteModal}
+        showArchiveModal={showArchiveModal}
+        setShowArchiveModal={setShowArchiveModal}
+        confirmDeleteNote={confirmDeleteNote}
+        onToggleArchive={onToggleArchive}
+      />
       {validURLs.includes(location.pathname) ? (
         <Button
           onClick={navigateToNewNote}
@@ -220,7 +250,9 @@ const ParentAppGrid = () => {
         !isNewNoteRequested ? (
           <ViewNotePage isNewNoteRequested={isNewNoteRequested} isDesktop={true} deskNoteId={activeNoteId} />
         ) : null}
-        {isNewNoteRequested ? <NewNote isDesktop={true} isNewNoteRequested={isNewNoteRequested} /> : null}
+        {isNewNoteRequested && !searchTerm ? (
+          <NewNote isDesktop={true} isNewNoteRequested={isNewNoteRequested} />
+        ) : null}
       </section>
       <aside className={classes.right__sidebar}>
         {activeNoteId &&
@@ -239,7 +271,7 @@ const ParentAppGrid = () => {
                 title={btn.title}
                 btnImageClass="image-left"
                 btnSecondaryImageClass="image-right"
-                onClick={() => console.log("btn", btn)}
+                onClick={() => (btn.title === "Delete Note" ? onDeleteNote() : onArchiveNote())}
               />
             );
           })}

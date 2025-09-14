@@ -232,3 +232,9 @@ link {
     bottom: 12rem;
   }
 }
+
+@media screen and (min-width: 900px) {
+  #toast {
+    bottom: 5rem;
+  }
+}

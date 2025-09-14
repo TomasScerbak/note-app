@@ -4,7 +4,7 @@ import { useDeleteNote } from "../hooks/mutations/useDeleteNote";
 import { useArchiveNote } from "../hooks/mutations/useArchiveNote";
 import { useUpdateNote } from "../hooks/mutations/useUpdateNote";
 
-export const useNoteActions = (noteId, noteData, isDesktop, title, noteText, tags) => {
+export const useNoteActions = (noteId, noteData, isDesktop, title, noteText, tags, onNoteDeleted) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { handleDeleteNote } = useDeleteNote(noteId);
@@ -16,7 +16,8 @@ export const useNoteActions = (noteId, noteData, isDesktop, title, noteText, tag
       const response = await handleDeleteNote(noteId);
       if (response) {
         queryClient.invalidateQueries(["notes"]);
-        queryClient.removeQueries(["note", noteId]);
+        queryClient.removeQueries({ queryKey: ["note", noteId], exact: true });
+        onNoteDeleted?.();
         isDesktop ? navigate("/home") : navigate("/home/all-notes");
       }
     } catch (error) {
