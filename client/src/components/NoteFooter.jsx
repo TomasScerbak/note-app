@@ -13,10 +13,10 @@ const NoteFooter = ({ onSaveNote, handleClearValues, isNewNoteRequested }) => {
       }
       return btn;
     });
+
   return (
     <div className={classes.footer__container}>
       {visibleButtons.map((btn) => {
-        console.log(btn);
         return (
           <Button
             key={btn.id}

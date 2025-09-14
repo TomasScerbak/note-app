@@ -220,7 +220,7 @@ const ParentAppGrid = () => {
         !isNewNoteRequested ? (
           <ViewNotePage isNewNoteRequested={isNewNoteRequested} isDesktop={true} deskNoteId={activeNoteId} />
         ) : null}
-        {isNewNoteRequested ? <NewNote isDesktop={true} /> : null}
+        {isNewNoteRequested ? <NewNote isDesktop={true} isNewNoteRequested={isNewNoteRequested} /> : null}
       </section>
       <aside className={classes.right__sidebar}>
         {activeNoteId &&

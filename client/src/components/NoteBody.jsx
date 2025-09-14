@@ -14,7 +14,7 @@ const NoteBody = ({
   isNewNoteRequested,
 }) => {
   const [placeholder, setPlaceholder] = useState("Start typing your note here…");
-  console.log("isDesktop", isDesktop);
+
   useEffect(() => {
     if (clearValues) {
       setNoteText(""); // Reset title
