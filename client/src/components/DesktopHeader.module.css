@@ -1,0 +1,8 @@
+.top__header {
+  grid-area: top__header;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.6rem 3.2rem 2.6rem 3.2rem;
+  background-color: var(--app-main-color);
+}

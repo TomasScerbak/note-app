@@ -1,0 +1,7 @@
+.right__sidebar {
+  grid-area: right__sidebar;
+  display: block;
+  background-color: var(--app-main-color);
+  border: 1px solid var(--app-login-signup-bg);
+  padding: 2rem 3.2rem 0 1.6rem;
+}

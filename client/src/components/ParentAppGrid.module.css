@@ -11,35 +11,6 @@
   position: relative;
 }
 
-.header {
-  grid-area: header;
-  background-color: var(app-login-signup-bg);
-}
-
-.body {
-  grid-area: body;
-  background-color: var(--app-main-color);
-  padding: 0 1.6rem;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.body::-webkit-scrollbar {
-  background-color: var(--app-main-color);
-  scrollbar-width: thin;
-}
-
-.body::-webkit-scrollbar-thumb {
-  background-color: var(--neutral-700);
-  border-radius: 1rem;
-}
-
-.footer {
-  grid-area: footer;
-  background-color: var(--app-main-color);
-}
-
 .top__left {
   grid-area: top__left;
   display: none;
@@ -92,45 +63,6 @@
     padding: 1.2rem 1.6rem;
     background-color: var(--app-main-color);
     border-right: 1px solid var(--app-login-signup-bg);
-  }
-
-  .top__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2.6rem 3.2rem 2.6rem 3.2rem;
-    background-color: var(--app-main-color);
-  }
-
-  .left__sidebar {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--app-main-color);
-    padding: 1.2rem 1.6rem;
-    border-right: 1px solid var(--app-login-signup-bg);
-  }
-
-  .left_inner_panel {
-    display: block;
-    padding: 2rem 1.6rem 0 3.2rem;
-    background-color: var(--app-main-color);
-    border: 1px solid var(--app-login-signup-bg);
-    height: 100%;
-    width: 100%;
-  }
-
-  .right_inner_panel {
-    display: block;
-    background-color: var(--app-main-color);
-    border: 1px solid var(--app-login-signup-bg);
-    padding: 0 2.4rem;
-  }
-
-  .right__sidebar {
-    display: block;
-    background-color: var(--app-main-color);
-    border: 1px solid var(--app-login-signup-bg);
-    padding: 2rem 3.2rem 0 1.6rem;
   }
 
   .archived__notes__container {
