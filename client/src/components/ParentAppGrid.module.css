@@ -133,18 +133,6 @@
     padding: 2rem 3.2rem 0 1.6rem;
   }
 
-  .header {
-    display: none;
-  }
-
-  .body {
-    display: none;
-  }
-
-  .footer {
-    display: none;
-  }
-
   .archived__notes__container {
     margin-top: 1.6rem;
   }

@@ -1,0 +1,28 @@
+.header {
+  grid-area: header;
+  background-color: var(app-login-signup-bg);
+}
+
+.body {
+  grid-area: body;
+  background-color: var(--app-main-color);
+  padding: 0 1.6rem;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.body::-webkit-scrollbar {
+  background-color: var(--app-main-color);
+  scrollbar-width: thin;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background-color: var(--neutral-700);
+  border-radius: 1rem;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: var(--app-main-color);
+}

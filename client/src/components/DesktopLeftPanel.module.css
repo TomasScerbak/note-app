@@ -1,0 +1,16 @@
+.top__left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1.2rem 1.6rem;
+  background-color: var(--app-main-color);
+  border-right: 1px solid var(--app-login-signup-bg);
+}
+
+.left__sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--app-main-color);
+  padding: 1.2rem 1.6rem;
+  border-right: 1px solid var(--app-login-signup-bg);
+}

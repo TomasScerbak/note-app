@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTheme } from "../contexts/themeContext";
-import { Outlet } from "react-router";
 import { useNavigate, useLocation } from "react-router";
 import { useNotes } from "../contexts/notesContext";
 import { initialBtnData, getBtnImages, btnActionsData } from "../utils/desktopButtonsUtils";
@@ -11,20 +10,17 @@ import useIsMobileOrTablet from "../hooks/useIsMobileOrTablet";
 import classes from "./ParentAppGrid.module.css";
 import PlusImage from "../assets/icon-plus.svg";
 
-import Logo from "../components/UI/Logo";
-import HeaderSmall from "../components/HeaderSmall";
-import Footer from "../components/Footer";
 import Button from "../components/UI/Button";
 import SearchInput from "../components/UI/SearchInput";
 import Loader from "../components/UI/Loader";
 import AllNotes from "../components/AllNotes";
-import Separator from "../components/UI/Separator";
 import ViewNotePage from "./ViewNotePage";
 import NewNote from "./NewNote";
 import NoteCard from "./NoteCard";
 import NoteModals from "./NoteModals";
-import TagList from "../pages/TagList";
 import ArchiveHeader from "../components/ArchiveHeader";
+import MobileLayout from "./MobileLayout";
+import DesktopLeftPanel from "./DesktopLeftPanel";
 
 const ParentAppGrid = () => {
   const { theme } = useTheme();
@@ -93,42 +89,63 @@ const ParentAppGrid = () => {
     setActiveNoteId("");
   };
 
+  const renderNoteCards = (notes) =>
+    notes.map((note) => (
+      <NoteCard
+        key={note.id}
+        id={note.id}
+        tags={note.tags ? note.tags.split(",") : []}
+        noteHeading={note.header}
+        lastEdited={formatDate(note.updated_at)}
+        onCardClick={() => {
+          setActiveNoteId(note.id);
+          setIsNewNoteRequested(false);
+          handleSearchChange("");
+        }}
+        isActive={activeNoteId === note.id}
+        isDesktop={true}
+      />
+    ));
+
   return (
     <section className={classes.parent}>
-      <NoteModals
-        showDeleteModal={showDeleteModal}
-        setShowDeleteModal={setShowDeleteModal}
-        showArchiveModal={showArchiveModal}
-        setShowArchiveModal={setShowArchiveModal}
-        confirmDeleteNote={confirmDeleteNote}
-        onToggleArchive={onToggleArchive}
-      />
-      {validURLs.includes(location.pathname) ? (
-        <Button
-          onClick={navigateToNewNote}
-          variant="primary"
-          hasImage={true}
-          type="button"
-          size="rounded"
-          src={PlusImage}
-        />
-      ) : null}
-      {isMobileOrTablet ? (
-        <>
-          <header className={classes.header}>
-            <HeaderSmall />
-          </header>
-          <section className={classes.body}>
-            <Outlet />
-          </section>
-          <section className={classes.footer}>
-            <Footer />
-          </section>
-        </>
-      ) : null}
-      <section className={classes.top__left}>
-        <Logo />
-      </section>
+      {
+        // Only show the mobile layout for mobile and tablet
+        isMobileOrTablet && <MobileLayout />
+      }
+
+      {
+        // Only show modals for desktop
+        !isMobileOrTablet && (
+          <NoteModals
+            showDeleteModal={showDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
+            showArchiveModal={showArchiveModal}
+            setShowArchiveModal={setShowArchiveModal}
+            confirmDeleteNote={confirmDeleteNote}
+            onToggleArchive={onToggleArchive}
+          />
+        )
+      }
+
+      {
+        // Only show the round blue create note button on valid URLs for mobile and tablet
+        validURLs.includes(location.pathname) && isMobileOrTablet && (
+          <Button
+            onClick={navigateToNewNote}
+            variant="primary"
+            hasImage={true}
+            type="button"
+            size="rounded"
+            src={PlusImage}
+          />
+        )
+      }
+
+      {
+        // Desktop Left Panel
+        !isMobileOrTablet && DesktopLeftPanel({ handleActiveBtn, deskBtnData })
+      }
       <header className={classes.top__header}>
         {searchTerm.length ? (
           <h1 style={{ color: "var(--app-secondary-text)" }}>
@@ -149,29 +166,6 @@ const ParentAppGrid = () => {
           value={searchTerm ?? ""}
         />
       </header>
-      <div className={classes.left__sidebar}>
-        {deskBtnData.map((btn) => {
-          const { img } = getBtnImages(btn, theme);
-          return (
-            <Button
-              key={btn.id}
-              active={btn.active}
-              src={img}
-              secondarySrc={btn.img2}
-              type={btn.type}
-              hasImage={true}
-              size={btn.size}
-              variant={btn.variant}
-              title={btn.title}
-              btnImageClass="image-left"
-              btnSecondaryImageClass="image-right"
-              onClick={() => handleActiveBtn(btn.id)}
-            />
-          );
-        })}
-        <Separator />
-        <TagList isDesktop={true} />
-      </div>
       <section className={classes.left_inner_panel}>
         <Button onClick={handleCreateNewNote} size="large" variant="primary" title="Create New Note " />
         {searchTerm ? message : null}
@@ -183,71 +177,12 @@ const ParentAppGrid = () => {
             setIsNewNoteRequested={setIsNewNoteRequested}
           />
         )}
-        {searchTerm && activeBtn.title === "All Notes"
-          ? filteredNotes.map((note) => {
-              return (
-                <NoteCard
-                  key={note.id}
-                  id={note.id}
-                  tags={note.tags ? note.tags.split(",") : []}
-                  noteHeading={note.header}
-                  lastEdited={formatDate(note.updated_at)}
-                  onCardClick={() => {
-                    setActiveNoteId(note.id);
-                    setIsNewNoteRequested(false);
-                    handleSearchChange("");
-                  }}
-                  isActive={activeNoteId === note.id}
-                  isDesktop={true}
-                />
-              );
-            })
-          : null}
-        {searchTerm && activeBtn.title === "Archived Notes"
-          ? filteredArchivedNotes.map((note) => {
-              return (
-                <NoteCard
-                  key={note.id}
-                  id={note.id}
-                  tags={note.tags ? note.tags.split(",") : []}
-                  noteHeading={note.header}
-                  lastEdited={formatDate(note.updated_at)}
-                  onCardClick={() => {
-                    setActiveNoteId(note.id);
-                    setIsNewNoteRequested(false);
-                    handleSearchChange("");
-                  }}
-                  isActive={activeNoteId === note.id}
-                  isDesktop={true}
-                />
-              );
-            })
-          : null}
+        {searchTerm && activeBtn.title === "All Notes" && renderNoteCards(filteredNotes)}
+        {searchTerm && activeBtn.title === "Archived Notes" && renderNoteCards(filteredArchivedNotes)}
         {activeBtn.title === "Archived Notes" && !searchTerm && !filteredArchivedNotes.length ? (
           <ArchiveHeader isDesktop={true} archivedNotes={archivedNotes} />
         ) : null}
-        {activeBtn.title === "Archived Notes" && !searchTerm
-          ? archivedNotes.map((note) => {
-              return (
-                <div key={note.id} className={classes.archived__notes__container}>
-                  <NoteCard
-                    key={note.id}
-                    id={note.id}
-                    tags={note.tags ? note.tags.split(",") : []}
-                    noteHeading={note.header}
-                    lastEdited={formatDate(note.updated_at)}
-                    onCardClick={() => {
-                      setActiveNoteId(note.id);
-                      setIsNewNoteRequested(false);
-                      handleSearchChange("");
-                    }}
-                    isActive={activeNoteId === note.id}
-                    isDesktop={true}
-                  />
-                </div>
-              );
-            })
-          : null}
+        {activeBtn.title === "Archived Notes" && !searchTerm && renderNoteCards(archivedNotes)}
         {isLoading ? <Loader /> : null}
       </section>
       <section className={classes.right_inner_panel}>
