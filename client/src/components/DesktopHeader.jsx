@@ -1,8 +1,17 @@
 import classes from "./DesktopHeader.module.css";
 
 import SearchInput from "../components/UI/SearchInput";
+import DesktopSettingButton from "./DesktopSettingButton";
 
-const DesktopHeader = ({ searchTerm, headerText, handleSearchChange, setActiveNoteId, message }) => {
+const DesktopHeader = ({
+  searchTerm,
+  headerText,
+  handleSearchChange,
+  setActiveNoteId,
+  message,
+  theme,
+  handleSettingClicked,
+}) => {
   return (
     <>
       <header className={classes.top__header}>
@@ -14,16 +23,19 @@ const DesktopHeader = ({ searchTerm, headerText, handleSearchChange, setActiveNo
         ) : (
           <h1>{headerText}</h1>
         )}
-        <SearchInput
-          onChange={(e) => {
-            handleSearchChange(e.target.value);
-            setActiveNoteId("");
-          }}
-          message={message}
-          placeholder="Search by title, content, or tags..."
-          isDesktop={true}
-          value={searchTerm ?? ""}
-        />
+        <div className={classes.header__right__container}>
+          <SearchInput
+            onChange={(e) => {
+              handleSearchChange(e.target.value);
+              setActiveNoteId("");
+            }}
+            message={message}
+            placeholder="Search by title, content, or tags..."
+            isDesktop={true}
+            value={searchTerm ?? ""}
+          />
+          <DesktopSettingButton theme={theme} handleSettingClicked={handleSettingClicked} />
+        </div>
       </header>
     </>
   );

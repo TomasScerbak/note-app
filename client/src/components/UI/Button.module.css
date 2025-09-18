@@ -47,6 +47,11 @@
   filter: var(--image-filter);
 }
 
+.btn--tiny {
+  width: 4.2rem;
+  height: 4.2rem;
+}
+
 .btn--small {
   width: 7.8rem;
   height: 4.1rem;
@@ -178,5 +183,17 @@
 
   .btn--active {
     background-color: var(--app-footer-item-bg);
+  }
+
+  .btn--setting {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .setting__icon {
+    width: 2.4rem;
+    height: 2.4rem;
   }
 }

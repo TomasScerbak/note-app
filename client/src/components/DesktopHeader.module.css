@@ -6,3 +6,10 @@
   padding: 2.6rem 3.2rem 2.6rem 3.2rem;
   background-color: var(--app-main-color);
 }
+
+.header__right__container {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  background-color: transparent;
+}

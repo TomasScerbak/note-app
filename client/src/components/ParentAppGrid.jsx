@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useTheme } from "../contexts/themeContext";
 import { useNavigate, useLocation } from "react-router";
 import { getBtnImages, btnActionsData } from "../utils/desktopButtonsUtils";
@@ -43,6 +44,7 @@ const ParentAppGrid = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isMobileOrTablet = useIsMobileOrTablet();
+  const [settingClicked, setSettingClicked] = useState(false);
 
   const validURLs = ["/home/all-notes", "/home/archive-notes", "/home/search-notes", "/home/tag-list"];
 
@@ -57,6 +59,11 @@ const ParentAppGrid = () => {
   ) : (
     ""
   );
+
+  const handleSettingClicked = () => {
+    setSettingClicked(true);
+  };
+
   // only for tablet and mobile version
   const navigateToNewNote = () => {
     navigate("/home/create-note");
@@ -69,6 +76,7 @@ const ParentAppGrid = () => {
     setActiveNoteId("");
     setIsNewNoteRequested(false);
     handleSearchChange("");
+    setSettingClicked(false);
   };
 
   const onDeleteNote = () => {
@@ -86,7 +94,14 @@ const ParentAppGrid = () => {
     setIsNewNoteRequested(true);
     handleSearchChange("");
     setActiveNoteId("");
+    setSettingClicked(false);
   };
+
+  useEffect(() => {
+    setSettingClicked(false);
+  }, [activeBtn, activeNoteId]);
+
+  console.log("settingClicked:", settingClicked);
 
   return (
     <section className={classes.parent}>
@@ -136,12 +151,14 @@ const ParentAppGrid = () => {
             handleSearchChange={handleSearchChange}
             setActiveNoteId={setActiveNoteId}
             message={message}
+            theme={theme}
+            handleSettingClicked={handleSettingClicked}
           />
         )
       }
       {
         // Desktop Left Inner Panel
-        !isMobileOrTablet && (
+        !isMobileOrTablet && !settingClicked && (
           <DesktopLeftInnerPanel
             handleCreateNewNote={handleCreateNewNote}
             searchTerm={searchTerm}

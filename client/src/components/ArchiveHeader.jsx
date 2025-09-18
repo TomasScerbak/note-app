@@ -2,8 +2,6 @@ import classes from "./ArchiveHeader.module.css";
 import { Link } from "react-router";
 
 const ArchiveHeader = ({ archivedNotes, isDesktop }) => {
-  console.log("archivedNotes in ArchiveHeader:", archivedNotes);
-
   const noArchivedNotes = !archivedNotes.length;
 
   return (

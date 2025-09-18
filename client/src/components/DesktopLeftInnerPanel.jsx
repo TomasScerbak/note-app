@@ -31,12 +31,30 @@ const DesktopLeftInnerPanel = ({
           setIsNewNoteRequested={setIsNewNoteRequested}
         />
       )}
-      {searchTerm && activeBtn.title === "All Notes" && renderNoteCards(filteredNotes)}
-      {searchTerm && activeBtn.title === "Archived Notes" && renderNoteCards(filteredArchivedNotes)}
+      {searchTerm &&
+        activeBtn.title === "All Notes" &&
+        renderNoteCards({
+          notes: filteredNotes,
+          onCardClick: (id) => setActiveNoteId(id),
+          activeNoteId,
+        })}
+      {searchTerm &&
+        activeBtn.title === "Archived Notes" &&
+        renderNoteCards({
+          notes: filteredArchivedNotes,
+          onCardClick: (id) => setActiveNoteId(id),
+          activeNoteId,
+        })}
       {activeBtn.title === "Archived Notes" && !searchTerm && !filteredArchivedNotes.length ? (
         <ArchiveHeader isDesktop={true} archivedNotes={archivedNotes} />
       ) : null}
-      {activeBtn.title === "Archived Notes" && !searchTerm && renderNoteCards(archivedNotes)}
+      {activeBtn.title === "Archived Notes" &&
+        !searchTerm &&
+        renderNoteCards({
+          notes: archivedNotes,
+          onCardClick: (id) => setActiveNoteId(id),
+          activeNoteId,
+        })}
       {isLoading ? <Loader /> : null}
     </section>
   );
