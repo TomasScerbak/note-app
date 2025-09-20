@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useAuth } from "../contexts/authContext";
 import { useNavigate } from "react-router";
 import { useTheme } from "../contexts/themeContext";
 
 import Setting from "../components/Setting";
-import CallToActionModal from "../components/modals/CallToActionModal";
+import NoteModals from "../components/NoteModals";
 
 import SunIcon from "../assets/icon-sun.svg";
 import SunDarkGreyIcon from "../assets/icon-sun-dark-grey.svg";
@@ -15,9 +14,8 @@ import LockDarkGreyIcon from "../assets/icon-lock-dark-grey.svg";
 import LogoutIcon from "../assets/icon-logout.svg";
 import LogoutDarkGreyIcon from "../assets/icon-logout-dark-grey.svg";
 
-const Settings = () => {
-  const { signOut } = useAuth();
-  const [showModal, setShowModal] = useState(false);
+const Settings = ({ isDesktop, handleSettingSelected }) => {
+  const [showLogoutModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const { theme } = useTheme();
 
@@ -44,32 +42,23 @@ const Settings = () => {
   return (
     <>
       <div>
-        <h1>Settings</h1>
+        {!isDesktop && <h1>Settings</h1>}
         {settings.map((setting, index) => (
           <Setting
             key={index}
             img={setting.image}
             text={setting.name}
             borderTop={setting.name === "Logout" ? "borderTop" : ""}
-            onClick={() => handleSettingClick(setting)}
+            onClick={() => {
+              if (isDesktop) {
+                if (setting.name === "Logout") setShowModal(true);
+                handleSettingSelected(setting);
+              } else handleSettingClick(setting);
+            }}
           />
         ))}
       </div>
-      {showModal && (
-        <CallToActionModal
-          header="Leaving so soon?"
-          message="Logging out will end your current session. You can always come back later. Want to continue or stay a bit longer?"
-          btnsArr={[
-            { title: "Cancel", variant: "cancel", onClick: () => setShowModal(false) },
-            {
-              title: "Logout",
-              variant: "delete",
-              onClick: () => signOut(),
-            },
-          ]}
-          image={theme === "light" ? LogoutDarkGreyIcon : LogoutIcon}
-        />
-      )}
+      <NoteModals showLogoutModal={showLogoutModal} setShowLogoutModal={setShowModal} />
     </>
   );
 };

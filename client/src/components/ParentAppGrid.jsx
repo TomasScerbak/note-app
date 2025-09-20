@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useCallback, useEffect, useState } from "react";
 import { useTheme } from "../contexts/themeContext";
 import { useNavigate, useLocation } from "react-router";
 import { getBtnImages, btnActionsData } from "../utils/desktopButtonsUtils";
@@ -45,6 +46,7 @@ const ParentAppGrid = () => {
   const location = useLocation();
   const isMobileOrTablet = useIsMobileOrTablet();
   const [settingClicked, setSettingClicked] = useState(false);
+  const [settingSelected, setSettingSelected] = useState({});
 
   const validURLs = ["/home/all-notes", "/home/archive-notes", "/home/search-notes", "/home/tag-list"];
 
@@ -62,6 +64,10 @@ const ParentAppGrid = () => {
 
   const handleSettingClicked = () => {
     setSettingClicked(true);
+  };
+
+  const handleSettingSelected = (setting) => {
+    setSettingSelected(setting);
   };
 
   // only for tablet and mobile version
@@ -90,18 +96,18 @@ const ParentAppGrid = () => {
   const activeBtn = deskBtnData.find((btn) => btn.active);
   const headerText = activeBtn.title === "All Notes" ? "All Notes" : "Archived Notes";
 
-  const handleCreateNewNote = () => {
+  const handleCreateNewNote = useCallback(() => {
     setIsNewNoteRequested(true);
-    handleSearchChange("");
-    setActiveNoteId("");
-    setSettingClicked(false);
-  };
+    if (searchTerm) handleSearchChange("");
+    if (activeNoteId) setActiveNoteId("");
+    if (settingClicked) setSettingClicked(false);
+  }, [searchTerm, activeNoteId, settingClicked]);
 
   useEffect(() => {
     setSettingClicked(false);
-  }, [activeBtn, activeNoteId]);
+  }, [activeBtn, activeNoteId, searchTerm]);
 
-  console.log("settingClicked:", settingClicked);
+  console.log("setting selected:", settingSelected);
 
   return (
     <section className={classes.parent}>
@@ -158,7 +164,7 @@ const ParentAppGrid = () => {
       }
       {
         // Desktop Left Inner Panel
-        !isMobileOrTablet && !settingClicked && (
+        !isMobileOrTablet && (
           <DesktopLeftInnerPanel
             handleCreateNewNote={handleCreateNewNote}
             searchTerm={searchTerm}
@@ -172,6 +178,8 @@ const ParentAppGrid = () => {
             archivedNotes={archivedNotes}
             isLoading={isLoading}
             renderNoteCards={renderNoteCards}
+            settingClicked={settingClicked}
+            handleSettingSelected={handleSettingSelected}
           />
         )
       }
