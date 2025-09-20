@@ -107,8 +107,6 @@ const ParentAppGrid = () => {
     setSettingClicked(false);
   }, [activeBtn, activeNoteId, searchTerm]);
 
-  console.log("setting selected:", settingSelected);
-
   return (
     <section className={classes.parent}>
       {

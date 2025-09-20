@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: start;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .setting__image {
@@ -12,4 +13,21 @@
 
 .borderTop {
   border-top: 1px solid var(--app-search-input-border);
+}
+
+.desktop {
+  margin-bottom: 0.8rem;
+  border-radius: var(--radius-6);
+  outline: none;
+  border: none;
+  box-shadow: none;
+  padding: 0 0 0 0.8rem;
+}
+
+.isActive {
+  background-color: var(--app-login-signup-bg);
+}
+
+.rigt__arrow {
+  margin-left: auto;
 }

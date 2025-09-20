@@ -18,6 +18,7 @@ const Settings = ({ isDesktop, handleSettingSelected }) => {
   const [showLogoutModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const [activeSetting, setActiveSetting] = useState(null);
 
   const settings = [
     { name: "Color Theme", label: "color-theme", image: theme === "light" ? SunDarkGreyIcon : SunIcon },
@@ -49,12 +50,15 @@ const Settings = ({ isDesktop, handleSettingSelected }) => {
             img={setting.image}
             text={setting.name}
             borderTop={setting.name === "Logout" ? "borderTop" : ""}
+            isDesktop={isDesktop}
             onClick={() => {
+              setActiveSetting(setting.label);
               if (isDesktop) {
                 if (setting.name === "Logout") setShowModal(true);
                 handleSettingSelected(setting);
               } else handleSettingClick(setting);
             }}
+            isActive={activeSetting === setting.label}
           />
         ))}
       </div>
