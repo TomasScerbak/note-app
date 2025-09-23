@@ -105,6 +105,7 @@ const ParentAppGrid = () => {
 
   useEffect(() => {
     setSettingClicked(false);
+    setSettingSelected({});
   }, [activeBtn, activeNoteId, searchTerm]);
 
   return (
@@ -189,6 +190,8 @@ const ParentAppGrid = () => {
             activeNoteId={activeNoteId}
             isNewNoteRequested={isNewNoteRequested}
             searchTerm={searchTerm}
+            settingSelected={settingSelected}
+            settingClicked={settingClicked}
           />
         )
       }

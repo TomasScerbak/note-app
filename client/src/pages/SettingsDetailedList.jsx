@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/authContext";
 import { isValidEmail } from "../validations/emailValidation.js";
 import { getSettingsData, getSettingLabels } from "../utils/settingUtils.js";
@@ -16,22 +16,23 @@ import ConfirmationModal from "../components/modals/ConfirmationModal.jsx";
 import Input from "../components/UI/Input.jsx";
 import Modal from "../components/modals/Modal.jsx";
 
-const SettingsDetailedList = () => {
+const SettingsDetailedList = ({ settingSelected, isDesktop }) => {
   const { passwordResetEmail, passwordResetSent } = useAuth();
   const { setting } = useParams();
+  const currentSetting = isDesktop ? settingSelected?.label?.toLowerCase() : setting;
   const { theme, setTheme } = useTheme();
   const { setFontTheme } = useFontTheme();
   const { addToast } = useToast();
 
-  const [email, setEmeil] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState({});
 
-  const { label: settingLabel, subLabel: settingSubLabel } = getSettingLabels(setting);
-  const [settingsData, setSettingsData] = useState(getSettingsData(setting));
+  const { label: settingLabel, subLabel: settingSubLabel } = getSettingLabels(currentSetting);
+  const [settingsData, setSettingsData] = useState(getSettingsData(currentSetting));
   const [activeSetting, setActiveSetting] = useState("");
 
   const handleEmailChange = (event) => {
-    setEmeil(event.target.value);
+    setEmail(event.target.value);
   };
 
   const handleActiveSetting = (indexToActivate) => {
@@ -40,7 +41,7 @@ const SettingsDetailedList = () => {
       active: index === indexToActivate,
     }));
     setSettingsData(updatedSettings);
-    setActiveSetting(updatedSettings[indexToActivate].heading);
+    setActiveSetting(updatedSettings[indexToActivate].label);
   };
 
   const hanglePasswordResetEmail = async (email) => {
@@ -53,9 +54,8 @@ const SettingsDetailedList = () => {
 
   const handleSettingChange = (settingName) => {
     const lowerCaseSettingName = settingName.toLowerCase();
-
     // Apply font family
-    if (setting === "font-theme") {
+    if (currentSetting === "font-theme") {
       switch (lowerCaseSettingName) {
         case "sans-serif":
         case "serif":
@@ -69,12 +69,12 @@ const SettingsDetailedList = () => {
 
     // Apply color theme
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (setting === "color-theme") {
+    if (currentSetting === "color-theme") {
       switch (lowerCaseSettingName) {
-        case "light mode":
+        case "light-mode":
           setTheme("light");
           break;
-        case "dark mode":
+        case "dark-mode":
           setTheme("dark");
           break;
         case "system":
@@ -92,10 +92,17 @@ const SettingsDetailedList = () => {
     });
   };
 
+  useEffect(() => {
+    if (isDesktop) {
+      setSettingsData(getSettingsData(currentSetting));
+      setActiveSetting("");
+    }
+  }, [currentSetting, isDesktop]);
+
   return (
     <div>
-      <SettingActions />
-      <SettingSubheadings settingLabel={settingLabel} settingSubLabel={settingSubLabel} />
+      {!isDesktop && <SettingActions />}
+      {!isDesktop && <SettingSubheadings settingLabel={settingLabel} settingSubLabel={settingSubLabel} />}
       {settingsData.map((item, index) => (
         <SettingCard
           heading={item.heading}
@@ -106,24 +113,26 @@ const SettingsDetailedList = () => {
           onClick={() => handleActiveSetting(index)}
         />
       ))}
-      {setting === "change-password" ? (
+      {currentSetting === "change-password" ? (
         <Input type="email" placeholder="Enter your email" value={email} onChange={handleEmailChange} />
       ) : null}
-      <SettingDetailFooterContainer>
-        <Button
-          type="btn"
-          title={setting === "change-password" ? "Send Link" : "Apply Changes"}
-          hasImage={false}
-          variant="primary"
-          size="medium"
-          onClick={
-            setting === "change-password"
-              ? () => hanglePasswordResetEmail(email)
-              : () => handleSettingChange(activeSetting)
-          }
-          disabled={true}
-        />
-      </SettingDetailFooterContainer>
+      {currentSetting !== "logout" && (
+        <SettingDetailFooterContainer>
+          <Button
+            type="btn"
+            title={currentSetting === "change-password" ? "Send Link" : "Apply Changes"}
+            hasImage={false}
+            variant="primary"
+            size="medium"
+            onClick={
+              currentSetting === "change-password"
+                ? () => hanglePasswordResetEmail(email)
+                : () => handleSettingChange(activeSetting)
+            }
+            disabled={true}
+          />
+        </SettingDetailFooterContainer>
+      )}
       {passwordResetSent ? <ConfirmationModal /> : null}
       {error.message ? <Modal header="Please Note" message={error.message} /> : null}
     </div>

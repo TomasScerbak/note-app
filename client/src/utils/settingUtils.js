@@ -16,6 +16,7 @@ const settingsData = {
   "font-theme": [
     {
       heading: "Sans-Serif",
+      label: "sans-serif",
       description: "Clean and modern, easy to read.",
       img: SansSerifImage,
       img2: SansSerifImageDark,
@@ -23,6 +24,7 @@ const settingsData = {
     },
     {
       heading: "Serif",
+      label: "serif",
       description: "Classic and elegant for a timeless feel.",
       img: SerifImage,
       img2: SerifImageDark,
@@ -30,6 +32,7 @@ const settingsData = {
     },
     {
       heading: "Monospace",
+      label: "monospace",
       description: "Code-like, great for a technical vibe.",
       img: Monospace,
       img2: MonospaceDark,
@@ -39,6 +42,7 @@ const settingsData = {
   "color-theme": [
     {
       heading: "Light Mode",
+      label: "light-mode",
       description: "Pick a clean and classic light theme",
       img: SunImage,
       img2: SunImageDarkGrey,
@@ -46,6 +50,7 @@ const settingsData = {
     },
     {
       heading: "Dark Mode",
+      label: "dark-mode",
       description: "Select a sleek and modern dark theme",
       img: MoonImage,
       img2: MoonImageDarkGrey,
@@ -53,6 +58,7 @@ const settingsData = {
     },
     {
       heading: "System",
+      label: "system",
       description: "Adapts to your device’s theme",
       img: SystemImage,
       img2: SystemImageDarkGrey,
