@@ -16,7 +16,7 @@ const TagCard = ({ tag, isDesktop, handleDesktopTagClicked }) => {
   return (
     <div
       onClick={isDesktop ? () => handleDesktopTagClicked(tag) : handleTagClick}
-      className={classes.tag_card}
+      className={`${classes.tag_card} ${!isDesktop ? classes.border__bottom : ""}`}
     >
       <img className={classes.tag__icon} src={theme === "light" ? TagDarkGrey : TagIcon} alt="Tag Icon" />
       <p className={classes.tag__label}>{tag}</p>

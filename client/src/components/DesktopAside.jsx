@@ -1,8 +1,12 @@
+import { useGetNoteById } from "../hooks/queries/useGetNoteById";
+
 import classes from "./DesktopAside.module.css";
 
 import Button from "./UI/Button";
 
 const DesktopAside = ({ activeNoteId, btnActionsData, getBtnImages, theme, onDeleteNote, onArchiveNote }) => {
+  const { noteData } = useGetNoteById(activeNoteId);
+
   return (
     <aside className={classes.right__sidebar}>
       {activeNoteId &&
@@ -18,7 +22,7 @@ const DesktopAside = ({ activeNoteId, btnActionsData, getBtnImages, theme, onDel
               hasImage={true}
               size={btn.size}
               variant={btn.variant}
-              title={btn.title}
+              title={btn.title === "Archive Note" && noteData?.is_archived ? "Unarchive Note" : btn.title}
               btnImageClass="image-left"
               btnSecondaryImageClass="image-right"
               onClick={() => (btn.title === "Delete Note" ? onDeleteNote() : onArchiveNote())}

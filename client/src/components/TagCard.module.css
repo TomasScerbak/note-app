@@ -1,10 +1,13 @@
 .tag_card {
-  border-bottom: 1px solid var(--app-login-signup-bg);
   height: 4rem;
   padding: 0.8rem;
   cursor: pointer;
   display: flex;
   align-items: center;
+}
+
+.border__bottom {
+  border-bottom: 1px solid var(--app-login-signup-bg);
 }
 
 .tag__icon {

@@ -51,7 +51,7 @@ const ParentAppGrid = () => {
   const [tag, setTag] = useState("");
 
   const validURLs = ["/home/all-notes", "/home/archive-notes", "/home/search-notes", "/home/tag-list"];
-  console.log("tag", tag);
+
   const message = searchTerm.length ? (
     <p style={{ color: "var(--app-secondary-text)" }}>
       All notes matching
@@ -130,6 +130,7 @@ const ParentAppGrid = () => {
   useEffect(() => {
     setSettingClicked(false);
     setSettingSelected({});
+    setTag("");
   }, [activeBtn, activeNoteId, searchTerm]);
 
   return (
@@ -238,6 +239,7 @@ const ParentAppGrid = () => {
             theme={theme}
             onDeleteNote={onDeleteNote}
             onArchiveNote={onArchiveNote}
+            notesData={notesData}
           />
         )
       }
