@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNotes } from "../contexts/notesContext";
 import { useNoteActions } from "../hooks/useNoteActions";
 import { initialBtnData } from "../utils/desktopButtonsUtils";
+import { useGetNoteById } from "../hooks/queries/useGetNoteById";
 
 export const useParentAppState = () => {
   const { isLoading, searchTerm, handleSearchChange, filteredNotes, filteredArchivedNotes, archivedNotes } =
@@ -12,10 +13,13 @@ export const useParentAppState = () => {
   const [isNewNoteRequested, setIsNewNoteRequested] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showArchiveModal, setShowArchiveModal] = useState(false);
+  const { noteData } = useGetNoteById(activeNoteId);
+  console.log("Active Note ID in useParentAppState:", activeNoteId);
+  console.log("Note Data in useParentAppState:", noteData);
 
   const { confirmDeleteNote, onToggleArchive } = useNoteActions(
     activeNoteId,
-    null,
+    noteData,
     true,
     undefined,
     undefined,
