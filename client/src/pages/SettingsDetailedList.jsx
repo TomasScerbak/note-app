@@ -15,6 +15,7 @@ import SettingDetailFooterContainer from "../components/SettingDetailFooterConta
 import ConfirmationModal from "../components/modals/ConfirmationModal.jsx";
 import Input from "../components/UI/Input.jsx";
 import Modal from "../components/modals/Modal.jsx";
+import DesktopSettingSubHeadings from "../components/DesktopSettingSubHeadings.jsx";
 
 const SettingsDetailedList = ({ settingSelected, isDesktop }) => {
   const { passwordResetEmail, passwordResetSent } = useAuth();
@@ -103,6 +104,9 @@ const SettingsDetailedList = ({ settingSelected, isDesktop }) => {
     <div>
       {!isDesktop && <SettingActions />}
       {!isDesktop && <SettingSubheadings settingLabel={settingLabel} settingSubLabel={settingSubLabel} />}
+      {isDesktop && currentSetting !== "logout" && (
+        <DesktopSettingSubHeadings heading={settingLabel} subheading={settingSubLabel} />
+      )}
       {settingsData.map((item, index) => (
         <SettingCard
           heading={item.heading}

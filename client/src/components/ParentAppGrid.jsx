@@ -64,6 +64,9 @@ const ParentAppGrid = () => {
 
   const handleSettingClicked = () => {
     setSettingClicked(true);
+    setActiveNoteId("");
+    setIsNewNoteRequested(false);
+    handleSearchChange("");
   };
 
   const handleSettingSelected = (setting) => {
