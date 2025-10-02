@@ -25,9 +25,12 @@ const DesktopLeftInnerPanel = ({
   filteredNotesByTag,
   tag,
 }) => {
+  console.log("settingSelected in inner panel", settingClicked);
   return (
     <section className={classes.left_inner_panel}>
-      <Button onClick={handleCreateNewNote} size="large" variant="primary" title="Create New Note " />
+      {!settingClicked && (
+        <Button onClick={handleCreateNewNote} size="large" variant="primary" title="Create New Note " />
+      )}
       {searchTerm ? message : null}
       {settingClicked ? (
         <Settings isDesktop={true} handleSettingSelected={handleSettingSelected} />
@@ -43,7 +46,7 @@ const DesktopLeftInnerPanel = ({
       ) : (
         <>
           {/* All Notes Section */}
-          {!searchTerm && activeBtn.title === "All Notes" && (
+          {!settingClicked && !searchTerm && activeBtn.title === "All Notes" && (
             <AllNotes
               isDesktop={true}
               activeNoteId={activeNoteId}
@@ -52,7 +55,8 @@ const DesktopLeftInnerPanel = ({
             />
           )}
 
-          {searchTerm &&
+          {!settingClicked &&
+            searchTerm &&
             activeBtn.title === "All Notes" &&
             renderNoteCards({
               notes: filteredNotes,
@@ -61,7 +65,8 @@ const DesktopLeftInnerPanel = ({
             })}
 
           {/* Archived Notes Section */}
-          {searchTerm &&
+          {!settingClicked &&
+            searchTerm &&
             activeBtn.title === "Archived Notes" &&
             renderNoteCards({
               notes: filteredArchivedNotes,
@@ -69,11 +74,13 @@ const DesktopLeftInnerPanel = ({
               activeNoteId,
             })}
 
-          {activeBtn.title === "Archived Notes" && !searchTerm && !filteredArchivedNotes.length && (
-            <ArchiveHeader isDesktop={true} archivedNotes={archivedNotes} />
-          )}
+          {!settingClicked &&
+            activeBtn.title === "Archived Notes" &&
+            !searchTerm &&
+            !filteredArchivedNotes.length && <ArchiveHeader isDesktop={true} archivedNotes={archivedNotes} />}
 
-          {activeBtn.title === "Archived Notes" &&
+          {!settingClicked &&
+            activeBtn.title === "Archived Notes" &&
             !searchTerm &&
             renderNoteCards({
               notes: archivedNotes,

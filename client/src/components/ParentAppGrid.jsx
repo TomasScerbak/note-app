@@ -128,9 +128,10 @@ const ParentAppGrid = () => {
   };
 
   useEffect(() => {
-    setSettingClicked(false);
-    setSettingSelected({});
-    setTag("");
+    if (!settingClicked) {
+      setSettingSelected({});
+      setTag("");
+    }
   }, [activeBtn, activeNoteId, searchTerm]);
 
   return (
