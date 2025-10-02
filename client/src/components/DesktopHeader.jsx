@@ -11,6 +11,7 @@ const DesktopHeader = ({
   message,
   theme,
   handleSettingClicked,
+  tag,
 }) => {
   return (
     <>
@@ -20,9 +21,15 @@ const DesktopHeader = ({
             Showing results for:
             <q style={{ color: "var(--app-primary-text)", marginLeft: "1rem" }}>{searchTerm}</q>
           </h1>
+        ) : tag ? (
+          <h1 style={{ color: "var(--app-secondary-text)" }}>
+            Notes tagged:
+            <q style={{ color: "var(--app-primary-text)", marginLeft: "1rem" }}>{tag}</q>
+          </h1>
         ) : (
           <h1>{headerText}</h1>
         )}
+
         <div className={classes.header__right__container}>
           <SearchInput
             onChange={(e) => {

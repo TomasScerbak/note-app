@@ -21,6 +21,7 @@ import DesktopAside from "./DesktopAside";
 
 const ParentAppGrid = () => {
   const {
+    notesData,
     deskBtnData,
     setDeskBtnData,
     activeNoteId,
@@ -47,9 +48,10 @@ const ParentAppGrid = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
   const [settingClicked, setSettingClicked] = useState(false);
   const [settingSelected, setSettingSelected] = useState({});
+  const [tag, setTag] = useState("");
 
   const validURLs = ["/home/all-notes", "/home/archive-notes", "/home/search-notes", "/home/tag-list"];
-
+  console.log("tag", tag);
   const message = searchTerm.length ? (
     <p style={{ color: "var(--app-secondary-text)" }}>
       All notes matching
@@ -62,11 +64,20 @@ const ParentAppGrid = () => {
     ""
   );
 
+  const filteredNotesByTag = notesData?.filter((note) => {
+    const tagsMatch = note.tags
+      ?.split(",")
+      .map((t) => t.trim().toLowerCase())
+      .some((t) => t === tag.toLowerCase());
+    return tagsMatch;
+  });
+
   const handleSettingClicked = () => {
     setSettingClicked(true);
     setActiveNoteId("");
     setIsNewNoteRequested(false);
     handleSearchChange("");
+    setTag("");
   };
 
   const handleSettingSelected = (setting) => {
@@ -86,6 +97,7 @@ const ParentAppGrid = () => {
     setIsNewNoteRequested(false);
     handleSearchChange("");
     setSettingClicked(false);
+    setTag("");
   };
 
   const onDeleteNote = () => {
@@ -104,7 +116,16 @@ const ParentAppGrid = () => {
     if (searchTerm) handleSearchChange("");
     if (activeNoteId) setActiveNoteId("");
     if (settingClicked) setSettingClicked(false);
-  }, [searchTerm, activeNoteId, settingClicked]);
+    if (tag) setTag("");
+  }, [searchTerm, activeNoteId, settingClicked, tag]);
+
+  const handleDesktopTagClicked = (tag) => {
+    setTag(tag);
+    setActiveNoteId("");
+    setIsNewNoteRequested(false);
+    handleSearchChange("");
+    setSettingClicked(false);
+  };
 
   useEffect(() => {
     setSettingClicked(false);
@@ -148,7 +169,13 @@ const ParentAppGrid = () => {
 
       {
         // Desktop Left Panel
-        !isMobileOrTablet && <DesktopLeftPanel handleActiveBtn={handleActiveBtn} deskBtnData={deskBtnData} />
+        !isMobileOrTablet && (
+          <DesktopLeftPanel
+            handleDesktopTagClicked={handleDesktopTagClicked}
+            handleActiveBtn={handleActiveBtn}
+            deskBtnData={deskBtnData}
+          />
+        )
       }
       {
         // Desktop Header
@@ -161,6 +188,7 @@ const ParentAppGrid = () => {
             message={message}
             theme={theme}
             handleSettingClicked={handleSettingClicked}
+            tag={tag}
           />
         )
       }
@@ -182,6 +210,8 @@ const ParentAppGrid = () => {
             renderNoteCards={renderNoteCards}
             settingClicked={settingClicked}
             handleSettingSelected={handleSettingSelected}
+            filteredNotesByTag={filteredNotesByTag}
+            tag={tag}
           />
         )
       }

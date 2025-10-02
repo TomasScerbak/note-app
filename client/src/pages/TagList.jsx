@@ -5,7 +5,7 @@ import Modal from "../components/modals/Modal";
 import Loader from "../components/UI/Loader";
 import TagHeader from "../components/TagHeader";
 
-const TagList = ({ isDesktop }) => {
+const TagList = ({ isDesktop, handleDesktopTagClicked }) => {
   const { notesData, isLoading, isError, error } = useNotes();
 
   const uniqueTags =
@@ -26,7 +26,16 @@ const TagList = ({ isDesktop }) => {
       {isDesktop ? <p>Tags</p> : <h1>Tags</h1>}
       {isLoading && <Loader />}
       {!isLoading && !uniqueTags.length ? <TagHeader /> : null}
-      {uniqueTags.length ? uniqueTags.map((tag, index) => <TagCard key={index} tag={tag} />) : null}
+      {uniqueTags.length
+        ? uniqueTags.map((tag, index) => (
+            <TagCard
+              handleDesktopTagClicked={handleDesktopTagClicked}
+              key={index}
+              tag={tag}
+              isDesktop={isDesktop}
+            />
+          ))
+        : null}
     </div>
   );
 };

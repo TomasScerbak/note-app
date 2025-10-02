@@ -7,7 +7,7 @@ import Separator from "../components/UI/Separator";
 import { getBtnImages } from "../utils/desktopButtonsUtils";
 import { useTheme } from "../contexts/themeContext";
 
-const DesktopLeftPanel = ({ handleActiveBtn, deskBtnData }) => {
+const DesktopLeftPanel = ({ handleActiveBtn, deskBtnData, handleDesktopTagClicked }) => {
   const { theme } = useTheme();
 
   return (
@@ -36,7 +36,7 @@ const DesktopLeftPanel = ({ handleActiveBtn, deskBtnData }) => {
           );
         })}
         <Separator />
-        <TagList isDesktop={true} />
+        <TagList handleDesktopTagClicked={handleDesktopTagClicked} isDesktop={true} />
       </section>
     </>
   );

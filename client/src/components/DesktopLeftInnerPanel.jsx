@@ -5,6 +5,7 @@ import AllNotes from "./AllNotes";
 import ArchiveHeader from "./ArchiveHeader";
 import Loader from "./UI/Loader";
 import Settings from "../pages/Settings";
+import TagListHeaders from "./TagListHeaders";
 
 const DesktopLeftInnerPanel = ({
   handleCreateNewNote,
@@ -21,16 +22,28 @@ const DesktopLeftInnerPanel = ({
   renderNoteCards,
   settingClicked,
   handleSettingSelected,
+  filteredNotesByTag,
+  tag,
 }) => {
   return (
     <section className={classes.left_inner_panel}>
+      <Button onClick={handleCreateNewNote} size="large" variant="primary" title="Create New Note " />
+      {searchTerm ? message : null}
       {settingClicked ? (
         <Settings isDesktop={true} handleSettingSelected={handleSettingSelected} />
+      ) : tag && !searchTerm ? (
+        <TagListHeaders isDesktop={true} tag={tag} />
+      ) : null}
+      {tag ? (
+        renderNoteCards({
+          notes: filteredNotesByTag,
+          onCardClick: (id) => setActiveNoteId(id),
+          activeNoteId,
+        })
       ) : (
         <>
-          <Button onClick={handleCreateNewNote} size="large" variant="primary" title="Create New Note " />
-          {searchTerm ? message : null}
-          {searchTerm || activeBtn.title !== "All Notes" ? null : (
+          {/* All Notes Section */}
+          {!searchTerm && activeBtn.title === "All Notes" && (
             <AllNotes
               isDesktop={true}
               activeNoteId={activeNoteId}
@@ -38,6 +51,7 @@ const DesktopLeftInnerPanel = ({
               setIsNewNoteRequested={setIsNewNoteRequested}
             />
           )}
+
           {searchTerm &&
             activeBtn.title === "All Notes" &&
             renderNoteCards({
@@ -45,6 +59,8 @@ const DesktopLeftInnerPanel = ({
               onCardClick: (id) => setActiveNoteId(id),
               activeNoteId,
             })}
+
+          {/* Archived Notes Section */}
           {searchTerm &&
             activeBtn.title === "Archived Notes" &&
             renderNoteCards({
@@ -52,9 +68,11 @@ const DesktopLeftInnerPanel = ({
               onCardClick: (id) => setActiveNoteId(id),
               activeNoteId,
             })}
-          {activeBtn.title === "Archived Notes" && !searchTerm && !filteredArchivedNotes.length ? (
+
+          {activeBtn.title === "Archived Notes" && !searchTerm && !filteredArchivedNotes.length && (
             <ArchiveHeader isDesktop={true} archivedNotes={archivedNotes} />
-          ) : null}
+          )}
+
           {activeBtn.title === "Archived Notes" &&
             !searchTerm &&
             renderNoteCards({
@@ -62,7 +80,8 @@ const DesktopLeftInnerPanel = ({
               onCardClick: (id) => setActiveNoteId(id),
               activeNoteId,
             })}
-          {isLoading ? <Loader /> : null}
+
+          {isLoading && <Loader />}
         </>
       )}
     </section>
