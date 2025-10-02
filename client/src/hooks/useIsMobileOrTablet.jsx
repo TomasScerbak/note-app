@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 const useIsMobileOrTablet = () => {
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState(window.innerWidth < 1024);
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(window.innerWidth < 900);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileOrTablet(window.innerWidth < 1024); // Adjust breakpoint as needed
+      setIsMobileOrTablet(window.innerWidth < 900); // Adjust breakpoint as needed
     };
 
     window.addEventListener("resize", handleResize);

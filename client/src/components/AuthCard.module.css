@@ -19,7 +19,7 @@
   }
 }
 
-@media (min-width: 922px) {
+@media (min-width: 900px) {
   .auth__card {
     width: 54rem;
     padding: var(--spacing-600);

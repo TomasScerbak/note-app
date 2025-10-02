@@ -42,7 +42,7 @@
   border: 1px solid var(--app-secondary-text);
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 900px) {
   .note__header_container {
     border-top: none;
   }
