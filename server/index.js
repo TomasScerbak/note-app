@@ -37,7 +37,7 @@ const pool = mysql.createPool({
   ssl: {
     ca: (() => {
       try {
-        return fs.readFileSync(path.resolve("cert", "DigiCertGlobalRootCA.crt.pem"));
+        return fs.readFileSync(path.resolve("cert", "azure_bundled_cert.pem"));
       } catch (err) {
         console.error("Failed to load SSL certificate:", err);
         return undefined;
