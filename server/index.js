@@ -7,12 +7,10 @@ import path from "path";
 
 const app = express();
 
-const isProduction = process.env.NODE_ENV === "production";
-
 //Midleware
 app.use(express.json());
 
-const allowedOrigins = ["http://localhost:5173", "https://dev-tomo-note-app.netlify.app"];
+const allowedOrigins = ["https://dev-tomo-note-app.netlify.app"];
 
 app.use(
   cors({
@@ -36,13 +34,10 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
-});
-
-if (isProduction) {
-  pool.ssl = {
+  ssl: {
     ca: fs.readFileSync(path.resolve("cert", "DigiCertGlobalRootCA.crt.pem")),
-  };
-}
+  },
+});
 
 const db = pool.promise();
 
