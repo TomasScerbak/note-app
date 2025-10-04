@@ -35,7 +35,14 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
   ssl: {
-    ca: fs.readFileSync(path.resolve("cert", "DigiCertGlobalRootCA.crt.pem")),
+    ca: (() => {
+      try {
+        return fs.readFileSync(path.resolve("cert", "BaltimoreCyberTrustRoot.pem"));
+      } catch (err) {
+        console.error("Failed to load SSL certificate:", err);
+        return undefined;
+      }
+    })(),
   },
 });
 
