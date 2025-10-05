@@ -7,7 +7,7 @@ const Main = ({ children }) => {
   return (
     <main style={{ height: "100dvh", overflow: "hidden", display: "flex", flexDirection: "column" }}>
       {children}
-      {location.pathname === "/" ? <Attribution /> : null}
+      {location.pathname === "/" || location.pathname === "/signup" ? <Attribution /> : null}
     </main>
   );
 };
