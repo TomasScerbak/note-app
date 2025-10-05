@@ -100,7 +100,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signInWiGoogle = async () => {
+  const signInWithGoogle = async () => {
     setIsLoading(true);
     const provider = new GoogleAuthProvider();
     try {
@@ -183,7 +183,7 @@ export const AuthProvider = ({ children }) => {
         isLoggedIn,
         signUp,
         signIn,
-        signInWiGoogle,
+        signInWithGoogle,
         signOut,
         passwordResetEmail,
         passwordResetSent,

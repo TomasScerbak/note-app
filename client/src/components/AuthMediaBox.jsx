@@ -5,10 +5,10 @@ import Button from "./UI/Button";
 import GoogleImage from "../assets/icon-google.svg";
 
 const AuthMediaBox = ({ text }) => {
-  const { signInWiGoogle } = useAuth();
+  const { signInWithGoogle } = useAuth();
 
   const handleGoogleSignIn = () => {
-    signInWiGoogle();
+    signInWithGoogle();
   };
 
   return (
