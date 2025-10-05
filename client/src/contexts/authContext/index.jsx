@@ -106,14 +106,12 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      console.log("USER", user);
       setUser(user);
       setAuthError(null);
 
       if (user && user.uid) {
         try {
           const existingUser = await fetchUserId(user.uid);
-          console.log("existingUser", existingUser);
           if (!existingUser) {
             const userData = {
               email: user.email,
@@ -127,7 +125,7 @@ export const AuthProvider = ({ children }) => {
             });
           }
         } catch (err) {
-          console.log("ERROR FROM DB", err);
+          console.error("ERROR FROM DB", err);
         }
 
         setIsLoggedIn(true);
