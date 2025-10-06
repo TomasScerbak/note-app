@@ -13,7 +13,6 @@ const AuthModal = () => {
   const { authError, setAuthError } = useAuth();
 
   const extractedAuthError = extractFirebaseAuthError(authError);
-  console.log("Extracted Auth Error:", extractedAuthError);
 
   let errorMessage = null;
   switch (extractedAuthError) {

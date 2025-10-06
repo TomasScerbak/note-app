@@ -25,7 +25,6 @@ const DesktopLeftInnerPanel = ({
   filteredNotesByTag,
   tag,
 }) => {
-  console.log("settingSelected in inner panel", settingClicked);
   return (
     <section className={classes.left_inner_panel}>
       {!settingClicked && (

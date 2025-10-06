@@ -101,13 +101,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signInWithGoogle = async () => {
-    setIsLoading(true);
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       setUser(user);
       setAuthError(null);
+      setIsLoading(true);
 
       if (user && user.uid) {
         try {
